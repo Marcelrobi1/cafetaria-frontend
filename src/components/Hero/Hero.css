@@ -1,0 +1,57 @@
+.hero-section {
+  
+  height: 100vh; 
+  /* fondo oscuro semi-transparente sobre la imagen para que el texto sea legible */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center; 
+  padding: 0 50px;
+  color: white;
+}
+
+.hero-content {
+  max-width: 600px;
+  margin-top: 60px; 
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  font-weight: normal;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero-content h1 em {
+  /* Mantiene la fuente elegante y en cursiva de tu diseño */
+  font-family: 'Georgia', serif;
+  font-style: italic;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  font-family: Arial, sans-serif;
+  color: #e0e0e0; 
+}
+
+/* --- Estilos do Botón --- */
+.btn-primary {
+  background-color: #d4b499; 
+  color: #1a1a1a; 
+  border: none;
+  padding: 15px 35px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #c4a182; 
+  transform: translateY(-2px); 
+}

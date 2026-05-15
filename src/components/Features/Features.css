@@ -1,0 +1,32 @@
+.features-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 80px 10%; 
+  background-color: #f4f1ee; 
+  gap: 40px;
+}
+
+.feature-box {
+  flex: 1; 
+  text-align: left;
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.feature-box h3 {
+  font-family: 'Georgia', serif;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #1a1a1a;
+}
+
+.feature-box p {
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #555; 
+}
