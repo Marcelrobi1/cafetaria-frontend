@@ -1,0 +1,194 @@
+/* --- Estilos base --- */
+.menu-page-section {
+  padding: 80px 5%;
+  background-color: #faf9f8; /* Un fondo súper claro como en tu imagen */
+  min-height: 80vh;
+}
+
+.menu-header-top {
+  margin-bottom: 60px;
+}
+
+.menu-header-top h2 {
+  font-family: 'Georgia', serif;
+  font-size: 2.8rem;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+.menu-header-top p {
+  font-family: Arial, sans-serif;
+  color: #666;
+  font-size: 0.95rem;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* --- Layout en Cuadrícula (Grid) --- */
+.menu-category {
+  margin-bottom: 60px;
+}
+
+.category-title {
+  font-family: 'Georgia', serif;
+  font-size: 1.5rem;
+  color: #888; /* Un gris elegante */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.menu-grid {
+  display: grid;
+  /* Esto crea columnas automáticas que no sean menores a 250px. 
+     Se adapta a pantallas grandes y móviles (Responsive) */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 40px 30px; /* gap vertical 40px, horizontal 30px */
+}
+
+/* --- Tarjetas (Cards) --- */
+.prato-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prato-card:hover {
+  transform: translateY(-5px);
+}
+
+.prato-image {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Cuadrado perfecto */
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 15px;
+}
+
+.prato-header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.prato-header-card h4 {
+  font-family: 'Georgia', serif;
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  margin: 0;
+  font-weight: normal;
+}
+
+.prato-price {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  color: #555;
+  font-weight: bold;
+}
+
+/* --- Etiquetas (Tags) --- */
+.prato-tags {
+  display: flex;
+  gap: 10px;
+}
+
+.tag {
+  background-color: #f0ebe1;
+  color: #7a7065;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.65rem;
+  font-family: Arial, sans-serif;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* --- ESTILOS DEL MODAL --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté por encima de todo */
+}
+
+.modal-content {
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+  box-shadow: 0px 10px 40px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #888;
+}
+
+.modal-layout {
+  display: flex;
+  gap: 40px;
+}
+
+.modal-layout img {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.modal-details {
+  flex: 1;
+}
+
+.modal-details h2 {
+  font-family: 'Georgia', serif;
+  font-size: 2.2rem;
+  margin: 0 0 10px 0;
+}
+
+.modal-price {
+  display: block;
+  font-size: 1.5rem;
+  color: #d4b499;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.modal-desc {
+  font-family: Arial, sans-serif;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.modal-ingredients h3 {
+  font-family: 'Georgia', serif;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.modal-ingredients ul {
+  list-style-type: square;
+  padding-left: 20px;
+  color: #666;
+  font-family: Arial, sans-serif;
+  line-height: 1.8;
+}
