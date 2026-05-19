@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import './navbar.css';
 
-function Navbar({ user, onLoginClick, onLogout }) {
+function Navbar({ user, onLoginClick, onLogout, onProfileEditClick }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -54,11 +54,12 @@ function Navbar({ user, onLoginClick, onLogout }) {
               {user ? (
                 <>
                   {user.role === 'ADMIN' && (
-                    <button className="dropdown-btn" onClick={() => { setIsOpen(false); /* Lógica para ir para a Dashboard */ }}>
+                    <button className="dropdown-btn" onClick={() => { setIsOpen(false); }}>
                       <span className="icon">🛡️</span> Gestão do Sistema
                     </button>
                   )}
-                  <button className="dropdown-btn" onClick={() => { setIsOpen(false); /* Ação de editar perfil */ }}>
+                  {/* ATUALIZADO AQUI para chamar a nova vista: */}
+                  <button className="dropdown-btn" onClick={() => { setIsOpen(false); onProfileEditClick(); }}>
                     <span className="icon">⚙️</span> Editar Perfil
                   </button>
                   <button className="dropdown-btn" onClick={() => { setIsOpen(false); onLogout(); }}>

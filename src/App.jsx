@@ -9,9 +9,10 @@ import MenuHighlights from './components/Homepage/MenuHighlights/MenuHighlights'
 import BestSellers from './components/Homepage/BestSellers/BestSellers';
 import Footer from './components/Footer/Footer';
 import Auth from './components/Auth/Auth';
+import Profile from './components/Profile'; // Nova Importação
 
 function App() {
-  const [view, setView] = useState('home'); 
+  const [view, setView] = useState('home'); // Vistas: 'home', 'auth', 'profile'
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -40,11 +41,13 @@ function App() {
 
   return (
     <div>
-      {view === 'home' ? (
+      {/* RENDERIZAÇÃO CONDICIONAL COM BASE NA VIEW */}
+      {view === 'home' && (
         <>
           <Navbar 
             user={currentUser}
             onLoginClick={() => setView('auth')}
+            onProfileEditClick={() => setView('profile')} // Ativa a view do Perfil
             onLogout={handleLogout}
           />
           <Hero />
@@ -54,9 +57,17 @@ function App() {
           <BestSellers />
           <Footer />
         </>
-      ) : (
+      )}
+
+      {view === 'auth' && (
         <Auth 
           onLoginSuccess={handleLoginSuccess} 
+          onClose={() => setView('home')} 
+        />
+      )}
+
+      {view === 'profile' && (
+        <Profile 
           onClose={() => setView('home')} 
         />
       )}
