@@ -1,0 +1,121 @@
+import { useState } from 'react';
+import './Auth.css';
+
+function Auth({ onLoginSuccess, onClose }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+
+  const BASE_URL = 'https://siws.ufp.pt/lwlc/api';
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setMessage('');
+
+    if (!username || !password) {
+      setError('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const textResponse = await response.text();
+      let data = {};
+      if (textResponse) {
+        try { data = JSON.parse(textResponse); } catch (e) { console.error(e); }
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || data.message || 'Credenciais inválidas.');
+      }
+
+      // Guarda os dados no LocalStorage
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('username', data.username);
+      localStorage.setItem('role', data.role);
+
+      setMessage('Login efetuado com sucesso!');
+      onLoginSuccess(data); 
+
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  return (
+    <div className="auth-page-container">
+      <button className="auth-back-btn" onClick={onClose}>&larr; Voltar ao Início</button>
+      
+      <div className="auth-card">
+        <div className="auth-image-side">
+          <img 
+            src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+            alt="Early Cafetaria" 
+          />
+          <div className="auth-image-overlay">
+            <p>"O seu ritual diário começa aqui."</p>
+          </div>
+        </div>
+
+        <div className="auth-form-side">
+          <h2>Bem-vindo de Volta</h2>
+          <p className="auth-subtitle">
+            Aceda à sua conta para gerir as suas encomendas e descobrir novos blends de curadoria artesanal.
+          </p>
+
+          {error && <div className="auth-status-error">{error}</div>}
+          {message && <div className="auth-status-success">{message}</div>}
+
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>NOME DE UTILIZADOR</label>
+              <input 
+                type="text" 
+                placeholder="O seu nome de utilizador" 
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <div className="label-row">
+                <label>PALAVRA-PASSE</label>
+                <span className="forgot-link">ESQUECEU-SE?</span>
+              </div>
+              <input 
+                type="password" 
+                placeholder="********" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            <button type="submit" className="auth-submit-btn">
+              INICIAR SESSÃO
+            </button>
+          </form>
+
+          <div className="auth-divider">
+            <span>OU CONTINUAR COM</span>
+          </div>
+
+          <div className="auth-social-buttons">
+            <button className="social-btn"><span className="btn-icon">G</span> Google</button>
+            <button className="social-btn"><span className="btn-icon"></span> Apple</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Auth;
