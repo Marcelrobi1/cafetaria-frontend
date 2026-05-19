@@ -1,3 +1,4 @@
+/* src/components/navbar/navbar.css */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -8,6 +9,7 @@
   position: absolute; 
   width: 100%;
   box-sizing: border-box;
+  z-index: 100; /* Garante que a navbar fica sempre no topo */
 }
 
 .nav-links {
@@ -31,7 +33,109 @@
   font-size: 1.5rem;
 }
 
-.user-profile {
-  cursor: pointer;
+/* --- Novos Estilos do Pop-up de Perfil --- */
+.user-profile-container {
+  position: relative; /* Importante para ancorar o dropdown aqui */
 }
 
+.user-profile {
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 280px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  margin-top: 15px;
+  padding: 40px 30px;
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 101;
+}
+
+/* Setinha/Triângulo no topo do dropdown (opcional, dá um ar requintado) */
+.profile-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 25px;
+  width: 0; 
+  height: 0; 
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #ffffff;
+}
+
+.dropdown-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.avatar-placeholder {
+  width: 70px;
+  height: 70px;
+  background-color: #f4f1ee;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin: 0 auto 15px auto;
+  color: #a0a0a0;
+}
+
+.dropdown-header h3 {
+  font-family: 'Georgia', serif;
+  font-size: 1.4rem;
+  margin: 0 0 8px 0;
+  font-weight: normal;
+}
+
+.dropdown-header p {
+  font-family: Arial, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  color: #888;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.dropdown-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.dropdown-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  color: #888;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.dropdown-btn:hover {
+  color: #1a1a1a;
+}
+
+.dropdown-btn .icon {
+  font-size: 1rem;
+  opacity: 0.7;
+}
