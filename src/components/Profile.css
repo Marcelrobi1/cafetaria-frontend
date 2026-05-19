@@ -1,0 +1,237 @@
+/* src/components/Profile/Profile.css */
+.profile-page-container {
+  min-height: 100vh;
+  background-color: #f4f1ee; /* Tom de areia suave do Early */
+  padding: 120px 5% 60px 5%;
+}
+
+.profile-header-nav {
+  max-width: 1200px;
+  margin: 0 auto 30px auto;
+}
+
+.profile-back-btn {
+  background: none;
+  border: none;
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  color: #1a1a1a;
+  text-transform: uppercase;
+}
+
+.profile-main-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  background-color: #ffffff;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+  border-radius: 2px;
+  min-height: 600px;
+}
+
+/* Painel Esquerdo (Fiel ao Mockup) */
+.profile-left-panel {
+  flex: 1;
+  border-right: 1px solid #f0ede9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 40px;
+  background-color: #faf9f8;
+}
+
+.profile-avatar-wrapper {
+  margin-bottom: 25px;
+}
+
+.profile-avatar-box {
+  width: 110px;
+  height: 110px;
+  background-color: #f0ede9;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  position: relative;
+  color: #9c9a96;
+}
+
+.avatar-edit-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 28px;
+  height: 28px;
+  background-color: #ffffff;
+  border: 1px solid #e0deda;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.profile-user-title {
+  font-family: 'Georgia', serif;
+  font-size: 1.8rem;
+  font-weight: normal;
+  color: #1a1a1a;
+  margin: 0 0 10px 0;
+}
+
+.profile-role-badge {
+  font-family: Arial, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 1.5px;
+  color: #888888;
+  border: 1px solid #eaeaea;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #ffffff;
+}
+
+.profile-extra-meta {
+  margin-top: 40px;
+  width: 100%;
+  border-top: 1px solid #eaeaea;
+  padding-top: 30px;
+  font-family: Arial, sans-serif;
+  font-size: 0.85rem;
+  color: #666666;
+  line-height: 1.8;
+}
+
+/* Painel Direito */
+.profile-right-panel {
+  flex: 2.5;
+  padding: 60px 80px;
+}
+
+.profile-right-panel h3 {
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: #1a1a1a;
+  margin: 0 0 6px 0;
+}
+
+.profile-section-subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: #aaaaaa;
+  margin-bottom: 40px;
+}
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 30px;
+}
+
+.profile-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-form-group label {
+  font-family: Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.profile-form-group input {
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid #eaeaea;
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  outline: none;
+  background: none;
+  transition: border-color 0.3s;
+}
+
+.profile-form-group input:focus {
+  border-bottom-color: #d4b499;
+}
+
+.profile-form-group input.disabled-input {
+  color: #aaaaaa;
+  border-bottom-style: dashed;
+}
+
+/* Botão Guardar Alterações */
+.profile-action-row {
+  margin-top: 50px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-save-btn {
+  background-color: #d4b499;
+  color: #1a1a1a;
+  border: none;
+  padding: 15px 40px;
+  font-family: Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-save-btn:hover {
+  background-color: #c4a182;
+}
+
+/* Feedbacks */
+.profile-loading {
+  text-align: center;
+  padding: 100px;
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  color: #888;
+}
+
+.profile-status-error {
+  background-color: #fce8e6;
+  color: #a83232;
+  padding: 12px;
+  margin-bottom: 30px;
+  font-size: 0.85rem;
+  font-family: Arial, sans-serif;
+  border-left: 3px solid #a83232;
+}
+
+.profile-status-success {
+  background-color: #e6f4ea;
+  color: #137333;
+  padding: 12px;
+  margin-bottom: 30px;
+  font-size: 0.85rem;
+  font-family: Arial, sans-serif;
+  border-left: 3px solid #137333;
+}
+
+@media (max-width: 900px) {
+  .profile-main-card {
+    flex-direction: column;
+  }
+  .profile-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .profile-right-panel {
+    padding: 40px 20px;
+  }
+}
