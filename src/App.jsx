@@ -1,20 +1,17 @@
-// src/App.jsx
 import { useState, useEffect } from 'react';
-import './index.css';
-import Navbar from './components/navbar/navbar';
-import Hero from './components/Homepage/Hero/Hero';
-import Features from './components/Homepage/Features/features';
-import About from './components/Homepage/About/About';
-import MenuHighlights from './components/Homepage/MenuHighlights/MenuHighlights';
-import BestSellers from './components/Homepage/BestSellers/BestSellers';
-import Footer from './components/Footer/Footer';
-import Auth from './components/Auth/Auth';
-import Profile from './components/Profile'; // Nova Importação
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// Importamos tus componentes y páginas
+import Navbar from './components/navbar/navbar'; // Ajusta esta ruta si es diferente
+import Home from './pages/Home/Home'; // Ajusta esta ruta si es diferente
+import MenuPage from './pages/MenuPage/MenuPage'; // Ajusta esta ruta si es diferente
+import Auth from './components/Auth/Auth'; 
+//import Profile from './components/Profile/Profile'; // Asumiendo que tu compañero creó esto
 
 function App() {
-  const [view, setView] = useState('home'); // Vistas: 'home', 'auth', 'profile'
   const [currentUser, setCurrentUser] = useState(null);
 
+  // La lógica de tu compañero para mantener la sesión se queda intacta
   useEffect(() => {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
@@ -25,53 +22,31 @@ function App() {
     }
   }, []);
 
-  const handleLoginSuccess = (userData) => {
-    setCurrentUser({
-      username: userData.username,
-      role: userData.role
-    });
-    setView('home'); 
-  };
-
   const handleLogout = () => {
     localStorage.clear();
     setCurrentUser(null);
-    setView('home');
   };
 
   return (
-    <div>
-      {/* RENDERIZAÇÃO CONDICIONAL COM BASE NA VIEW */}
-      {view === 'home' && (
-        <>
-          <Navbar 
-            user={currentUser}
-            onLoginClick={() => setView('auth')}
-            onProfileEditClick={() => setView('profile')} // Ativa a view do Perfil
-            onLogout={handleLogout}
-          />
-          <Hero />
-          <Features />
-          <About />
-          <MenuHighlights />
-          <BestSellers />
-          <Footer />
-        </>
-      )}
-
-      {view === 'auth' && (
-        <Auth 
-          onLoginSuccess={handleLoginSuccess} 
-          onClose={() => setView('home')} 
+    <BrowserRouter>
+      {/* El Navbar ya no necesita recibir funciones para cambiar la "vista" */}
+      <Navbar user={currentUser} onLogout={handleLogout} />
+      
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<MenuPage />} />
+        
+        {/* Transformamos las vistas de tu compañero en Rutas */}
+        <Route 
+          path="/login" 
+          element={<Auth onLoginSuccess={(userData) => setCurrentUser(userData)} />} 
         />
-      )}
-
-      {view === 'profile' && (
-        <Profile 
-          onClose={() => setView('home')} 
-        />
-      )}
-    </div>
+        {/* <Route path="/profile" element={<Profile />} /> */}
+        
+        {/* Ruta futura para la gestión del administrador */}
+        {/* <Route path="/admin" element={<AdminDashboard />} /> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
