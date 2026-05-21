@@ -12,7 +12,8 @@ import MenuHighlights from './components/Homepage/MenuHighlights/MenuHighlights'
 import BestSellers from './components/Homepage/BestSellers/BestSellers';
 import Footer from './components/Footer/Footer';
 import Auth from './components/Auth/Auth';
-import Profile from './components/Profile'; // <-- Garante que tens este import
+import Profile from './components/Profile'; 
+import Dashboard from './components/Dashboard/Dashboard';
 
 // 1. CRIAMOS A HOMEPAGE FORA DO APP PARA AGRUPAR TUDO SEM ERROS
 function HomePage({ currentUser, handleLogout }) {
@@ -68,6 +69,9 @@ function App() {
         
         {/* A ROTA DO PERFIL: Também 100% isolada. */}
         <Route path="/profile" element={<Profile />} />
+
+        {/* A ROTA DA DASHBOARD*/}
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
