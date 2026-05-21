@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Auth.css';
 
 function Auth({ onLoginSuccess, onClose }) {
@@ -6,6 +7,7 @@ function Auth({ onLoginSuccess, onClose }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const BASE_URL = 'https://siws.ufp.pt/lwlc/api';
 
@@ -42,7 +44,9 @@ function Auth({ onLoginSuccess, onClose }) {
       localStorage.setItem('role', data.role);
 
       setMessage('Login efetuado com sucesso!');
-      onLoginSuccess(data); 
+      onLoginSuccess(data);
+
+      navigate('/');
 
     } catch (err) {
       setError(err.message);
