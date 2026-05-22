@@ -1,0 +1,209 @@
+/* Layout Principal */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #faf9f8;
+  /* Esta línea es clave si el Navbar global se solapa. 
+     Para un dashboard real, a veces ocultamos el Navbar superior. */
+  padding-top: 80px; 
+}
+
+
+
+/* --- CONTENIDO PRINCIPAL --- */
+.dashboard-content {
+  flex: 1;
+  padding: 40px 60px;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.content-header h2 {
+  font-family: 'Georgia', serif;
+  font-size: 2.2rem;
+  color: #1a1a1a;
+  margin: 0 0 10px 0;
+  font-weight: normal;
+}
+
+.content-header p {
+  font-family: Arial, sans-serif;
+  color: #888;
+  font-style: italic;
+  margin: 0;
+}
+
+.btn-add-primary {
+  background-color: #6b5c4f;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-add-primary:hover {
+  background-color: #52453a;
+}
+
+/* --- TABLA --- */
+.table-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  overflow: hidden;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-table th {
+  padding: 20px;
+  background-color: #fff;
+  color: #aaa;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #f4f1ee;
+}
+
+.admin-table td {
+  padding: 20px;
+  border-bottom: 1px solid #f4f1ee;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+.td-nome {
+  font-family: 'Georgia', serif !important;
+  font-weight: bold;
+  color: #1a1a1a !important;
+}
+
+.badge-categoria {
+  background-color: #f4f1ee;
+  color: #8c7355;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.low-stock {
+  color: #d9534f !important;
+  font-weight: bold;
+}
+
+.td-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.action-btn:hover {
+  opacity: 1;
+}
+
+/* --- FORMULARIO --- */
+.form-card {
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  max-width: 800px;
+}
+
+.admin-form .form-row {
+  margin-bottom: 25px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.admin-form label {
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.admin-form input, .admin-form select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.admin-form input:focus, .admin-form select:focus {
+  outline: none;
+  border-color: #8c7355;
+}
+
+.error-text {
+  color: #d9534f;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  display: block;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #f4f1ee;
+}
+
+.btn-cancel {
+  background: none;
+  border: none;
+  color: #888;
+  font-weight: bold;
+  font-size: 0.85rem;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.btn-save {
+  background-color: #6b5c4f;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+}

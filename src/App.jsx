@@ -2,37 +2,23 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 
-// Importações dos teus componentes
-import Navbar from './components/navbar/navbar';
-import Hero from './components/Homepage/Hero/Hero';
-import Features from './components/Homepage/Features/Features';
-import About from './components/Homepage/About/About';
-import MenuHighlights from './components/Homepage/MenuHighlights/MenuHighlights';
-import BestSellers from './components/Homepage/BestSellers/BestSellers';
-import Footer from './components/Footer/Footer';
-import Auth from './components/Auth/Auth';
-import Profile from './components/Profile'; 
-import Dashboard from './components/Dashboard/Dashboard';
+import Navbar from './components/navbar/navbar'; // Barra de navegação (Header)
+import Home from './pages/Home/Home'; //Inicio
+import MenuPage from './pages/MenuPage/MenuPage'; //Menu
+import Auth from './components/Auth/Auth'; //Login
 
-// 1. CRIAMOS A HOMEPAGE FORA DO APP PARA AGRUPAR TUDO SEM ERROS
-function HomePage({ currentUser, handleLogout }) {
-  return (
-    <>
-      <Navbar user={currentUser} onLogout={handleLogout} />
-      <Hero />
-      <Features />
-      <About />
-      <MenuHighlights />
-      <BestSellers />
-      <Footer />
-    </>
-  );
-}
+//Panel do Gestão
+import AdminLayout from './pages/AdminDashboard/AdminLayout';
+import GestaoIngredientes from './components/Gestao/GestaoIngredientes/GestaoIngredientes';
+import GestaoPratos from './components/Gestao/GestaoPratos/GestaoPratos';
+//import GestaoMenus from './components/Gestao/GestaoMenu/GestaoMenus';
+//import GestaoCompras from './components/Gestao/GestaoCompras/GestaoCompras';
+//import GestaoUtilizadores from './components/Gestao/GestaoUtilizadores/GestaoUtilizadores'; 
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
-  // Lê o token do LocalStorage quando a app carrega
+  // Logica de autenticação
   useEffect(() => {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
@@ -56,19 +42,27 @@ function App() {
   };
 
   return (
-    <Router>
+    <BrowserRouter>
+      <Navbar user={currentUser} onLogout={handleLogout} />
+      
       <Routes>
-        {/* A ROTA PRINCIPAL: Chama o componente HomePage (que tem a Navbar e o Footer) */}
-        <Route path="/" element={<HomePage currentUser={currentUser} handleLogout={handleLogout} />} />
-        
-        {/* A ROTA DE LOGIN: Como vês, não tem Navbar nem Footer! Fica 100% isolada. */}
-        <Route path="/auth" element={<Auth onLoginSuccess={handleLoginSuccess} />} />
-        
-        {/* A ROTA DO PERFIL: Também 100% isolada. */}
-        <Route path="/profile" element={<Profile />} />
-
-        {/* A ROTA DA DASHBOARD*/}
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<MenuPage />} />
+        <Route 
+          path="/login" 
+          element={<Auth onLoginSuccess={(userData) => setCurrentUser(userData)} />} 
+        />
+        <Route path="/admin" element={<AdminLayout />}>
+          {/*Rutas panel do Admin
+          <Route index element={<GestaoPratos />} />
+          <Route path="pratos" element={<GestaoPratos />} />
+          <Route path="menu" element={<GestaoMenus />} />
+          <Route path="compras" element={<GestaoCompras />} />
+          <Route path="ingredientes" element={<GestaoIngredientes />} />
+          <Route path="utilizadores" element={<GestaoUtilizadores />} /> */}
+          <Route path="pratos" element={<GestaoPratos />} />
+          <Route path="ingredientes" element={<GestaoIngredientes />} /> 
+        </Route>
       </Routes>
     </Router>
   );
