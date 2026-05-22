@@ -1,0 +1,166 @@
+.gestao-pratos-container {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.center-header {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.admin-header h2 {
+  font-family: 'Georgia', serif;
+  font-size: 2.2rem;
+  color: #0b2b40;
+  margin: 0 0 5px 0;
+}
+
+.admin-header p {
+  color: #888;
+  font-family: Arial, sans-serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.btn-add-primary {
+  background-color: #6b5c4f;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background-color 0.2s;
+}
+.btn-add-primary:hover { background-color: #52453a; }
+
+.table-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  overflow: hidden;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 20px 25px;
+  background-color: #fff;
+  color: #aaa;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #f4f1ee;
+}
+
+.admin-table td {
+  padding: 15px 25px;
+  border-bottom: 1px solid #f4f1ee;
+  vertical-align: middle;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+}
+
+.admin-tag {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 15px;
+}
+
+.action-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  opacity: 0.5;
+  transition: 0.2s;
+}
+.action-icon:hover { opacity: 1; }
+
+.form-card-centered {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  max-width: 600px; /* Un poco más estrecho para este form */
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.admin-form .form-group {
+  margin-bottom: 25px;
+}
+
+.admin-form label {
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.admin-form input[type="date"],
+.admin-form select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.admin-form input:focus,
+.admin-form select:focus {
+  outline: none;
+  border-color: #6b5c4f;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eaeaea;
+}
+
+.btn-text {
+  background: none; border: none;
+  font-weight: bold; color: #888;
+  cursor: pointer; letter-spacing: 1px;
+}
+
+.btn-submit {
+  background-color: #6b5c4f; color: white;
+  border: none; padding: 12px 24px;
+  border-radius: 6px; font-weight: bold;
+  cursor: pointer; letter-spacing: 1px;
+}

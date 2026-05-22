@@ -1,16 +1,50 @@
-﻿﻿import { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+﻿import { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom'; // <-- 1. Importamos useNavigate
 import './navbar.css';
 
 function Navbar({ user, onLogout }) {
-  const navigate = useNavigate();
-  
-  // 1. Estado para controlar se o pop-up está aberto ou fechado
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate(); // <-- 2. Inicializamos el hook de navegación
+  const location = useLocation(); // <-- 3. Inicializamos el hook de ubicación
+  
+  // 1. Lógica para el botón "Menu"
+  const handleMenuClick = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      // Si no está autenticado, lo enviamos al login
+      navigate('/login');
+    } else {
+      // Si está autenticado, lo enviamos al catálogo
+      navigate('/menu');
+    }
+  }; 
 
-  // 2. Lógica para fechar o pop-up se o utilizador clicar noutro sítio do ecrã
+  // 2. Lógica inteligente para hacer Scroll
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault();
+
+    // Si NO estamos en la página de inicio, primero navegamos allá
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Le damos un pequeño respiro a React para que renderice la página antes de buscar el ID
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Si ya estamos en el inicio, hacemos scroll directamente
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -31,9 +65,9 @@ function Navbar({ user, onLogout }) {
       </div>
       <ul className="nav-links">
         <li><Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Inicio</Link></li>
-        <li><Link to="/menu" style={{ color: 'white', textDecoration: 'none' }}>Menu</Link></li>
-        <li><Link to="#features" style={{ color: 'white', textDecoration: 'none' }}>Sobre Nós</Link></li>
-        <li><Link to="/contact" style={{ color: 'white', textDecoration: 'none' }}>Contato</Link></li>
+        <li><a to="/menu" onClick={handleMenuClick} style={{ color: 'white', textDecoration: 'none' }}>Menu</a></li>
+        <li><a href="#features" onClick={(e) => scrollToSection(e, 'features')} style={{ color: 'white', textDecoration: 'none' }}>Sobre Nós</a></li>
+        <li><a href="#footer" onClick={(e) => scrollToSection(e, 'footer')} style={{ color: 'white', textDecoration: 'none' }}>Contato</a></li>
         <li><Link to="/faq" style={{ color: 'white', textDecoration: 'none' }}>FAQ</Link></li>
       </ul>
 
@@ -42,7 +76,6 @@ function Navbar({ user, onLogout }) {
           <span>👤 {user ? user.username : 'Perfil'}</span>
         </div>
 
-        {/* 4. O Pop-up propriamente dito (só aparece se isOpen for true) */}
         {isOpen && (
           <div className="profile-dropdown" onClick={(e) => e.stopPropagation()}>
             <div className="dropdown-header">
@@ -64,11 +97,10 @@ function Navbar({ user, onLogout }) {
               {user ? (
                 <>
                   {user.role === 'ADMIN' && (
-                    <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/dashboard'); }}>
+                    <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/admin'); }}>
                       <span className="icon">🛡️</span> Gestão do Sistema
                     </button>
                   )}
-                  {/* Botão que leva à nova página de Perfil */}
                   <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/profile'); }}>
                     <span className="icon">⚙️</span> Editar Perfil
                   </button>
@@ -81,7 +113,7 @@ function Navbar({ user, onLogout }) {
                   </button>
                 </>
               ) : (
-                <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/auth'); }}>
+                <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/login'); }}>
                   <span className="icon">➔</span> Iniciar Sessão
                 </button>
               )}

@@ -6,12 +6,13 @@ import Navbar from './components/navbar/navbar'; // Barra de navegação (Header
 import Home from './pages/Home/Home'; //Inicio
 import MenuPage from './pages/MenuPage/MenuPage'; //Menu
 import Auth from './components/Auth/Auth'; //Login
+import Profile from './components/Profile'; //Perfil do utilizador
 
 //Panel do Gestão
 import AdminLayout from './pages/AdminDashboard/AdminLayout';
 import GestaoIngredientes from './components/Gestao/GestaoIngredientes/GestaoIngredientes';
 import GestaoPratos from './components/Gestao/GestaoPratos/GestaoPratos';
-//import GestaoMenus from './components/Gestao/GestaoMenu/GestaoMenus';
+import GestaoMenus from './components/Gestao/GestaoMenu/GestaoMenus';
 //import GestaoCompras from './components/Gestao/GestaoCompras/GestaoCompras';
 //import GestaoUtilizadores from './components/Gestao/GestaoUtilizadores/GestaoUtilizadores'; 
 
@@ -42,9 +43,9 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <Router>
       <Navbar user={currentUser} onLogout={handleLogout} />
-      
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<MenuPage />} />
@@ -52,6 +53,7 @@ function App() {
           path="/login" 
           element={<Auth onLoginSuccess={(userData) => setCurrentUser(userData)} />} 
         />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/admin" element={<AdminLayout />}>
           {/*Rutas panel do Admin
           <Route index element={<GestaoPratos />} />
@@ -61,7 +63,8 @@ function App() {
           <Route path="ingredientes" element={<GestaoIngredientes />} />
           <Route path="utilizadores" element={<GestaoUtilizadores />} /> */}
           <Route path="pratos" element={<GestaoPratos />} />
-          <Route path="ingredientes" element={<GestaoIngredientes />} /> 
+          <Route path="ingredientes" element={<GestaoIngredientes />} />
+          <Route path="menus" element={<GestaoMenus />} /> 
         </Route>
       </Routes>
     </Router>
