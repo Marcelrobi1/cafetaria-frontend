@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './index.css';
 
 import Navbar from './components/navbar/navbar'; // Barra de navegação (Header)
 import Home from './pages/Home/Home'; //Inicio
@@ -27,6 +28,13 @@ function App() {
       setCurrentUser({ username, role });
     }
   }, []);
+
+  const handleLoginSuccess = (userData) => {
+    setCurrentUser({
+      username: userData.username,
+      role: userData.role
+    });
+  };
 
   const handleLogout = () => {
     localStorage.clear();
@@ -56,7 +64,7 @@ function App() {
           <Route path="ingredientes" element={<GestaoIngredientes />} /> 
         </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

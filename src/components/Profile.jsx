@@ -1,8 +1,10 @@
 // src/components/Profile/Profile.jsx
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // <-- IMPORTAÇÃO DO ROUTER
 import './Profile.css';
 
-function Profile({ onClose }) {
+function Profile() {
+  const navigate = useNavigate(); // <-- INICIALIZA O NAVIGATE
   const [userData, setUserData] = useState(null);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -14,12 +16,12 @@ function Profile({ onClose }) {
   const BASE_URL = 'https://siws.ufp.pt/lwlc/api';
   const token = localStorage.getItem('token');
 
-  // 1. Carregar os dados atuais do utilizador (GET /api/users/me)
+  // 1. Carregar os dados atuais do utilizador
   useEffect(() => {
     const fetchUserData = async () => {
       if (!token) {
-        setError('Sessão expirada. Por favor, volte a iniciar sessão.');
-        setLoading(false);
+        // Se não houver token, redireciona logo para a página inicial ou login
+        navigate('/');
         return;
       }
 
@@ -38,7 +40,7 @@ function Profile({ onClose }) {
 
         const data = await response.json();
         setUserData(data);
-        setBalance(data.balance || 0); // Define o saldo atual no formulário
+        setBalance(data.balance || 0);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -47,31 +49,28 @@ function Profile({ onClose }) {
     };
 
     fetchUserData();
-  }, [token]);
+  }, [token, navigate]);
 
-  // 2. Atualizar os dados do utilizador (PUT /api/users/me)
+  // 2. Atualizar os dados do utilizador
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
 
-    // Nova Validação: A password agora é obrigatória
     if (!password) {
       setError('A palavra-passe é obrigatória para guardar as alterações.');
       return;
     }
 
-    // Se o utilizador preencheu a confirmação, têm de coincidir
     if (confirmPassword && password !== confirmPassword) {
       setError('As palavras-passe não coincidem.');
       return;
     }
 
     try {
-      // O payload agora inclui OBRIGATORIAMENTE o username e a password
       const payload = {
         username: userData.username, 
-        password: password, // Enviamos sempre a password escrita no input
+        password: password, 
         type: userData.type,
         balance: parseFloat(balance)
       };
@@ -96,11 +95,7 @@ function Profile({ onClose }) {
       }
 
       setSuccess('Perfil atualizado com sucesso!');
-      
-      // Atualiza o estado local com os novos dados devolvidos pela API
       setUserData(data);
-      
-      // Opcional: Limpar os campos de password após sucesso para maior segurança
       setPassword('');
       setConfirmPassword('');
     } catch (err) {
@@ -110,7 +105,6 @@ function Profile({ onClose }) {
 
   if (loading) return <div className="profile-loading">A carregar curadoria Early...</div>;
 
-  // Mapeamento estético dos cargos com base no mockup
   const formatRole = (type) => {
     if (type === 'ADMIN') return 'GERENTE DE LOJA';
     if (type === 'EMPLOYEE') return 'BARISTA JUNIOR';
@@ -120,11 +114,14 @@ function Profile({ onClose }) {
   return (
     <div className="profile-page-container">
       <div className="profile-header-nav">
-        <button className="profile-back-btn" onClick={onClose}>&larr; Voltar ao Início</button>
+        {/* <-- USAR O NAVIGATE PARA VOLTAR À HOME --> */}
+        <button className="profile-back-btn" onClick={() => navigate('/')}>
+          &larr; Voltar ao Início
+        </button>
       </div>
 
       <div className="profile-main-card">
-        {/* LADO ESQUERDO: Bloco do Avatar e Metadata */}
+        {/* Painel Esquerdo */}
         <div className="profile-left-panel">
           <div className="profile-avatar-wrapper">
             <div className="profile-avatar-box">
@@ -141,7 +138,7 @@ function Profile({ onClose }) {
           </div>
         </div>
 
-        {/* LADO DIREITO: Formulário de Informações Pessoais */}
+        {/* Painel Direito */}
         <div className="profile-right-panel">
           <h3>INFORMAÇÕES PESSOAIS</h3>
           <p className="profile-section-subtitle">GERAL DA SUA CONTA E CRÉDITO</p>
