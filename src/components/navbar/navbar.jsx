@@ -1,12 +1,16 @@
-﻿import { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // <-- 1. Importamos useNavigate
+﻿﻿import { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css';
 
 function Navbar({ user, onLogout }) {
+  const navigate = useNavigate();
+  
+  // 1. Estado para controlar se o pop-up está aberto ou fechado
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate(); // <-- 2. Inicializamos el hook de navegación
 
+  // 2. Lógica para fechar o pop-up se o utilizador clicar noutro sítio do ecrã
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -38,6 +42,7 @@ function Navbar({ user, onLogout }) {
           <span>👤 {user ? user.username : 'Perfil'}</span>
         </div>
 
+        {/* 4. O Pop-up propriamente dito (só aparece se isOpen for true) */}
         {isOpen && (
           <div className="profile-dropdown" onClick={(e) => e.stopPropagation()}>
             <div className="dropdown-header">
@@ -59,10 +64,11 @@ function Navbar({ user, onLogout }) {
               {user ? (
                 <>
                   {user.role === 'ADMIN' && (
-                    <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/admin'); }}>
+                    <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/dashboard'); }}>
                       <span className="icon">🛡️</span> Gestão do Sistema
                     </button>
                   )}
+                  {/* Botão que leva à nova página de Perfil */}
                   <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/profile'); }}>
                     <span className="icon">⚙️</span> Editar Perfil
                   </button>
@@ -75,7 +81,7 @@ function Navbar({ user, onLogout }) {
                   </button>
                 </>
               ) : (
-                <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/login'); }}>
+                <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/auth'); }}>
                   <span className="icon">➔</span> Iniciar Sessão
                 </button>
               )}
