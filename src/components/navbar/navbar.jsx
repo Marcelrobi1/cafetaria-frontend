@@ -8,6 +8,7 @@ function Navbar({ user, onLogout }) {
   // 1. Estado para controlar se o pop-up está aberto ou fechado
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate(); // <-- 2. Inicializamos el hook de navegación
 
   // 2. Lógica para fechar o pop-up se o utilizador clicar noutro sítio do ecrã
   useEffect(() => {
@@ -16,24 +17,26 @@ function Navbar({ user, onLogout }) {
         setIsOpen(false);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [dropdownRef]);
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <nav className="navbar">
-      <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-        <h2>Early Cafetaria</h2>
+      <div className="logo">
+        <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
+          <h2>Early Cafetaria</h2>
+        </Link>
       </div>
       <ul className="nav-links">
-        <li onClick={() => navigate('/')}>Inicio</li>
-        <li>Menu</li>
-        <li>Sobre Nós</li>
-        <li>Contato</li>
-        <li>FAQ</li>
+        <li><Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Inicio</Link></li>
+        <li><Link to="/menu" style={{ color: 'white', textDecoration: 'none' }}>Menu</Link></li>
+        <li><Link to="/about" style={{ color: 'white', textDecoration: 'none' }}>Sobre Nós</Link></li>
+        <li><Link to="/contact" style={{ color: 'white', textDecoration: 'none' }}>Contato</Link></li>
+        <li><Link to="/faq" style={{ color: 'white', textDecoration: 'none' }}>FAQ</Link></li>
       </ul>
-      
-      {/* 3. Container do Pop-up */}
+
       <div className="user-profile-container" ref={dropdownRef}>
         <div className="user-profile" onClick={() => setIsOpen(!isOpen)}>
           <span>👤 {user ? user.username : 'Perfil'}</span>
@@ -41,7 +44,7 @@ function Navbar({ user, onLogout }) {
 
         {/* 4. O Pop-up propriamente dito (só aparece se isOpen for true) */}
         {isOpen && (
-          <div className="profile-dropdown">
+          <div className="profile-dropdown" onClick={(e) => e.stopPropagation()}>
             <div className="dropdown-header">
               <div className="avatar-placeholder">👤</div>
               {user ? (
@@ -56,7 +59,7 @@ function Navbar({ user, onLogout }) {
                 </>
               )}
             </div>
-            
+
             <div className="dropdown-actions">
               {user ? (
                 <>
@@ -69,7 +72,11 @@ function Navbar({ user, onLogout }) {
                   <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/profile'); }}>
                     <span className="icon">⚙️</span> Editar Perfil
                   </button>
-                  <button className="dropdown-btn" onClick={() => { setIsOpen(false); onLogout(); }}>
+                  <button className="dropdown-btn" onClick={() => { 
+                      setIsOpen(false); 
+                      onLogout(); 
+                      navigate('/'); // Redirige al inicio tras cerrar sesión
+                  }}>
                     <span className="icon">🚪</span> Terminar Sessão
                   </button>
                 </>

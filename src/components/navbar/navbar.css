@@ -1,12 +1,12 @@
-/* src/components/navbar/navbar.css */
+﻿/* src/components/navbar/navbar.css */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 50px;
-  background-color: #1a1a1a; 
+  background-color: #1a1a1a;
   color: white;
-  position: absolute; 
+  position: absolute;
   width: 100%;
   box-sizing: border-box;
   z-index: 100; /* Garante que a navbar fica sempre no topo */
@@ -33,9 +33,8 @@
   font-size: 1.5rem;
 }
 
-/* --- Novos Estilos do Pop-up de Perfil --- */
 .user-profile-container {
-  position: relative; /* Importante para ancorar o dropdown aqui */
+  position: relative;
 }
 
 .user-profile {
@@ -49,68 +48,74 @@
   right: 0;
   width: 280px;
   background-color: #ffffff;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  margin-top: 15px;
-  padding: 40px 30px;
   color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  margin-top: 15px;
+  padding: 30px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 101;
+  text-align: center;
+  cursor: default;
 }
 
-/* Setinha/Triângulo no topo do dropdown (opcional, dá um ar requintado) */
 .profile-dropdown::before {
   content: '';
   position: absolute;
   top: -8px;
   right: 25px;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-bottom: 8px solid #ffffff;
 }
 
 .dropdown-header {
+  width: 100%;
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
 }
 
 .avatar-placeholder {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background-color: #f4f1ee;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   margin: 0 auto 15px auto;
-  color: #a0a0a0;
+  color: #888;
 }
 
 .dropdown-header h3 {
   font-family: 'Georgia', serif;
-  font-size: 1.4rem;
-  margin: 0 0 8px 0;
+  font-size: 1.3rem;
+  margin: 0 0 10px 0;
+  color: #1a1a1a;
   font-weight: normal;
 }
 
 .dropdown-header p {
   font-family: Arial, sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 1.5px;
+  font-size: 0.75rem;
   color: #888;
-  text-transform: uppercase;
+  letter-spacing: 1px;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .dropdown-actions {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
 .dropdown-btn {
@@ -118,14 +123,14 @@
   background: none;
   border: none;
   text-align: left;
-  padding: 5px;
+  padding: 12px 10px;
   font-family: Arial, sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: #888;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: color 0.3s;
@@ -137,5 +142,5 @@
 
 .dropdown-btn .icon {
   font-size: 1rem;
-  opacity: 0.7;
+  opacity: 0.8;
 }

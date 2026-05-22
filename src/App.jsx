@@ -1,4 +1,3 @@
-// src/App.jsx
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
@@ -31,7 +30,6 @@ function HomePage({ currentUser, handleLogout }) {
 }
 
 function App() {
-  const [view, setView] = useState('home'); // Vistas: 'home', 'auth', 'profile'
   const [currentUser, setCurrentUser] = useState(null);
 
   // Lê o token do LocalStorage quando a app carrega
@@ -55,7 +53,6 @@ function App() {
   const handleLogout = () => {
     localStorage.clear();
     setCurrentUser(null);
-    setView('home');
   };
 
   return (

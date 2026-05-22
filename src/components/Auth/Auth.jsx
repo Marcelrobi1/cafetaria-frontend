@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Auth.css';
+import { useNavigate } from 'react-router-dom';
 
-function Auth({ onLoginSuccess, onClose }) {
+function Auth({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -48,6 +49,9 @@ function Auth({ onLoginSuccess, onClose }) {
 
       navigate('/');
 
+      // 2. MAGIA DEL ROUTER: Redirección automática al inicio tras el login exitoso
+      navigate('/'); 
+
     } catch (err) {
       setError(err.message);
     }
@@ -55,7 +59,10 @@ function Auth({ onLoginSuccess, onClose }) {
 
   return (
     <div className="auth-page-container">
-      <button className="auth-back-btn" onClick={onClose}>&larr; Voltar ao Início</button>
+      {/* 3. Actualizamos el botón para usar navigate() en lugar de onClose() */}
+      <button className="auth-back-btn" onClick={() => navigate('/')}>
+        &larr; Voltar ao Início
+      </button>
       
       <div className="auth-card">
         <div className="auth-image-side">
