@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Auth.css';
-import { useNavigate } from 'react-router-dom';
+
 
 function Auth({ onLoginSuccess }) {
   const [username, setUsername] = useState('');

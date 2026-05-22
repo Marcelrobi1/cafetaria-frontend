@@ -2,7 +2,7 @@ import './Footer.css';
 
 function Footer() {
   return (
-    <footer className="footer-section" id = "#footer">
+    <footer className="footer-section" id = "footer">
       <div className="footer-container">
         
         {/* Columna 1: Marca */}
