@@ -3,32 +3,34 @@ import './Menu.css';
 
 function Menu() {
   const [pratos, setPratos] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [termoBusca, setTermoBusca] = useState(''); // Estado para el buscador
   
-  // NUEVO ESTADO: Guardará el plato en el que el usuario hizo clic.
-  // Empieza en 'null' (ningún plato seleccionado).
+  const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState('');
   const [selectedPrato, setSelectedPrato] = useState(null);
+
+  const BASE_URL = 'https://siws.ufp.pt/lwlc/api';
 
   useEffect(() => {
     const fetchPratos = async () => {
       try {
-        const token = localStorage.getItem('token'); 
-        const response = await fetch('https://siws.ufp.pt/lwlc/api/pratos', {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${BASE_URL}/dishes`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` 
+            ...(token && { 'Authorization': `Bearer ${token}` })
           }
         });
 
         if (response.ok) {
           const data = await response.json();
-          // Asumimos que la API devuelve un array de platos. 
-          // Si por ahora la API está vacía, puedes poner datos de prueba aquí para ver el diseño.
-          setPratos(data); 
+          setPratos(data); // Guardamos todos los platos sin dividirlos
+        } else {
+          setErro("Não foi possível carregar o catálogo de pratos.");
         }
       } catch (error) {
-        console.error("Error de conexión:", error);
+        setErro("Erro de conexão com o servidor.");
       } finally {
         setLoading(false);
       }
@@ -37,93 +39,118 @@ function Menu() {
     fetchPratos();
   }, []);
 
-  const pratosCarne = pratos.filter(prato => prato.categoria === 'Carne');
-  const pratosPeixe = pratos.filter(prato => prato.categoria === 'Peixe');
-  const pratosVegetariano = pratos.filter(prato => prato.categoria === 'Vegetariano');
-
-  // Función para cerrar el modal
-  const closeModal = () => {
+  const adicionarAoCarrinho = (prato) => {
+    alert(`"${prato.name}" adicionado ao carrinho!`);
     setSelectedPrato(null);
   };
 
-  // Renderiza una sección de cuadrícula (Grid) en lugar de una lista
-  const renderSection = (title, items) => (
-    <div className="menu-category">
-      <h3 className="category-title">{title}</h3>
-      <div className="menu-grid">
-        {items.length > 0 ? (
-          items.map((prato) => (
-            // Al hacer clic, guardamos este plato en el estado 'selectedPrato'
-            <div key={prato.id} className="prato-card" onClick={() => setSelectedPrato(prato)}>
-              {/* RF5: La API devuelve una imagen o usamos una por defecto */}
-              <img src={prato.imagemUrl || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80'} alt={prato.nome} className="prato-image" />
-              
-              <div className="prato-info">
-                <div className="prato-header-card">
-                  <h4>{prato.nome}</h4>
-                  <span className="prato-price">€{prato.preco.toFixed(2)}</span>
-                </div>
-                
-                {/* Etiquetas de ejemplo inspiradas en tu diseño */}
-                <div className="prato-tags">
-                  <span className="tag">Artesanal</span>
-                  <span className="tag">{prato.categoria}</span>
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p className="empty-message">Nenhum prato disponível nesta categoria.</p>
-        )}
-      </div>
-    </div>
-  );
+  // Lógica del Buscador: Filtra los platos en tiempo real según lo que el usuario escriba
+  const pratosFiltrados = pratos.filter((prato) => {
+    if (termoBusca === '') return true;
+    
+    const termoLower = termoBusca.toLowerCase();
+    const nomeInclui = prato.name.toLowerCase().includes(termoLower);
+    
+    // También buscamos dentro de los ingredientes (por si buscan "tomato" o "tomate")
+    const ingredientesIncluem = prato.ingredientNames && prato.ingredientNames.some(ing => 
+      ing.toLowerCase().includes(termoLower)
+    );
+
+    return nomeInclui || ingredientesIncluem;
+  });
 
   return (
-    <section className="menu-page-section" id="menu-completo">
-      <div className="menu-header-top">
-        <h2>O Nosso Menu</h2>
-        <p>Produção diária com ingredientes frescos para garantir textura e sabor inigualáveis.</p>
+    <section className="menu-catalog-section">
+      <div className="catalog-header">
+        <span className="subtitle">SABORES DO MUNDO</span>
+        <h2>Menu Completo</h2>
+        <p>Explore as nossas criações preparadas diariamente. Utilize a pesquisa para encontrar os seus ingredientes favoritos.</p>
+        
+        {/* BARRA DE BÚSQUEDA */}
+        <div className="search-bar-container">
+          <span className="search-icon">🔍</span>
+          <input 
+            type="text" 
+            className="search-input"
+            placeholder="Procurar por prato ou ingrediente (ex: 'salmão', 'vegan', 'chicken')..."
+            value={termoBusca}
+            onChange={(e) => setTermoBusca(e.target.value)}
+          />
+        </div>
       </div>
 
       {loading ? (
-        <div className="loading-spinner">A carregar o menu...</div>
+        <div className="loading-spinner">A carregar os pratos...</div>
+      ) : erro ? (
+        <div className="error-message">{erro}</div>
       ) : (
-        <div className="menu-layout">
-          {renderSection('Carne', pratosCarne)}
-          {renderSection('Peixe', pratosPeixe)}
-          {renderSection('Vegetariano', pratosVegetariano)}
+        <div className="catalog-container">
+          {pratosFiltrados.length === 0 ? (
+            <div className="empty-message">Nenhum prato encontrado com o termo "{termoBusca}".</div>
+          ) : (
+            <div className="pratos-grid">
+              {pratosFiltrados.map((prato) => (
+                <div key={prato.id} className="prato-card" onClick={() => setSelectedPrato(prato)}>
+                  <div className="image-container">
+                    <img 
+                      src={prato.imageUrl || 'https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=500&q=80'} 
+                      alt={prato.name} 
+                      className="prato-image" 
+                    />
+                  </div>
+                  
+                  <div className="prato-info">
+                    <div className="prato-header">
+                      <h4>{prato.name}</h4>
+                      <span className="price">{prato.price ? prato.price.toFixed(2) : '0.00'}€</span>
+                    </div>
+                    
+                    <div className="prato-tags">
+                      {prato.ingredientNames && prato.ingredientNames.slice(0, 3).map((ing, idx) => (
+                        <span key={idx} className="tag">{ing}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
-      {/* RENDERIZADO CONDICIONAL DEL MODAL: Solo se dibuja si selectedPrato tiene datos */}
+      {/* MODAL MANTENIDO IGUAL QUE ANTES */}
       {selectedPrato && (
-        <div className="modal-overlay" onClick={closeModal}>
-          {/* Evitamos que el clic dentro del modal lo cierre */}
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={closeModal}>✕</button>
+        <div className="modal-overlay" onClick={() => setSelectedPrato(null)}>
+          <div className="modal-content dish-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="close-btn" onClick={() => setSelectedPrato(null)}>✕</button>
             
             <div className="modal-layout">
-              <img src={selectedPrato.imagemUrl || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80'} alt={selectedPrato.nome} />
+              <img 
+                src={selectedPrato.imageUrl || 'https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=500&q=80'} 
+                alt={selectedPrato.name} 
+                className="modal-image"
+              />
               
               <div className="modal-details">
-                <h2>{selectedPrato.nome}</h2>
-                <span className="modal-price">€{selectedPrato.preco.toFixed(2)}</span>
-                <p className="modal-desc">{selectedPrato.descricao}</p>
+                <h2>{selectedPrato.name}</h2>
+                <span className="modal-price">{selectedPrato.price ? selectedPrato.price.toFixed(2) : '0.00'}€</span>
                 
                 <div className="modal-ingredients">
                   <h3>Ingredientes:</h3>
-                  <ul>
-                    {/* Verificamos si la API nos mandó ingredientes (RF4/RF5) */}
-                    {selectedPrato.ingredientes && selectedPrato.ingredientes.length > 0 ? (
-                      selectedPrato.ingredientes.map((ing, idx) => (
-                        <li key={idx}>{ing.nome || ing}</li>
-                      ))
-                    ) : (
-                      <li>Informação de ingredientes não disponível.</li>
-                    )}
-                  </ul>
+                  {selectedPrato.ingredientNames && selectedPrato.ingredientNames.length > 0 ? (
+                    <ul>
+                      {selectedPrato.ingredientNames.map((ing, idx) => (
+                        <li key={idx}>{ing}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>Detalhes nutricionais não disponíveis.</p>
+                  )}
                 </div>
+
+                <button className="btn-add-cart" onClick={() => adicionarAoCarrinho(selectedPrato)}>
+                  <span className="cart-icon">🛒</span> ADICIONAR AO CARRINHO
+                </button>
               </div>
             </div>
           </div>

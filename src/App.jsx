@@ -1,17 +1,23 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// Importamos tus componentes y páginas
-import Navbar from './components/navbar/navbar'; // Ajusta esta ruta si es diferente
-import Home from './pages/Home/Home'; // Ajusta esta ruta si es diferente
-import MenuPage from './pages/MenuPage/MenuPage'; // Ajusta esta ruta si es diferente
-import Auth from './components/Auth/Auth'; 
-//import Profile from './components/Profile/Profile'; // Asumiendo que tu compañero creó esto
+import Navbar from './components/navbar/navbar'; // Barra de navegação (Header)
+import Home from './pages/Home/Home'; //Inicio
+import MenuPage from './pages/MenuPage/MenuPage'; //Menu
+import Auth from './components/Auth/Auth'; //Login
+
+//Panel do Gestão
+import AdminLayout from './pages/AdminDashboard/AdminLayout';
+import GestaoIngredientes from './components/Gestao/GestaoIngredientes/GestaoIngredientes';
+import GestaoPratos from './components/Gestao/GestaoPratos/GestaoPratos';
+//import GestaoMenus from './components/Gestao/GestaoMenu/GestaoMenus';
+//import GestaoCompras from './components/Gestao/GestaoCompras/GestaoCompras';
+//import GestaoUtilizadores from './components/Gestao/GestaoUtilizadores/GestaoUtilizadores'; 
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
-  // La lógica de tu compañero para mantener la sesión se queda intacta
+  // Logica de autenticação
   useEffect(() => {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
@@ -29,22 +35,26 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* El Navbar ya no necesita recibir funciones para cambiar la "vista" */}
       <Navbar user={currentUser} onLogout={handleLogout} />
       
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<MenuPage />} />
-        
-        {/* Transformamos las vistas de tu compañero en Rutas */}
         <Route 
           path="/login" 
           element={<Auth onLoginSuccess={(userData) => setCurrentUser(userData)} />} 
         />
-        {/* <Route path="/profile" element={<Profile />} /> */}
-        
-        {/* Ruta futura para la gestión del administrador */}
-        {/* <Route path="/admin" element={<AdminDashboard />} /> */}
+        <Route path="/admin" element={<AdminLayout />}>
+          {/*Rutas panel do Admin
+          <Route index element={<GestaoPratos />} />
+          <Route path="pratos" element={<GestaoPratos />} />
+          <Route path="menu" element={<GestaoMenus />} />
+          <Route path="compras" element={<GestaoCompras />} />
+          <Route path="ingredientes" element={<GestaoIngredientes />} />
+          <Route path="utilizadores" element={<GestaoUtilizadores />} /> */}
+          <Route path="pratos" element={<GestaoPratos />} />
+          <Route path="ingredientes" element={<GestaoIngredientes />} /> 
+        </Route>
       </Routes>
     </BrowserRouter>
   );

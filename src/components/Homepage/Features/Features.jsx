@@ -3,7 +3,7 @@ import './Features.css';
 
 function Features() {
   return (
-    <section className="features-section">
+    <section className="features-section" id= "features">
       <div className="feature-box">
         <span className="feature-icon">✨</span>
         <h3>Torra de autor</h3>

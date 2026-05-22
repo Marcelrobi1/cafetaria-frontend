@@ -28,7 +28,7 @@ function Navbar({ user, onLogout }) {
       <ul className="nav-links">
         <li><Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Inicio</Link></li>
         <li><Link to="/menu" style={{ color: 'white', textDecoration: 'none' }}>Menu</Link></li>
-        <li><Link to="/about" style={{ color: 'white', textDecoration: 'none' }}>Sobre Nós</Link></li>
+        <li><Link to="#features" style={{ color: 'white', textDecoration: 'none' }}>Sobre Nós</Link></li>
         <li><Link to="/contact" style={{ color: 'white', textDecoration: 'none' }}>Contato</Link></li>
         <li><Link to="/faq" style={{ color: 'white', textDecoration: 'none' }}>FAQ</Link></li>
       </ul>

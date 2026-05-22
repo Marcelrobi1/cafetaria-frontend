@@ -1,194 +1,276 @@
-/* --- Estilos base --- */
-.menu-page-section {
-  padding: 80px 5%;
-  background-color: #faf9f8; /* Un fondo súper claro como en tu imagen */
-  min-height: 80vh;
+/* --- 1. VARIABLES GLOBALES (Custom Properties) --- */
+:root {
+  --primary-color: #0b2b40;
+  --accent-color: #8c7355;
+  --bg-color: #faf9f8;
+  --text-muted: #888;
+  --text-body: #555;
+  --border-color: #eaeaea;
+  --font-serif: 'Georgia', serif;
+  --font-sans: Arial, sans-serif;
+  --shadow-sm: 0 4px 15px rgba(0,0,0,0.02);
+  --shadow-md: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-.menu-header-top {
-  margin-bottom: 60px;
+/* --- 2. LAYOUT & GENERAL --- */
+.menu-catalog-section {
+  padding: 120px 5% 80px; /* Shorthand: top horizontal bottom */
+  background: var(--bg-color);
+  min-height: 100vh;
 }
 
-.menu-header-top h2 {
-  font-family: 'Georgia', serif;
-  font-size: 2.8rem;
-  color: #1a1a1a;
+/* Agrupamos contenedores que comparten la misma estructura máxima */
+.catalog-container, .catalog-header, .pratos-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.catalog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.catalog-header { margin-bottom: 60px; }
+
+/* --- 3. TIPOGRAFÍA (Agrupación de selectores) --- */
+.catalog-header .subtitle, .category-header .subtitle {
+  font: 0.75rem var(--font-sans); /* Shorthand de font */
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  text-transform: uppercase;
   margin-bottom: 10px;
+  display: block;
+}
+
+.catalog-header h2, .category-header h2 {
+  font: 2.8rem var(--font-serif);
+  color: var(--primary-color);
+  margin: 0 0 15px;
   font-weight: normal;
 }
+.catalog-header h2 { font-size: 3.5rem; } /* Excepción específica */
 
-.menu-header-top p {
-  font-family: Arial, sans-serif;
-  color: #666;
-  font-size: 0.95rem;
+.catalog-header p {
+  font: 0.95rem/1.6 var(--font-sans);
+  color: var(--text-body);
   max-width: 600px;
-  line-height: 1.5;
 }
 
-/* --- Layout en Cuadrícula (Grid) --- */
-.menu-category {
-  margin-bottom: 60px;
-}
-
-.category-title {
-  font-family: 'Georgia', serif;
-  font-size: 1.5rem;
-  color: #888; /* Un gris elegante */
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 30px;
-}
-
-.menu-grid {
+/* --- 4. GRID DE PLATOS & CARDS --- */
+.pratos-grid {
   display: grid;
-  /* Esto crea columnas automáticas que no sean menores a 250px. 
-     Se adapta a pantallas grandes y móviles (Responsive) */
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 40px 30px; /* gap vertical 40px, horizontal 30px */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 40px 30px;
 }
 
-/* --- Tarjetas (Cards) --- */
 .prato-card {
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease;
 }
+.prato-card:hover { transform: translateY(-8px); }
 
-.prato-card:hover {
-  transform: translateY(-5px);
+.image-container {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 20px;
+  height: 250px;
+  display: grid; /* Modern CSS: Centrado perfecto con 2 líneas */
+  place-items: center; 
 }
 
 .prato-image {
-  width: 100%;
-  aspect-ratio: 1 / 1; /* Cuadrado perfecto */
-  object-fit: cover;
-  border-radius: 4px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
-  margin-bottom: 15px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-.prato-header-card {
+.prato-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.prato-header-card h4 {
-  font-family: 'Georgia', serif;
-  font-size: 1.2rem;
-  color: #1a1a1a;
+.prato-header h4 {
+  font: 1.3rem var(--font-serif);
+  color: var(--primary-color);
   margin: 0;
   font-weight: normal;
 }
 
-.prato-price {
-  font-family: Arial, sans-serif;
-  font-size: 1rem;
-  color: #555;
-  font-weight: bold;
+.prato-header .price {
+  font: bold 1.1rem var(--font-sans);
+  color: var(--accent-color);
 }
 
-/* --- Etiquetas (Tags) --- */
 .prato-tags {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
-.tag {
-  background-color: #f0ebe1;
-  color: #7a7065;
-  padding: 4px 10px;
+.prato-tags .tag {
+  background: #f0ebe1;
+  color: var(--accent-color);
+  padding: 5px 12px;
   border-radius: 20px;
-  font-size: 0.65rem;
-  font-family: Arial, sans-serif;
-  font-style: italic;
-  font-weight: bold;
+  font: italic bold 0.65rem var(--font-sans);
 }
 
-/* --- ESTILOS DEL MODAL --- */
+/* --- 5. MODAL --- */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Asegura que esté por encima de todo */
+  inset: 0; /* Shorthand moderno que reemplaza top/right/bottom/left: 0 */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(5px);
+  display: grid; 
+  place-items: center; /* Reemplaza el flexbox para centrado */
+  z-index: 1000;
 }
 
-.modal-content {
-  background-color: white;
+.dish-modal {
+  background: white;
   padding: 40px;
-  border-radius: 8px;
+  border-radius: 16px;
   width: 90%;
-  max-width: 800px;
+  max-width: 850px;
   position: relative;
-  box-shadow: 0px 10px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
 }
 
 .close-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
+  top: 20px; right: 20px;
+  background: #f4f1ee;
   border: none;
-  font-size: 1.5rem;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
   cursor: pointer;
-  color: #888;
+  color: var(--text-body);
+  transition: background 0.2s;
 }
+.close-btn:hover { background: #e0dcd5; }
 
 .modal-layout {
   display: flex;
-  gap: 40px;
+  gap: 50px;
+  align-items: center;
 }
 
-.modal-layout img {
-  width: 350px;
-  height: 350px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.modal-details {
+.modal-image {
   flex: 1;
+  max-width: 400px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: var(--shadow-md);
 }
+
+.modal-details { flex: 1; }
 
 .modal-details h2 {
-  font-family: 'Georgia', serif;
-  font-size: 2.2rem;
-  margin: 0 0 10px 0;
+  font: 2.5rem var(--font-serif);
+  color: var(--primary-color);
+  margin: 0 0 10px;
 }
 
 .modal-price {
   display: block;
-  font-size: 1.5rem;
-  color: #d4b499;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.modal-desc {
-  font-family: Arial, sans-serif;
-  color: #555;
-  line-height: 1.6;
+  font: bold 1.8rem var(--font-sans);
+  color: var(--accent-color);
   margin-bottom: 30px;
 }
 
 .modal-ingredients h3 {
-  font-family: 'Georgia', serif;
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 5px;
+  font: 0.85rem var(--font-sans);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 15px;
 }
 
 .modal-ingredients ul {
-  list-style-type: square;
-  padding-left: 20px;
-  color: #666;
-  font-family: Arial, sans-serif;
-  line-height: 1.8;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.modal-ingredients li {
+  background: #f9f9f9;
+  border: 1px solid var(--border-color);
+  padding: 8px 15px;
+  border-radius: 8px;
+  font: 0.9rem var(--font-sans);
+  color: var(--text-body);
+}
+
+.btn-add-cart {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 18px;
+  border-radius: 8px;
+  font: bold 0.95rem var(--font-sans);
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.2s, background 0.2s;
+}
+.btn-add-cart:hover {
+  background: #16405c;
+  transform: translateY(-2px);
+}
+
+/* --- 6. CATEGORÍAS & BUSCADOR --- */
+.category-header {
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 20px;
+}
+
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  padding: 5px 20px;
+  max-width: 600px;
+  margin-top: 30px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.search-bar-container:focus-within {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border-color: var(--accent-color);
+}
+
+.search-icon {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-right: 15px;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  padding: 12px 0;
+  font: 0.95rem var(--font-sans);
+  color: #333;
+  outline: none;
+  background: transparent;
+}
+.search-input::placeholder {
+  color: #bbb;
+  font-style: italic;
 }
