@@ -1,6 +1,10 @@
 import './MenuHighlights.css';
-
+import { useNavigate } from 'react-router-dom';
 function MenuHighlights() {
+  const navigate = useNavigate();
+  const navigateToMenu = () => {
+    navigate('/menu');
+  };
   return (
     <section className="menu-highlights-section">
       <div className="menu-header">
@@ -9,7 +13,7 @@ function MenuHighlights() {
       
       <div className="cards-container">
         {/* Tarjeta 1 */}
-        <div className="menu-card card-early">
+        <div className="menu-card card-meat" onClick={navigateToMenu}>
           <div className="card-content">
             <h3>Carne</h3>
             <p>Desperta o teu sentido</p>
@@ -17,7 +21,7 @@ function MenuHighlights() {
         </div>
 
         {/* Tarjeta 2 */}
-        <div className="menu-card card-later">
+        <div className="menu-card card-fish" onClick={navigateToMenu}>
           <div className="card-content">
             <h3>Peixe</h3>
             <p>O sabor do mar</p>
@@ -25,7 +29,7 @@ function MenuHighlights() {
         </div>
 
         {/* Tarjeta 3 */}
-        <div className="menu-card card-bakery">
+        <div className="menu-card card-vegie" onClick={navigateToMenu}>
           <div className="card-content">
             <h3>Vegetariano</h3>
             <p>Opções saudáveis</p>

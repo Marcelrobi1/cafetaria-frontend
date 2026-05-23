@@ -113,12 +113,6 @@ function Profile() {
 
   return (
     <div className="profile-page-container">
-      <div className="profile-header-nav">
-        {/* <-- USAR O NAVIGATE PARA VOLTAR À HOME --> */}
-        <button className="profile-back-btn" onClick={() => navigate('/')}>
-          &larr; Voltar ao Início
-        </button>
-      </div>
 
       <div className="profile-main-card">
         {/* Painel Esquerdo */}

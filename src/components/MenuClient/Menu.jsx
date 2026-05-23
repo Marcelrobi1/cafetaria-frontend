@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContext'; // Importación vital
 import './Menu.css';
 
 function Menu() {
-  const [pratos, setPratos] = useState([]);
-  const [termoBusca, setTermoBusca] = useState(''); // Estado para el buscador
+  // 1. Extraemos la función mágica del contexto global
+  const { addToCart } = useCart(); 
+  const navigate = useNavigate();
   
+  const [pratos, setPratos] = useState([]);
+  const [termoBusca, setTermoBusca] = useState('');
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState('');
   const [selectedPrato, setSelectedPrato] = useState(null);
@@ -25,7 +30,7 @@ function Menu() {
 
         if (response.ok) {
           const data = await response.json();
-          setPratos(data); // Guardamos todos los platos sin dividirlos
+          setPratos(data); 
         } else {
           setErro("Não foi possível carregar o catálogo de pratos.");
         }
@@ -39,40 +44,47 @@ function Menu() {
     fetchPratos();
   }, []);
 
+  // 2. FUNCIÓN PARA AÑADIR AL CARRITO
   const adicionarAoCarrinho = (prato) => {
-    alert(`"${prato.name}" adicionado ao carrinho!`);
-    setSelectedPrato(null);
+    const token = localStorage.getItem('token');
+    
+    // Si no ha iniciado sesión, no le dejamos comprar
+    if (!token) {
+      alert("Por favor, inicie sessão para adicionar pratos à encomenda.");
+      navigate('/login');
+      return;
+    }
+
+    console.log("Enviando prato para o contexto global:", prato); // Para diagnóstico (F12)
+    
+    addToCart(prato); // Invocamos el estado global
+    alert(`"${prato.name}" adicionado ao seu carrinho!`);
+    setSelectedPrato(null); // Cerramos la ventana emergente
   };
 
-  // Lógica del Buscador: Filtra los platos en tiempo real según lo que el usuario escriba
   const pratosFiltrados = pratos.filter((prato) => {
     if (termoBusca === '') return true;
-    
     const termoLower = termoBusca.toLowerCase();
     const nomeInclui = prato.name.toLowerCase().includes(termoLower);
-    
-    // También buscamos dentro de los ingredientes (por si buscan "tomato" o "tomate")
     const ingredientesIncluem = prato.ingredientNames && prato.ingredientNames.some(ing => 
       ing.toLowerCase().includes(termoLower)
     );
-
     return nomeInclui || ingredientesIncluem;
   });
 
   return (
-    <section className="menu-catalog-section">
+    <section className="menu-catalog-section" id="menu-completo">
       <div className="catalog-header">
         <span className="subtitle">SABORES DO MUNDO</span>
         <h2>Menu Completo</h2>
-        <p>Explore as nossas criações preparadas diariamente. Utilize a pesquisa para encontrar os seus ingredientes favoritos.</p>
+        <p>Explore as nossas criações preparadas diariamente.</p>
         
-        {/* BARRA DE BÚSQUEDA */}
         <div className="search-bar-container">
           <span className="search-icon">🔍</span>
           <input 
             type="text" 
             className="search-input"
-            placeholder="Procurar por prato ou ingrediente (ex: 'salmão', 'vegan', 'chicken')..."
+            placeholder="Procurar por prato ou ingrediente..."
             value={termoBusca}
             onChange={(e) => setTermoBusca(e.target.value)}
           />
@@ -118,7 +130,6 @@ function Menu() {
         </div>
       )}
 
-      {/* MODAL MANTENIDO IGUAL QUE ANTES */}
       {selectedPrato && (
         <div className="modal-overlay" onClick={() => setSelectedPrato(null)}>
           <div className="modal-content dish-modal" onClick={(e) => e.stopPropagation()}>
@@ -148,9 +159,23 @@ function Menu() {
                   )}
                 </div>
 
-                <button className="btn-add-cart" onClick={() => adicionarAoCarrinho(selectedPrato)}>
-                  <span className="cart-icon">🛒</span> ADICIONAR AO CARRINHO
-                </button>
+                {/* BOTÓN CONECTADO A LA FUNCIÓN DEL CARRITO */}
+                {localStorage.getItem('token') ? (
+                  <button 
+                    className="btn-add-cart" 
+                    onClick={() => adicionarAoCarrinho(selectedPrato)}
+                  >
+                    <span className="cart-icon">🛒</span> ADICIONAR AO CARRINHO
+                  </button>
+                ) : (
+                  <button 
+                    className="btn-add-cart" 
+                    style={{ backgroundColor: '#888', cursor: 'pointer' }}
+                    onClick={() => navigate('/login')}
+                  >
+                    <span className="cart-icon">🔒</span> INICIAR SESSÃO PARA COMPRAR
+                  </button>
+                )}
               </div>
             </div>
           </div>

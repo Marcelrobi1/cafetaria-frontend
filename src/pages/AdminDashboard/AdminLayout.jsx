@@ -17,7 +17,10 @@ function AdminLayout() {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate('/');
+    clearCart();
+    
+    // HARD REDIRECT: Destruye el árbol de React y vuelve a montar la aplicación
+    window.location.href = '/'; 
   };
 
   return (
@@ -67,13 +70,7 @@ function AdminLayout() {
 
       {/* ÁREA DE CONTENIDO DINÁMICO */}
       <main className="admin-main-content">
-        <div className="top-bar-placeholder">
-          {/* Aquí puedes poner notificaciones o el perfil del admin como en tu mockup */}
-          <div className="user-profile-mini">
-            <span>Admin</span>
-            <div className="avatar-circle">👤</div>
-          </div>
-        </div>
+      
         
         {/* Aquí se inyectarán GestaoPratos, GestaoMenus, etc. */}
         <div className="content-wrapper">
