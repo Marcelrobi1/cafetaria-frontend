@@ -1,0 +1,41 @@
+.gestao-container {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.gestao-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.add-btn {
+  background-color: #137333;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Restante estilo da tabela (para não ficar sem margens) */
+.data-table th, 
+.data-table td {
+  border: 1px solid #e0e0e0;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.data-table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
