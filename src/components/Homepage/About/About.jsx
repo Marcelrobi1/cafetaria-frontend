@@ -7,7 +7,7 @@ function About() {
         {/* Lado izquierdo: Imagen */}
         <div className="about-image">
           <img 
-            src="https://images.unsplash.com/photo-1511228539447-0890bb5ec607?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+            src="src\assets\652837157_18096069416083341_6200878973332390481_n.jpg" 
             alt="Café Especialidade" 
           />
         </div>

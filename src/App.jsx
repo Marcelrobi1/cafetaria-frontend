@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {CartProvider} from './context/CartContext';
 import './index.css';
 
 import Navbar from './components/navbar/navbar'; // Barra de navegação (Header)
@@ -43,31 +44,33 @@ function App() {
   };
 
   return (
-    <Router>
-      <Navbar user={currentUser} onLogout={handleLogout} />
+    <CartProvider>
+      <Router>
+        <Navbar user={currentUser} onLogout={handleLogout} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<MenuPage />} />
-        <Route 
-          path="/login" 
-          element={<Auth onLoginSuccess={(userData) => setCurrentUser(userData)} />} 
-        />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/admin" element={<AdminLayout />}>
-          {/*Rutas panel do Admin
-          <Route index element={<GestaoPratos />} />
-          <Route path="pratos" element={<GestaoPratos />} />
-          <Route path="menu" element={<GestaoMenus />} />
-          <Route path="compras" element={<GestaoCompras />} />
-          <Route path="ingredientes" element={<GestaoIngredientes />} />
-          <Route path="utilizadores" element={<GestaoUtilizadores />} /> */}
-          <Route path="pratos" element={<GestaoPratos />} />
-          <Route path="ingredientes" element={<GestaoIngredientes />} />
-          <Route path="menus" element={<GestaoMenus />} /> 
-        </Route>
-      </Routes>
-    </Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<MenuPage />} />
+          <Route 
+            path="/login" 
+            element={<Auth onLoginSuccess={(userData) => setCurrentUser(userData)} />} 
+          />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            {/*Rutas panel do Admin
+            <Route index element={<GestaoPratos />} />
+            <Route path="pratos" element={<GestaoPratos />} />
+            <Route path="menu" element={<GestaoMenus />} />
+            <Route path="compras" element={<GestaoCompras />} />
+            <Route path="ingredientes" element={<GestaoIngredientes />} />
+            <Route path="utilizadores" element={<GestaoUtilizadores />} /> */}
+            <Route path="pratos" element={<GestaoPratos />} />
+            <Route path="ingredientes" element={<GestaoIngredientes />} />
+            <Route path="menus" element={<GestaoMenus />} /> 
+          </Route>
+        </Routes>
+      </Router>
+    </CartProvider>
   );
 }
 

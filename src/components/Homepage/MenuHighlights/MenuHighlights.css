@@ -56,14 +56,14 @@
   letter-spacing: 1px;
 }
 
-.card-early {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%), url('https://images.unsplash.com/photo-1495474472207-464a8d9cb0c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');
+.card-meat {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.436) 50%), url('../../../assets/655077106_18111395389747400_2961447355530419255_n.jpg');
 }
 
-.card-later {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%), url('https://images.unsplash.com/photo-1541167760496-1628856ab772?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');
+.card-fish {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.436) 50%), url('../../../assets/448228435_18228958852279952_7308605445139769024_n.jpg');
 }
 
-.card-bakery {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%), url('https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');
+.card-vegie {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.436) 50%), url('../../../assets/343065172_976310050192633_1902809623809180976_n.jpg');
 }

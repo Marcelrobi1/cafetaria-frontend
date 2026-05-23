@@ -1,6 +1,7 @@
 .admin-layout-container {
   display: flex;
   min-height: 100vh;
+  padding-top: 85px; /* Espacio para la barra superior */
   background-color: #faf9f8;
   font-family: Arial, sans-serif;
 }

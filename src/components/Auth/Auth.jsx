@@ -60,9 +60,7 @@ function Auth({ onLoginSuccess }) {
   return (
     <div className="auth-page-container">
       {/* 3. Actualizamos el botón para usar navigate() en lugar de onClose() */}
-      <button className="auth-back-btn" onClick={() => navigate('/')}>
-        &larr; Voltar ao Início
-      </button>
+      
       
       <div className="auth-card">
         <div className="auth-image-side">

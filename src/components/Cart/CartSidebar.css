@@ -1,0 +1,222 @@
+/* --- 1. OVERLAY (Glassmorphism) --- */
+.cart-overlay-glass {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 43, 64, 0.2); /* Usa el color primario con transparencia */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2000;
+  animation: fadeInOverlay 0.3s ease;
+}
+
+/* --- 2. LAYOUT DEL PANEL LATERAL --- */
+.cart-sidebar-premium {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 450px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+  z-index: 2001;
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* --- 3. ENCABEZADO (Como en la imagen) --- */
+.cart-header-premium {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 40px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cart-title-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--primary-color);
+}
+
+.cart-icon-container {
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+}
+
+.cart-header-premium h2 {
+  font: 1.8rem var(--font-serif);
+  color: var(--primary-color);
+  margin: 0;
+  font-weight: normal;
+}
+
+.close-cart-btn-premium {
+  background: #f4f1ee;
+  border: none;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-body);
+  transition: 0.2s;
+}
+.close-cart-btn-premium:hover { background: #e0dcd5; }
+
+/* --- 4. CONTENIDO (Lista de artículos) --- */
+.cart-content-premium {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px 40px;
+}
+
+.cart-items-list-premium {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* --- 5. TARJETA INDIVIDUAL DE ARTÍCULO (Como en la imagen) --- */
+.cart-item-premium {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.cart-item-image-premium {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: var(--shadow-md);
+}
+
+.cart-item-details-premium {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cart-item-top-premium {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-item-top-premium h4 {
+  margin: 0;
+  font: 1rem/1.2 var(--font-serif);
+  color: #1a1a1a;
+  font-weight: normal;
+}
+
+.remove-item-btn-premium {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+.remove-item-btn-premium:hover { color: #d9534f; }
+
+.cart-item-bottom-premium {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.cart-item-unit-price {
+  font-weight: bold;
+  color: #333;
+}
+
+.cart-item-total-price {
+  margin-left: auto; /* Empuja el precio total a la derecha */
+  font-weight: bold;
+  color: var(--accent-color);
+  font-size: 1.1rem;
+}
+
+/* --- 6. PIE DE PÁGINA ( Total y Botones) --- */
+.cart-footer-premium {
+  padding: 30px 40px;
+  background: #fcfcfc;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cart-total-premium {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.total-amount-premium {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.btn-continue-premium {
+  background: none;
+  border: 2px solid var(--border-color);
+  color: #888;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: 0.2s;
+}
+.btn-continue-premium:hover { background: #f4f1ee; color: #333; }
+
+.full-width { width: 100%; }
+
+.btn-checkout-premium {
+  width: 100%;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 18px;
+  border-radius: 6px;
+  font: bold 0.95rem var(--font-sans);
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.btn-checkout-premium:hover {
+  background: #16405c;
+  transform: translateY(-2px);
+}
+.btn-checkout-premium:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+  transform: none;
+}
