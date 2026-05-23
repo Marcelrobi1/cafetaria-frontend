@@ -15,16 +15,16 @@ function Footer() {
         <div className="footer-column">
           <h4>MENU</h4>
           <ul>
-            <li>Café</li>
-            <li>Cozinha</li>
-            <li>Reservas</li>
+            <li><a href="/menu" style={{ textDecoration: 'none', color: 'inherit' }}>Carne</a></li>
+            <li><a href="/menu" style={{ textDecoration: 'none', color: 'inherit' }}>Peixe</a></li>
+            <li><a href="/menu" style={{ textDecoration: 'none', color: 'inherit' }}>Vegetariano</a></li>
           </ul>
         </div>
 
         {/* Columna 3: Ubicación */}
         <div className="footer-column">
           <h4>VISITE-NOS</h4>
-          <p>📍 Rua do Comércio, 120, 4000-174<br/>Porto, Portugal</p>
+          <p>📍 Rua dos Bragas 351, 4050-123 Porto<br/>Porto, Portugal</p>
           <p>🕒 Seg - Sex: 08:00 — 18:00<br/>Sáb - Dom: 09:00 — 16:00</p>
         </div>
 
@@ -32,11 +32,11 @@ function Footer() {
         <div className="footer-column">
           <h4>REDES SOCIAIS</h4>
           <p className="social-links">
-            <span>Instagram</span>
-            <span>Pinterest</span>
+            <span> <a href="https://www.instagram.com/earlycedofeita/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>Instagram</a></span>
+            <span> <a href="https://www.pinterest.com/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>Pinterest</a></span>
           </p>
           <h4 className="phone-title">TELEFONE</h4>
-          <p>📞 +351 900 000 000</p>
+          <p>📞 +351 937 461 551</p>
         </div>
 
       </div>

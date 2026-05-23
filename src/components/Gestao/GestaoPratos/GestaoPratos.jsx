@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './GestaoPratos.css';
 
 function GestaoPratos() {
@@ -7,6 +7,13 @@ function GestaoPratos() {
   const [ingredientes, setIngredientes] = useState([]); 
   const [loading, setLoading] = useState(true);
   
+  // Nuevos estados para la imagen
+  const [imagemFile, setImagemFile] = useState(null);
+  const [imagemPreview, setImagemPreview] = useState('');
+  const [uploading, setUploading] = useState(false);
+
+  const fileInputRef = useRef(null);
+
   // Estados del Formulario (Adaptados 100% al backend)
   const [editingId, setEditingId] = useState(null);
   const [nome, setNome] = useState('');
@@ -55,39 +62,71 @@ function GestaoPratos() {
     );
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     if (!nome.trim() || preco <= 0) {
       setErroValidacao('Por favor, preencha o nome e um preço válido.');
       return;
     }
 
-    // PAYLOAD EXACTO DEL SERVIDOR (Sin campos extra)
-    const payload = {
+    setUploading(true);
+    setErroValidacao('');
+
+    // 1. Creamos el objeto con los datos del plato
+    const dishData = {
       name: nome,
       price: parseFloat(preco),
       ingredientNames: ingredientesSelecionados 
     };
 
+    // 2. Preparamos el FormData (Formulario Multiparte)
+    const formData = new FormData();
+    
+    // IMPORTANTE: El Swagger exige que la parte 'dish' sea un JSON expuesto.
+    // Para que Java/Spring Boot o el backend lo lea bien en un multipart, 
+    // lo enviamos como un Blob (Archivo de texto en memoria) de tipo application/json.
+    formData.append('dish', new Blob([JSON.stringify(dishData)], {
+      type: 'application/json'
+    }));
+
+    // 3. Añadimos la imagen si el usuario seleccionó una
+    if (imagemFile) {
+      formData.append('image', imagemFile);
+    }
+
     try {
       const url = editingId ? `${BASE_URL}/dishes/${editingId}` : `${BASE_URL}/dishes`;
       const method = editingId ? 'PUT' : 'POST';
 
+      // 4. Preparamos los headers de Autorización
+      const token = localStorage.getItem('token');
+      const headers = {};
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+      // ¡ATENCIÓN! NO ponemos 'Content-Type': 'application/json' ni 'multipart/form-data'.
+      // El navegador lo detecta automáticamente al pasarle el objeto formData y crea los boundaries.
+
       const response = await fetch(url, {
-        method,
-        headers: getAuthHeaders(),
-        body: JSON.stringify(payload)
+        method: method,
+        headers: headers,
+        body: formData // Enviamos el paquete completo
       });
 
-      if (response.ok) {
-        fetchDadosIniciais(); 
-        resetForm();
-      } else {
-        const errorData = await response.json();
-        setErroValidacao(errorData.message || 'Erro ao guardar o prato no servidor.');
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Erro do servidor: ${errorText || response.status}`);
       }
+
+      // Si todo fue bien, recargamos la lista y limpiamos
+      fetchDadosIniciais(); 
+      resetForm();
+
     } catch (error) {
-      setErroValidacao('Erro de comunicação.');
+      console.error("Erro na submissão:", error);
+      setErroValidacao(error.message || 'Erro ao guardar o prato e a imagem.');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -118,14 +157,22 @@ function GestaoPratos() {
     setNome(prato.name);
     setPreco(prato.price);
     setIngredientesSelecionados(prato.ingredientNames || []);
+    setImagemPreview(prato.imageUrl || ''); // Mostramos la imagen actual si existe
+    setImagemFile(null);
     setVistaActual('formulario');
   };
 
-  const resetForm = () => {
+const resetForm = () => {
     setEditingId(null);
     setNome('');
     setPreco('');
     setIngredientesSelecionados([]);
+    setImagemFile(null);
+    setImagemPreview('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""; 
+    }
+    
     setErroValidacao('');
     setVistaActual('lista');
   };
@@ -262,12 +309,52 @@ function GestaoPratos() {
               {/* Se eliminó el toggle de disponibilidad porque el backend no lo soporta */}
 
               <div className="form-group">
-                <label>Imagem do Item</label>
-                <div className="image-upload-zone">
-                  <span className="upload-icon">🖼️</span>
-                  <p>O upload de imagens requer integração com Amazon S3 / Minio.</p>
-                  <span className="upload-hint">Funcionalidade a ser ativada posteriormente.</span>
+                <label>Imagem do Prato</label>
+                
+                {/* Input oculto para seleccionar el archivo */}
+                <input 
+                  type="file" 
+                  id="imageInput"
+                  ref={fileInputRef}
+                  accept="image/png, image/jpeg, image/webp" 
+                  style={{ display: 'none' }}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      setImagemFile(file);
+                      setImagemPreview(URL.createObjectURL(file)); // Crea una vista previa temporal
+                    }
+                  }}
+                />
+
+                <div 
+                  className={`image-upload-zone ${imagemPreview ? 'has-image' : ''}`}
+                  onClick={() => document.getElementById('imageInput').click()}
+                >
+                  {imagemPreview ? (
+                    <img src={imagemPreview} alt="Preview" className="preview-image" />
+                  ) : (
+                    <>
+                      <span className="upload-icon">📷</span>
+                      <p>Clique para selecionar uma imagem</p>
+                      <span className="upload-hint">PNG, JPG ou WEBP (Max. 5MB)</span>
+                    </>
+                  )}
                 </div>
+                
+                {imagemPreview && (
+                  <button 
+                    type="button" 
+                    className="btn-remove-image" 
+                    onClick={() => {
+                      setImagemFile(null);
+                      setImagemPreview('');
+                      document.getElementById('imageInput').value = '';
+                    }}
+                  >
+                    Remover Imagem
+                  </button>
+                )}
               </div>
 
               {erroValidacao && <div className="error-message" style={{color: 'red', marginTop: '10px'}}>{erroValidacao}</div>}

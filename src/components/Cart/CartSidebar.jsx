@@ -23,32 +23,62 @@ function CartSidebar({ isOpen, onClose }) {
     
     setLoading(true);
     const token = localStorage.getItem('token');
+    
+    // O nome de utilizador tem de estar guardado no localStorage no momento do Login
+    const username = localStorage.getItem('username'); 
 
-    // Paylaod exacto para Swagger: un array de IDs de los platos
-    const payload = {
-      dishIds: cart.map(item => item.id) 
-    };
+    if (!username) {
+      alert("Erro de sistema: Não foi possível identificar o teu Username. Por favor, faz logout e inicia sessão novamente.");
+      setLoading(false);
+      return;
+    }
+
+    const dataAmanha = new Date();
+    dataAmanha.setDate(dataAmanha.getDate() + 1);
+    const futureDateString = dataAmanha.toISOString().split('T')[0]; 
 
     try {
-      const response = await fetch(`${BASE_URL}/purchases`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(payload)
+      const promesasDeCompra = cart.map(item => {
+        const payload = {
+          clientUsername: username,
+          dishName: item.name,
+          date: item.reserveDate || futureDateString,
+          quantity: item.quantidade || 1
+        };
+
+        return fetch(`${BASE_URL}/purchases`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        });
       });
 
-      if (response.ok) {
-        alert('Compra finalizada com sucesso! O seu pedido está a ser preparado.');
+      const resultados = await Promise.all(promesasDeCompra);
+      
+      // MAGIA DE DIAGNÓSTICO: Vamos extrair o erro exato do servidor para cada prato
+      let errosEncontrados = [];
+      for (let i = 0; i < resultados.length; i++) {
+        const res = resultados[i];
+        if (!res.ok) {
+          const textoErro = await res.text();
+          // Guardamos o nome do prato e a justificação do servidor
+          errosEncontrados.push(`- Prato "${cart[i].name}": ${textoErro}`);
+        }
+      }
+
+      if (errosEncontrados.length === 0) {
+        alert('Reserva efetuada com sucesso! Os pratos estarão prontos amanhã.');
         clearCart(); 
         onClose();   
       } else {
-        const errorText = await response.text();
-        alert(`Erro ao finalizar compra: ${errorText}`);
+        console.error("Erros do servidor:", errosEncontrados);
+        alert(`O servidor rejeitou a compra pelo(s) seguinte(s) motivo(s):\n\n${errosEncontrados.join('\n')}`);
       }
     } catch (error) {
-      alert('Erro de conexão ao processar a compra.');
+      alert('Erro crítico ao comunicar com o servidor.');
     } finally {
       setLoading(false);
     }
@@ -89,7 +119,10 @@ function CartSidebar({ isOpen, onClose }) {
                   <div className="cart-item-details-premium">
                     <div className="cart-item-top-premium">
                       <h4>{item.name}</h4>
-                      <button className="remove-item-btn-premium" onClick={() => removeFromCart(item.id)}>Remover</button>
+                      <span style={{ fontSize: '0.8rem', color: '#888', display: 'block', marginBottom: '5px' }}>
+                      Reserva: {new Date(item.reserveDate).toLocaleDateString('pt-PT')}
+                      </span>
+                      <button className="remove-item-btn-premium" onClick={() => removeFromCart(item.id, item.reserveDate)}>Remover</button>
                     </div>
                     <div className="cart-item-bottom-premium">
                       <span className="cart-item-qty">{item.quantidade || 1} x</span>

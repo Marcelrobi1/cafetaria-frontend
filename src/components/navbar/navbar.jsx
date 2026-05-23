@@ -134,7 +134,11 @@ function Navbar({ user, onLogout }) {
                     <button className="dropdown-btn" onClick={() => { 
                         setIsOpen(false); 
                         onLogout(); 
-                        navigate('/'); // Redirige al inicio tras cerrar sesión
+                        localStorage.clear();
+                        clearCart();
+                        
+                        // HARD REDIRECT: Destruye el árbol de React y vuelve a montar la aplicación
+                        window.location.href = '/'; // Redirige al inicio tras cerrar sesión
                     }}>
                       <span className="icon">🚪</span> Terminar Sessão
                     </button>

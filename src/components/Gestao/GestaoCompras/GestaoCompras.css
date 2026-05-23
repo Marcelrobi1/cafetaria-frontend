@@ -1,0 +1,152 @@
+/* Reutiliza la animación y estructuras base de GestaoPratos */
+@import '../GestaoPratos/GestaoPratos.css'; 
+
+/* --- BADGES DE ESTADO (Etiquetas de color) --- */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.status-pending { background-color: #fff3cd; color: #856404; }
+.status-preparing { background-color: #cce5ff; color: #004085; }
+.status-completed { background-color: #d4edda; color: #155724; }
+.status-cancelled { background-color: #f8d7da; color: #721c24; }
+.status-default { background-color: #e2e3e5; color: #383d41; }
+
+.btn-outline-small {
+  background: transparent;
+  border: 1px solid #0b2b40;
+  color: #0b2b40;
+  padding: 6px 15px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-outline-small:hover {
+  background: #0b2b40;
+  color: white;
+}
+
+/* --- ESTILOS DEL MODAL DE COMPRAS --- */
+.purchase-modal {
+  max-width: 600px !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.modal-header {
+  background-color: #faf9f8;
+  padding: 25px 30px;
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  color: #0b2b40;
+  font-size: 1.5rem;
+}
+
+.purchase-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 30px;
+  background-color: #fff;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.info-value {
+  font-weight: bold;
+  color: #333;
+  font-size: 1rem;
+}
+.info-value.highlight { color: #8c7355; font-size: 1.2rem; }
+
+.purchase-items-section,
+.purchase-actions-section {
+  padding: 25px 30px;
+}
+
+.purchase-items-section h3,
+.purchase-actions-section h3 {
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.purchase-items-list {
+  list-style: none;
+  padding: 0; margin: 0;
+}
+
+.purchase-item-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px dashed #eaeaea;
+}
+.purchase-item-row:last-child { border-bottom: none; }
+
+.item-qty {
+  font-weight: bold;
+  color: #8c7355;
+  width: 40px;
+}
+
+.item-name {
+  flex: 1;
+  color: #333;
+  font-weight: 500;
+}
+
+.item-price {
+  color: #888;
+  font-weight: bold;
+}
+
+.status-buttons-group {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-status {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-status:hover { opacity: 0.8; }
+
+.btn-status.pending { background-color: #fff3cd; color: #856404; }
+.btn-status.preparing { background-color: #cce5ff; color: #004085; }
+.btn-status.completed { background-color: #d4edda; color: #155724; }

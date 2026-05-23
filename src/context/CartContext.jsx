@@ -20,22 +20,23 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (prato) => {
     setCart((prevCart) => {
-      // Comprobamos si el plato ya está en el carrito
-      const itemExistente = prevCart.find(item => item.id === prato.id);
+      // Magia: Ahora identificamos un pedido por su ID + la fecha de reserva
+      const itemExistente = prevCart.find(item => item.id === prato.id && item.reserveDate === prato.reserveDate);
       
       if (itemExistente) {
-        // Si existe, aumentamos la cantidad
         return prevCart.map(item => 
-          item.id === prato.id ? { ...item, quantidade: item.quantidade + 1 } : item
+          (item.id === prato.id && item.reserveDate === prato.reserveDate) 
+            ? { ...item, quantidade: item.quantidade + 1 } 
+            : item
         );
       }
-      // Si no existe, lo añadimos con cantidad 1
       return [...prevCart, { ...prato, quantidade: 1 }];
     });
   };
 
-  const removeFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter(item => item.id !== id));
+  const removeFromCart = (id, dataReserva) => {
+    // También actualizamos el remove para que elimine por ID + Fecha
+    setCart((prevCart) => prevCart.filter(item => !(item.id === id && item.reserveDate === dataReserva)));
   };
 
   const clearCart = () => {
