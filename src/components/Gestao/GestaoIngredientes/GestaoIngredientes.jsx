@@ -8,7 +8,6 @@ function GestaoIngredientes() {
   
   const [editingId, setEditingId] = useState(null);
   
-  // Estados exactos del esquema del servidor
   const [nome, setNome] = useState('');
   const [tipo, setTipo] = useState('VEGETABLES');
   const [alergenio, setAlergenio] = useState('NONE');
@@ -45,7 +44,6 @@ function GestaoIngredientes() {
     }
   };
 
-  // Regla del proyecto: Nomes só podem conter letras e espaços
   const handleNomeChange = (e) => {
     const valor = e.target.value;
     if (/^[a-zA-ZÀ-ÿ\s]*$/.test(valor) || valor === '') {
@@ -63,7 +61,6 @@ function GestaoIngredientes() {
       return;
     }
 
-    // PAYLOAD 100% ADAPTADO A SWAGGER
     const payload = {
       name: nome,
       type: tipo,
@@ -83,15 +80,16 @@ function GestaoIngredientes() {
         body: JSON.stringify(payload)
       });
 
-      if (response.ok) {
-        fetchIngredientes(); 
-        resetForm();
-      } else {
-        const errorData = await response.json();
-        setErroValidacao(errorData.message || 'O servidor rejeitou os dados. Verifique o formato.');
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || `Erro do servidor (Status: ${response.status})`);
       }
+
+      fetchIngredientes(); 
+      resetForm();
+      
     } catch (error) {
-      setErroValidacao('Erro de comunicação com o servidor.');
+      setErroValidacao(error.message || 'Erro de comunicação com o servidor.');
     }
   };
 
@@ -136,17 +134,43 @@ function GestaoIngredientes() {
     setVistaActual('lista');
   };
 
-  // Traductor visual para la tabla
+  // Traductor para la tabla: Tipos
   const traduzirTipo = (type) => {
     const traducoes = {
+      'DAIRY_PRODUCTS': 'Laticínios',
       'VEGETABLES': 'Vegetais',
+      'FRUIT': 'Frutas',
+      'TUBERS': 'Tubérculos',
+      'CEREALS_AND_DERIVATIVES': 'Grãos/Cereais',
       'MEAT': 'Carne',
+      'FATS_AND_OILS': 'Gorduras/Óleos',
+      'LEGUMES': 'Leguminosas',
       'FISH': 'Peixe',
-      'DAIRY': 'Laticínios',
-      'GRAIN': 'Grãos',
-      'OTHER': 'Outro'
+      'EGGS': 'Ovos'
     };
     return traducoes[type] || type;
+  };
+
+  // Traductor para la tabla: Alergénicos
+  const traduzirAlergenio = (allergen) => {
+    const traducoes = {
+      'CELERY': 'Aipo',
+      'NUTS': 'Frutos Casca Rija',
+      'LUPINS': 'Tremoços',
+      'CRUSTACEANS': 'Crustáceos',
+      'EGGS': 'Ovos',
+      'MOLLUSCS': 'Moluscos',
+      'PEANUTS': 'Amendoins',
+      'GLUTEN_CONTAINING_CEREALS': 'Glúten',
+      'FISH': 'Peixe',
+      'SULPHITES': 'Sulfitos',
+      'MILK_AND_MILK_PRODUCTS': 'Laticínios',
+      'SOYBEANS': 'Soja',
+      'MUSTARD': 'Mostarda',
+      'NONE': 'Nenhum',
+      'SESAME_SEEDS': 'Sésamo'
+    };
+    return traducoes[allergen] || allergen;
   };
 
   return (
@@ -192,9 +216,12 @@ function GestaoIngredientes() {
                         <td>
                           <span style={{ 
                             color: ing.allergen === 'NONE' ? '#aaa' : '#d9534f', 
-                            fontWeight: ing.allergen !== 'NONE' ? 'bold' : 'normal' 
+                            fontWeight: ing.allergen !== 'NONE' ? 'bold' : 'normal',
+                            backgroundColor: ing.allergen !== 'NONE' ? '#fdeaea' : 'transparent',
+                            padding: ing.allergen !== 'NONE' ? '3px 8px' : '0',
+                            borderRadius: '4px'
                           }}>
-                            {ing.allergen}
+                            {traduzirAlergenio(ing.allergen)}
                           </span>
                         </td>
                         <td className="actions-cell">
@@ -239,19 +266,34 @@ function GestaoIngredientes() {
                     <option value="VEGETABLES">Vegetais</option>
                     <option value="MEAT">Carne</option>
                     <option value="FISH">Peixe</option>
-                    <option value="DAIRY">Laticínios</option>
-                    <option value="GRAIN">Grãos / Cereais</option>
-                    <option value="OTHER">Outros</option>
+                    <option value="DAIRY_PRODUCTS">Laticínios</option>
+                    <option value="CEREALS_AND_DERIVATIVES">Grãos / Cereais</option>
+                    <option value="FRUIT">Frutas</option>
+                    <option value="TUBERS">Tubérculos</option>
+                    <option value="LEGUMES">Leguminosas</option>
+                    <option value="FATS_AND_OILS">Gorduras e Óleos</option>
+                    <option value="EGGS">Ovos</option>
                   </select>
                 </div>
                 <div>
                   <label>Alergénios</label>
+                  {/* AQUÍ ESTÁ LA CORRECCIÓN DE LA CAPTURA: Toda la lista oficial del backend */}
                   <select value={alergenio} onChange={(e) => setAlergenio(e.target.value)} required>
                     <option value="NONE">Nenhum</option>
-                    <option value="GLUTEN">Glúten</option>
-                    <option value="LACTOSE">Lactose</option>
+                    <option value="GLUTEN_CONTAINING_CEREALS">Glúten (Cereais)</option>
+                    <option value="MILK_AND_MILK_PRODUCTS">Laticínios</option>
                     <option value="NUTS">Frutos de Casca Rija</option>
-                    <option value="SEAFOOD">Marisco</option>
+                    <option value="PEANUTS">Amendoins</option>
+                    <option value="CRUSTACEANS">Crustáceos</option>
+                    <option value="MOLLUSCS">Moluscos</option>
+                    <option value="FISH">Peixe</option>
+                    <option value="EGGS">Ovos</option>
+                    <option value="SOYBEANS">Soja</option>
+                    <option value="CELERY">Aipo</option>
+                    <option value="MUSTARD">Mostarda</option>
+                    <option value="SESAME_SEEDS">Sementes de Sésamo</option>
+                    <option value="SULPHITES">Sulfitos</option>
+                    <option value="LUPINS">Tremoços</option>
                   </select>
                 </div>
               </div>

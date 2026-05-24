@@ -14,12 +14,11 @@
 
 /* --- 2. LAYOUT & GENERAL --- */
 .menu-catalog-section {
-  padding: 120px 5% 80px; /* Shorthand: top horizontal bottom */
+  padding: 120px 5% 80px;
   background: var(--bg-color);
   min-height: 100vh;
 }
 
-/* Agrupamos contenedores que comparten la misma estructura máxima */
 .catalog-container, .catalog-header, .pratos-grid {
   max-width: 1200px;
   margin: 0 auto;
@@ -33,9 +32,9 @@
 
 .catalog-header { margin-bottom: 60px; }
 
-/* --- 3. TIPOGRAFÍA (Agrupación de selectores) --- */
+/* --- 3. TIPOGRAFÍA --- */
 .catalog-header .subtitle, .category-header .subtitle {
-  font: 0.75rem var(--font-sans); /* Shorthand de font */
+  font: 0.75rem var(--font-sans);
   letter-spacing: 3px;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -49,7 +48,7 @@
   margin: 0 0 15px;
   font-weight: normal;
 }
-.catalog-header h2 { font-size: 3.5rem; } /* Excepción específica */
+.catalog-header h2 { font-size: 3.5rem; }
 
 .catalog-header p {
   font: 0.95rem/1.6 var(--font-sans);
@@ -60,13 +59,15 @@
 /* --- 4. GRID DE PLATOS & CARDS --- */
 .pratos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 40px 30px;
 }
 
 .prato-card {
   cursor: pointer;
   transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
 }
 .prato-card:hover { transform: translateY(-8px); }
 
@@ -77,8 +78,9 @@
   box-shadow: var(--shadow-md);
   margin-bottom: 20px;
   height: 250px;
-  display: grid; /* Modern CSS: Centrado perfecto con 2 líneas */
+  display: grid; 
   place-items: center; 
+  position: relative;
 }
 
 .prato-image {
@@ -87,11 +89,15 @@
   object-fit: contain;
 }
 
+.prato-info {
+  padding: 0 10px;
+}
+
 .prato-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .prato-header h4 {
@@ -106,39 +112,51 @@
   color: var(--accent-color);
 }
 
-.prato-tags {
+/* --- ETIQUETAS DE ALÉRGENOS --- */
+.allergens-wrapper {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.prato-tags .tag {
-  background: #f0ebe1;
-  color: var(--accent-color);
-  padding: 5px 12px;
-  border-radius: 20px;
-  font: italic bold 0.65rem var(--font-sans);
+.allergen-tag {
+  background-color: #fdeaea;
+  color: #d9534f;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: 1px solid #f5c6cb;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* --- 5. MODAL --- */
 .modal-overlay {
   position: fixed;
-  inset: 0; /* Shorthand moderno que reemplaza top/right/bottom/left: 0 */
+  inset: 0; 
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(5px);
   display: grid; 
-  place-items: center; /* Reemplaza el flexbox para centrado */
+  place-items: center; 
   z-index: 1000;
+  padding: 20px; /* Previene que el modal toque los bordes del móvil */
 }
 
 .dish-modal {
   background: white;
   padding: 40px;
   border-radius: 16px;
-  width: 90%;
-  max-width: 850px;
+  width: 100%;
+  max-width: 900px;
   position: relative;
   box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  
+  /* Lógica para evitar que sea más grande que la pantalla */
+  max-height: 90vh; 
+  overflow-y: auto; 
 }
 
 .close-btn {
@@ -152,6 +170,7 @@
   cursor: pointer;
   color: var(--text-body);
   transition: background 0.2s;
+  z-index: 10; /* Asegura que el botón de cerrar sea cliqueable siempre */
 }
 .close-btn:hover { background: #e0dcd5; }
 
@@ -161,27 +180,49 @@
   align-items: center;
 }
 
+/* Diferenciamos la imagen del modal de la imagen de la tarjeta */
 .modal-image {
   flex: 1;
+  width: 100%;
   max-width: 400px;
+  max-height: 200px;
   border-radius: 12px;
   object-fit: cover;
   box-shadow: var(--shadow-md);
+  display: block;
 }
 
-.modal-details { flex: 1; }
+.modal-details { flex: 1; display: flex; flex-direction: column; }
+
+.modal-date-tag {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
 
 .modal-details h2 {
   font: 2.5rem var(--font-serif);
   color: var(--primary-color);
-  margin: 0 0 10px;
+  margin: 0 0 5px;
 }
 
 .modal-price {
   display: block;
   font: bold 1.8rem var(--font-sans);
   color: var(--accent-color);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+.modal-allergens-alert {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border-left: 4px solid #ffeeba;
+  font-size: 0.9rem;
+  margin-bottom: 25px;
 }
 
 .modal-ingredients h3 {
@@ -195,11 +236,9 @@
 .modal-ingredients ul {
   list-style: none;
   padding: 0;
-  margin: 0 0 40px;
+  margin: 0 0 30px;
   display: flex;
   flex-wrap: wrap;
-  max-height: 150px;
-  overflow-y: scroll;
   gap: 10px;
 }
 
@@ -227,59 +266,17 @@
   align-items: center;
   gap: 10px;
   transition: transform 0.2s, background 0.2s;
+  margin-top: auto; /* Empuja el botón hacia el final */
 }
 .btn-add-cart:hover {
   background: #16405c;
   transform: translateY(-2px);
 }
 
-/* --- 6. CATEGORÍAS & BUSCADOR --- */
-.category-header {
-  margin-bottom: 40px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 20px;
-}
-
-.search-bar-container {
-  display: flex;
-  align-items: center;
-  background: white;
-  border: 1px solid var(--border-color);
-  border-radius: 30px;
-  padding: 5px 20px;
-  max-width: 600px;
-  margin-top: 30px;
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.3s, border-color 0.3s;
-}
-.search-bar-container:focus-within {
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  border-color: var(--accent-color);
-}
-
-.search-icon {
-  font-size: 1.2rem;
-  color: var(--text-muted);
-  margin-right: 15px;
-}
-
-.search-input {
-  flex: 1;
-  border: none;
-  padding: 12px 0;
-  font: 0.95rem var(--font-sans);
-  color: #333;
-  outline: none;
-  background: transparent;
-}
-.search-input::placeholder {
-  color: #bbb;
-  font-style: italic;
-}
-
+/* --- FECHAS Y BADGES --- */
 .date-tabs-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 15px;
   margin-top: 30px;
   flex-wrap: wrap;
@@ -322,59 +319,79 @@
   background: rgba(255,255,255,0.9);
   padding: 5px 12px;
   border-radius: 20px;
-  font: bold 0.7rem var(--font-sans);
+  font: bold 0.75rem var(--font-sans);
   color: var(--primary-color);
   z-index: 10;
-}
-.image-container { position: relative; }
-
-.prato-image {
-  width: 80%;
-  height: 80%;
-  border-radius: 8px;
-  object-fit: cover;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+
 /* =========================================
-   MEDIA QUERIES - MENÚ PÚBLICO
+   MEDIA QUERIES - MENÚ PÚBLICO (RESPONSIVE)
    ========================================= */
 @media (max-width: 768px) {
+  .menu-catalog-section {
+    padding: 100px 20px 40px; /* Reduce padding lateral */
+  }
+
   .catalog-header h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   
-  /* Pasar de 3 columnas a 1 columna */
+  /* Convierte la cuadrícula en 1 sola columna en móviles */
   .pratos-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 0 15px;
+    gap: 30px;
   }
 
-  /* Pestañas de fechas apiladas o ajustadas */
+  /* Las pestañas de fecha ocupan todo el ancho y hacen scroll si son muchas */
   .date-tabs-container {
     gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
   }
-  .date-tab {
-    padding: 10px 15px;
-    font-size: 0.85rem;
-    flex: 1 1 auto;
-    text-align: center;
+  
+  .date-tabs-container::-webkit-scrollbar {
+    display: none; /* Oculta la barra de scroll fea en móvil */
   }
 
-  /* Modal de detalles del plato en el menú */
-  .modal-layout {
-    flex-direction: column; /* Imagen arriba, texto abajo */
+  .date-tab {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    flex: 0 0 auto; /* Evita que los botones se encojan */
+    scroll-snap-align: start;
   }
+
+  /* Modificaciones extremas para el MODAL en móviles */
+  .dish-modal {
+    padding: 25px 20px;
+  }
+
+  .modal-layout {
+    flex-direction: column; /* Apila foto arriba y texto abajo */
+    gap: 20px;
+  }
+
   .modal-image {
     width: 100%;
-    height: 250px; /* Limitar altura de la foto en móvil */
-    border-radius: 12px 12px 0 0;
+    max-width: 100%;
+    height: 220px; /* Altura controlada para no ocupar toda la pantalla */
+    border-radius: 12px;
   }
+
   .modal-details {
-    padding: 20px;
+    padding: 0;
   }
+
   .modal-details h2 {
+    font-size: 1.8rem;
+  }
+
+  .modal-price {
     font-size: 1.5rem;
+    margin-bottom: 15px;
   }
 }

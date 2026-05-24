@@ -28,20 +28,26 @@
   font-weight: normal;
 }
 
-.view-all {
+/* Transformado de enlace a botón limpio */
+.view-all-btn {
+  background: none;
+  border: none;
   font-size: 0.8rem;
-  text-decoration: none;
+  font-family: Arial, sans-serif;
   color: #888;
   letter-spacing: 1px;
   text-transform: uppercase;
+  cursor: pointer;
   transition: color 0.3s;
+  padding: 0;
+  font-weight: bold;
 }
 
-.view-all:hover {
+.view-all-btn:hover {
   color: #1a1a1a;
 }
 
-/* --- CSS GRID --- */
+/* --- CSS GRID DE ESCRITORIO --- */
 .bestsellers-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
@@ -57,31 +63,40 @@
   align-items: flex-end;
   padding: 30px;
   box-sizing: border-box;
+  border-radius: 8px; /* Bordes suaves premium */
+  cursor: pointer; /* Indica que es clickeable */
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Efecto de elevación al pasar el ratón */
+.grid-item:hover {
+  transform: translateY(-5px);
+  filter: brightness(1.1);
 }
 
 .main-dish {
-  grid-column: 1 / 2; /* Ocupa la 1ra columna */
-  grid-row: 1 / 3;    /* Ocupa las 2 filas de alto */
-  background-image: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0)), url('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  background-image: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.405)), url('../../../assets/velvet_garden.jpg');
 }
 
 .side-top {
-  grid-column: 2 / 4; /* Ocupa desde la 2da hasta la 4ta línea (2 columnas) */
-  grid-row: 1 / 2;    /* Ocupa la 1ra fila */
-  background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url('https://images.unsplash.com/photo-1519915028121-7d3463d20b13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+  grid-column: 2 / 4;
+  grid-row: 1 / 2;
+  background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0, 0, 0, 0.405)), url('https://images.unsplash.com/photo-1519915028121-7d3463d20b13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
 }
 
 .side-bottom-left {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
   background-color: #eee;
-  background-image: url('https://images.unsplash.com/photo-1579954115563-e72bf1b81615?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.405)), url('../../../assets/pudim-caramelo.jpg');
 }
 
 .side-bottom-right {
   grid-column: 3 / 4;
   grid-row: 2 / 3;
-  background-image: url('https://images.unsplash.com/photo-1481391319762-47dff72954d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.405)), url('../../../assets/652757412_18000281729861843_7615757866819261152_n.jpg');
 }
 
 .item-content h3 {
@@ -112,6 +127,7 @@
   letter-spacing: 1px;
   display: inline-block;
   margin-bottom: 15px;
+  border-radius: 4px;
 }
 
 .price-content {
@@ -125,4 +141,49 @@
   color: #d4b499;
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+/* =========================================
+   MEDIA QUERIES - MÓVILES Y TABLETS
+   ========================================= */
+@media screen and (max-width: 768px) {
+  .bestsellers-section {
+    padding: 60px 20px;
+  }
+
+  .bestsellers-header {
+    flex-direction: column; /* Apila el título y el botón en móviles */
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .header-titles h2 {
+    font-size: 1.8rem;
+  }
+
+  /* REESTRUCTURACIÓN DE LA CUADRÍCULA */
+  .bestsellers-grid {
+    grid-template-columns: 1fr; /* Pasa a tener solo 1 columna vertical */
+    grid-template-rows: auto; /* La altura se ajusta automáticamente */
+    gap: 15px;
+  }
+
+  /* Reseteamos el posicionamiento de todas las cajas para que fluyan hacia abajo */
+  .main-dish, .side-top, .side-bottom-left, .side-bottom-right {
+    grid-column: 1 / -1; 
+    grid-row: auto;
+    height: 250px; /* Altura uniforme para móviles */
+  }
+
+  /* Hacemos el plato principal un poquito más alto para que destaque */
+  .main-dish {
+    height: 350px;
+  }
+
+  /* Desactivamos la animación hover en móviles (ya que se usa el dedo) */
+  .grid-item:hover {
+    transform: none;
+    filter: none;
+  }
 }
