@@ -22,7 +22,6 @@ function About() {
             Focamo-nos na honestidade dos ingredientes e na calma do espaço para que 
             o teu quotidiano ganhe uma nova textura.
           </p>
-          <a href="#historia" className="about-link">DESCUBRA NOSSA HISTÓRIA</a>
         </div>
       </div>
     </section>
