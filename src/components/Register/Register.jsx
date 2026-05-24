@@ -13,6 +13,12 @@ function Register() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const passwordChecks = {
+    length: formData.password.length >= 6,
+    uppercase: /[A-Z]/.test(formData.password),
+    number: /[0-9]/.test(formData.password),
+    special: /[^A-Za-z0-9]/.test(formData.password)
+  };
 
   const BASE_URL = 'https://siws.ufp.pt/lwlc/api';
   
@@ -36,9 +42,14 @@ function Register() {
       setError('As palavras-passe não coincidem.');
       return;
     }
-    if (formData.password.length < 6) {
-      setError('A palavra-passe deve ter pelo menos 6 caracteres.');
-      return;
+    if (
+      !passwordChecks.length ||
+      !passwordChecks.uppercase ||
+      !passwordChecks.number ||
+      !passwordChecks.special
+    ) {
+    setError('A palavra-passe não cumpre todos os requisitos.');
+    return;
     }
 
     setLoading(true);
@@ -138,14 +149,19 @@ function Register() {
 
           <div className="form-group">
             <label>Confirmar Palavra-passe</label>
-            <input 
-              type="password" 
-              name="confirmPassword"
-              placeholder="Repita a sua palavra-passe"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required 
-            />
+              <div className="password-rules">
+                  <p className={passwordChecks.length ? 'valid' : 'invalid'}> ● 6 Caracteres
+                </p>
+
+                  <p className={passwordChecks.uppercase ? 'valid' : 'invalid'}> ● 1 Maiúscula
+                </p>
+
+                  <p className={passwordChecks.number ? 'valid' : 'invalid'}> ● 1 Número
+                </p>
+
+                  <p className={passwordChecks.special ? 'valid' : 'invalid'}> ● 1 Carácter Extraordinário
+                </p>
+            </div>
           </div>
 
           <button type="submit" className="btn-register" disabled={loading}>
