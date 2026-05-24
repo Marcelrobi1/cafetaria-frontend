@@ -1,3 +1,6 @@
+/* =========================================
+   DISEÑO DE ESCRITORIO (Desktop)
+   ========================================= */
 .about-section {
   padding: 100px 5%;
   background-color: #f4f1ee;
@@ -69,4 +72,40 @@
 
 .about-link:hover {
   opacity: 0.6;
+}
+
+/* =========================================
+   MEDIA QUERIES - MÓVILES Y TABLETS
+   ========================================= */
+@media screen and (max-width: 850px) { /* Usamos 850px porque 2 columnas requieren más espacio */
+  .about-section {
+    padding: 60px 20px; /* Reduce espacios muertos arriba y abajo */
+  }
+
+  .about-container {
+    flex-direction: column; /* Coloca la imagen arriba y el texto abajo */
+    gap: 40px; /* Reduce la separación entre foto y texto */
+  }
+
+  .about-image img {
+    box-shadow: 6px 6px 0px #d4b499; /* Hace la sombra más sutil en pantallas pequeñas */
+  }
+
+  .about-content {
+    text-align: center; /* Centra el texto */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-content h2 {
+    font-size: 2.2rem; /* Disminuye el tamaño del título */
+    margin-bottom: 20px;
+  }
+
+  .about-content p {
+    font-size: 0.95rem; /* Ajusta el cuerpo del texto */
+    margin-bottom: 30px;
+    padding: 0 10px; /* Evita que el texto toque los bordes laterales del teléfono */
+  }
 }

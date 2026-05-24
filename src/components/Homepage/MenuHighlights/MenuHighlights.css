@@ -1,3 +1,6 @@
+/* =========================================
+   DISEÑO BASE Y ESCRITORIO
+   ========================================= */
 .menu-highlights-section {
   padding: 80px 5%;
   background-color: #f4f1ee;
@@ -7,9 +10,9 @@
 .menu-header h2 {
   font-family: 'Georgia', serif;
   font-style: italic;
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: #1a1a1a;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   font-weight: normal;
 }
 
@@ -18,52 +21,105 @@
   justify-content: center;
   gap: 30px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 40px auto 0;
 }
 
-.menu-card {
+/* Tarjeta dinámica */
+.dynamic-card {
   flex: 1;
-  height: 400px; /* Altura fija para las tarjetas */
-  background-size: cover;
-  background-position: center;
+  height: 420px;
+  position: relative; /* Clave para contener la imagen absoluta */
+  overflow: hidden; /* Corta la imagen si sobresale */
+  border-radius: 12px;
   display: flex;
-  align-items: flex-end; /* Empuja el texto hacia abajo */
+  align-items: flex-end;
   padding: 30px;
   box-sizing: border-box;
   text-align: left;
-  transition: transform 0.3s ease;
   cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-.menu-card:hover {
-  transform: translateY(-10px);
+/* Imagen generada por DishImage como fondo */
+.highlight-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  transition: transform 0.5s ease;
+}
+
+/* Efecto de zoom elegante al pasar el ratón */
+.dynamic-card:hover .highlight-bg-img {
+  transform: scale(1.08);
+}
+
+/* Gradiente para proteger la lectura del texto */
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+  z-index: 2;
+}
+
+/* Contenido del texto encima de la imagen */
+.card-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
 }
 
 .card-content h3 {
   font-family: 'Georgia', serif;
   font-style: italic;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: white;
-  margin: 0 0 5px 0;
+  margin: 0 0 8px 0;
 }
 
 .card-content p {
   font-family: Arial, sans-serif;
+  font-size: 1rem;
+  color: #f4f1ee;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+.highlight-price {
+  display: inline-block;
+  background-color: #d4b499;
+  color: #1a1a1a;
+  padding: 4px 10px;
+  border-radius: 4px;
   font-size: 0.85rem;
-  color: #ddd;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
 }
 
-.card-meat {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.436) 50%), url('../../../assets/655077106_18111395389747400_2961447355530419255_n.jpg');
-}
+/* =========================================
+   MEDIA QUERIES - MÓVILES Y TABLETS
+   ========================================= */
+@media screen and (max-width: 768px) {
+  .menu-highlights-section {
+    padding: 60px 20px;
+  }
+  
+  .menu-header h2 {
+    font-size: 1.8rem;
+  }
 
-.card-fish {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.436) 50%), url('../../../assets/448228435_18228958852279952_7308605445139769024_n.jpg');
-}
+  .cards-container {
+    flex-direction: column; /* Pasa de 3 columnas a 1 lista vertical */
+    gap: 20px;
+  }
 
-.card-vegie {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.436) 50%), url('../../../assets/343065172_976310050192633_1902809623809180976_n.jpg');
+  .dynamic-card {
+    height: 320px; /* Tarjetas un poco más bajas en móviles */
+  }
 }

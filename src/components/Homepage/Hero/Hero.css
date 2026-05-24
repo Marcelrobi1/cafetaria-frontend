@@ -1,6 +1,9 @@
+/* =========================================
+   DISEÑO DE ESCRITORIO (Desktop)
+   ========================================= */
 .hero-section {
-  
-  height: 100vh; 
+  /* Usamos min-height para evitar problemas con la barra de direcciones en Safari/Chrome móvil */
+  min-height: 100vh; 
   /* fondo oscuro semi-transparente sobre la imagen para que el texto sea legible */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../../../assets/601977623_18295577920279952_8451106502764881457_n.jpg');
   background-size: cover;
@@ -49,9 +52,50 @@
   cursor: pointer;
   text-transform: uppercase;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 4px; /* Un pequeño borde redondeado para modernizar */
 }
 
 .btn-primary:hover {
   background-color: #c4a182; 
   transform: translateY(-2px); 
+}
+
+/* =========================================
+   MEDIA QUERIES - MÓVILES Y TABLETS
+   ========================================= */
+@media screen and (max-width: 768px) {
+  .hero-section {
+    padding: 0 20px; /* Reducimos el margen lateral para aprovechar la pantalla */
+    justify-content: center; /* Centramos el contenedor principal */
+  }
+
+  .hero-content {
+    margin-top: 0;
+    text-align: center; /* Centramos el texto para una lectura más cómoda en móvil */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-content h1 {
+    font-size: 2.8rem; /* Reducimos el título para que no desborde */
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+    padding: 0 10px; /* Evita que el texto toque los bordes del teléfono */
+  }
+
+  .btn-primary {
+    width: 100%; /* El botón ocupa todo el ancho disponible... */
+    max-width: 300px; /* ...pero sin superar los 300px para que no se vea gigante en tablets */
+    padding: 15px 20px;
+  }
+}
+
+/* Ajuste adicional para teléfonos muy pequeños (ej. iPhone SE) */
+@media screen and (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2.3rem; 
+  }
 }

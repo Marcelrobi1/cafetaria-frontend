@@ -1,3 +1,6 @@
+/* =========================================
+   DISEÑO DE ESCRITORIO (Desktop)
+   ========================================= */
 .features-section {
   display: flex;
   justify-content: space-between;
@@ -29,4 +32,27 @@
   font-size: 0.9rem;
   line-height: 1.6;
   color: #555; 
+}
+
+/* =========================================
+   MEDIA QUERIES - MÓVILES Y TABLETS
+   ========================================= */
+@media screen and (max-width: 768px) {
+  .features-section {
+    flex-direction: column; /* Apila las cajas verticalmente */
+    padding: 60px 5%; /* Reduce el margen lateral */
+    gap: 40px;
+  }
+
+  .feature-box {
+    text-align: center; /* Centra el texto en móviles para mejor estética */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-icon {
+    font-size: 2rem; /* Hace el icono un poco más grande en móviles */
+    margin-bottom: 10px;
+  }
 }
