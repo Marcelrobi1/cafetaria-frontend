@@ -235,3 +235,31 @@
     padding: 40px 20px;
   }
 }
+
+/* =========================================
+   MEDIA QUERIES - PERFIL
+   ========================================= */
+@media (max-width: 768px) {
+  .profile-main-card {
+    flex-direction: column; /* Romper el layout horizontal */
+  }
+
+  .profile-left-panel {
+    border-right: none;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 30px;
+  }
+
+  .profile-form-grid {
+    grid-template-columns: 1fr; /* Inputs a una sola columna */
+    gap: 15px;
+  }
+
+  .profile-action-row {
+    justify-content: center; /* Centrar botón de guardar */
+  }
+  
+  .profile-save-btn {
+    width: 100%;
+  }
+}

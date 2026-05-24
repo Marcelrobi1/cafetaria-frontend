@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import DishImage from '../../components/DishImage/DishImage';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import './Menu.css';
@@ -36,14 +37,16 @@ function Menu() {
           const menusData = await resMenus.json();
           const pratosData = await resPratos.json();
 
-          // Filtramos solo los menús de hoy en adelante y los ordenamos por fecha
-          const hoje = new Date();
-          hoje.setHours(0, 0, 0, 0);
+          // Configuramos la barrera de tiempo estrictamente para "MAÑANA" a las 00:00
+          const amanha = new Date();
+          amanha.setHours(0, 0, 0, 0);
+          amanha.setDate(amanha.getDate() + 1); // Le sumamos 1 día a la fecha actual
 
+          // Filtramos los menús para que SOLO muestre fechas futuras
           const disponiveis = menusData
-            .filter(m => new Date(m.date) >= hoje)
+            .filter(m => new Date(m.date) >= amanha)
             .sort((a, b) => new Date(a.date) - new Date(b.date));
-
+            
           setMenusFuturos(disponiveis);
           setPratosCatalogo(pratosData);
 
@@ -142,9 +145,9 @@ function Menu() {
                 <div key={index} className="prato-card" onClick={() => setSelectedPrato({ ...pratoDetalhes, categoryLabel: categorias[index] })}>
                   <div className="image-container">
                     <span className="category-badge">{categorias[index]}</span>
-                    <img 
-                      src={pratoDetalhes.imageUrl || 'https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=500&q=80'} 
-                      alt={pratoDetalhes.name} 
+                    <DishImage 
+                      dishId={pratoDetalhes.id} 
+                      altName={pratoDetalhes.name} 
                       className="prato-image" 
                     />
                   </div>
@@ -168,8 +171,11 @@ function Menu() {
             <button className="close-btn" onClick={() => setSelectedPrato(null)}>✕</button>
             
             <div className="modal-layout">
-              <img src={selectedPrato.imageUrl || 'https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=500&q=80'} alt={selectedPrato.name} className="modal-image" />
-              
+              <DishImage 
+                      dishId={selectedPrato.id} 
+                      altName={selectedPrato.name} 
+                      className="prato-image" 
+                    />
               <div className="modal-details">
                 <span className="modal-date-tag">Para {formatarData(menuAtivo.date)}</span>
                 <h2>{selectedPrato.name}</h2>

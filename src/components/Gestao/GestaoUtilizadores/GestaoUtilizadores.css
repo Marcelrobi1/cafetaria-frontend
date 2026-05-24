@@ -1,41 +1,72 @@
-.gestao-container {
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+/* Reutilizamos toda la arquitectura de la tabla y botones principales */
+@import '../GestaoPratos/GestaoPratos.css'; 
+
+/* --- BADGES DE ROLES --- */
+.role-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-block;
 }
 
-.gestao-header {
+.role-admin { background-color: #f8d7da; color: #721c24; }
+.role-employee { background-color: #cce5ff; color: #004085; }
+.role-client { background-color: #e2e3e5; color: #383d41; }
+
+/* --- ESTRUCTURA DEL FORMULARIO MODAL --- */
+.users-modal {
+  max-width: 500px !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.modal-form-body {
+  padding: 30px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.add-btn {
-  background-color: #137333;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
+.form-group-row {
+  display: flex;
+  gap: 15px;
 }
 
-.data-table {
+.form-group.half {
+  flex: 1;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 10px;
+  padding-top: 20px;
+  border-top: 1px solid #eaeaea;
+}
+
+/* Campos de entrada estilizados */
+.form-input {
   width: 100%;
-  border-collapse: collapse;
-}
-
-/* Restante estilo da tabela (para não ficar sem margens) */
-.data-table th, 
-.data-table td {
-  border: 1px solid #e0e0e0;
   padding: 12px 15px;
-  text-align: left;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
 }
 
-.data-table th {
-  background-color: #f5f5f5;
-  font-weight: bold;
+.form-input:focus {
+  outline: none;
+  border-color: #0b2b40;
+  box-shadow: 0 0 0 2px rgba(11, 43, 64, 0.1);
+}
+
+select.form-input {
+  cursor: pointer;
+  background-color: white;
 }

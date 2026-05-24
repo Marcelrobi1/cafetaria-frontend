@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import DishImage from '../../DishImage/DishImage';
 import './GestaoPratos.css';
 
 function GestaoPratos() {
@@ -211,10 +212,10 @@ const resetForm = () => {
                     pratos.map((prato) => (
                       <tr key={prato.id}>
                         <td className="item-cell">
-                          <img 
-                            src={prato.imageUrl || 'https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=100&q=80'} 
-                            alt={prato.name} 
-                            className="item-thumbnail" 
+                          <DishImage 
+                            dishId={prato.id} 
+                            altName={prato.name} 
+                            className="prato-image" 
                           />
                           <div className="item-details">
                             <span className="item-name">{prato.name}</span>
@@ -308,7 +309,7 @@ const resetForm = () => {
 
               {/* Se eliminó el toggle de disponibilidad porque el backend no lo soporta */}
 
-              <div className="form-group">
+<div className="form-group">
                 <label>Imagem do Prato</label>
                 
                 {/* Input oculto para seleccionar el archivo */}
@@ -322,34 +323,55 @@ const resetForm = () => {
                     const file = e.target.files[0];
                     if (file) {
                       setImagemFile(file);
-                      setImagemPreview(URL.createObjectURL(file)); // Crea una vista previa temporal
+                      // Ya no necesitamos crear el ObjectURL para el preview
                     }
                   }}
                 />
 
                 <div 
-                  className={`image-upload-zone ${imagemPreview ? 'has-image' : ''}`}
+                  className="image-upload-zone"
                   onClick={() => document.getElementById('imageInput').click()}
+                  style={imagemFile ? { backgroundColor: '#f0fdf4', border: '2px dashed #16a34a' } : {}}
                 >
-                  {imagemPreview ? (
-                    <img src={imagemPreview} alt="Preview" className="preview-image" />
+                  {imagemFile ? (
+                    <div style={{ textAlign: 'center' }}>
+                      <span style={{ fontSize: '2rem', display: 'block' }}>✅</span>
+                      <p style={{ color: '#16a34a', fontWeight: 'bold', margin: '10px 0 5px 0' }}>
+                        Imagem carregada com sucesso!
+                      </p>
+                      <p style={{ color: '#555', fontSize: '0.85rem', margin: 0 }}>
+                        {imagemFile.name}
+                      </p>
+                    </div>
+                  ) : imagemPreview ? (
+                    <div style={{ textAlign: 'center' }}>
+                      <span style={{ fontSize: '2rem', display: 'block' }}>🖼️</span>
+                      <p style={{ color: '#0b2b40', fontWeight: 'bold', margin: '10px 0 5px 0' }}>
+                        Este prato já possui uma imagem.
+                      </p>
+                      <p style={{ color: '#888', fontSize: '0.85rem', margin: 0 }}>
+                        Clique aqui para substituir por uma nova foto.
+                      </p>
+                    </div>
                   ) : (
-                    <>
+                    <div style={{ textAlign: 'center' }}>
                       <span className="upload-icon">📷</span>
                       <p>Clique para selecionar uma imagem</p>
                       <span className="upload-hint">PNG, JPG ou WEBP (Max. 5MB)</span>
-                    </>
+                    </div>
                   )}
                 </div>
                 
-                {imagemPreview && (
+                {(imagemFile || imagemPreview) && (
                   <button 
                     type="button" 
                     className="btn-remove-image" 
                     onClick={() => {
                       setImagemFile(null);
-                      setImagemPreview('');
-                      document.getElementById('imageInput').value = '';
+                      setImagemPreview(''); 
+                      if (fileInputRef.current) {
+                        fileInputRef.current.value = '';
+                      }
                     }}
                   >
                     Remover Imagem

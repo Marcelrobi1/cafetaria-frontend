@@ -1,14 +1,13 @@
 // src/components/Profile/Profile.jsx
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // <-- IMPORTAÇÃO DO ROUTER
+import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 
 function Profile() {
-  const navigate = useNavigate(); // <-- INICIALIZA O NAVIGATE
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -20,7 +19,6 @@ function Profile() {
   useEffect(() => {
     const fetchUserData = async () => {
       if (!token) {
-        // Se não houver token, redireciona logo para a página inicial ou login
         navigate('/');
         return;
       }
@@ -40,7 +38,6 @@ function Profile() {
 
         const data = await response.json();
         setUserData(data);
-        setBalance(data.balance || 0);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -68,11 +65,12 @@ function Profile() {
     }
 
     try {
+      // Inyectamos el saldo original directamente del userData para no alterarlo
       const payload = {
         username: userData.username, 
         password: password, 
         type: userData.type,
-        balance: parseFloat(balance)
+        balance: userData.balance 
       };
 
       const response = await fetch(`${BASE_URL}/users/me`, {
@@ -127,7 +125,7 @@ function Profile() {
           <span className="profile-role-badge">{formatRole(userData?.type)}</span>
           
           <div className="profile-extra-meta">
-            <p>💳 Saldo em Conta: <strong>€{userData?.balance?.toFixed(2)}</strong></p>
+            <p>💳 Saldo em Conta: <strong>€{userData?.balance?.toFixed(2) || '0.00'}</strong></p>
             <p>🆔 ID: {userData?.id?.substring(0, 8)}...</p>
           </div>
         </div>
@@ -147,14 +145,14 @@ function Profile() {
                 <input type="text" value={userData?.username || ''} disabled className="disabled-input" />
               </div>
 
+              {/* Saldo só letura */}
               <div className="profile-form-group">
-                <label>SALDO DA CONTA (€)</label>
+                <label>SALDO DA CONTA (€) </label>
                 <input 
-                  type="number" 
-                  step="0.01" 
-                  value={balance} 
-                  onChange={(e) => setBalance(e.target.value)} 
-                  required 
+                  type="text" 
+                  value={userData?.balance?.toFixed(2) || '0.00'} 
+                  disabled 
+                  className="disabled-input"
                 />
               </div>
 

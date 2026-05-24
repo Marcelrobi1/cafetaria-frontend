@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useCart } from '../../context/CartContext';
+import DishImage from '../../components/DishImage/DishImage';
 import './CartSidebar.css';
 
 // Icono SVG personalizado que se parece al de la imagen (una cesta de compra moderna)
@@ -111,10 +112,10 @@ function CartSidebar({ isOpen, onClose }) {
             <div className="cart-items-list-premium">
               {cart.map((item, index) => (
                 <div key={`${item.id}-${index}`} className="cart-item-premium">
-                  <img 
-                    src={item.imageUrl || 'https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=100&q=80'} 
-                    alt={item.name} 
-                    className="cart-item-image-premium"
+                  <DishImage 
+                    dishId={item.id} 
+                    altName={item.name} 
+                    className="cart-item-image-premium" 
                   />
                   <div className="cart-item-details-premium">
                     <div className="cart-item-top-premium">

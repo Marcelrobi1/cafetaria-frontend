@@ -47,6 +47,30 @@ function GestaoCompras() {
     });
   };
 
+  // --- VERIFICACIÓN DE SEGURIDAD (RBAC) ---
+  const userType = localStorage.getItem('userType');
+
+  if (userType !== 'ADMIN') {
+    return (
+      <div className="gestao-pratos-container">
+        <div className="admin-header">
+          <div>
+            <h2>Reservas de Pratos</h2>
+            <p>Listagem de compras e reservas agendadas pelos clientes.</p>
+          </div>
+        </div>
+        
+        <div className="table-card" style={{ textAlign: 'center', padding: '60px 20px' }}>
+          <div style={{ fontSize: '4rem', marginBottom: '15px' }}>🛡️</div>
+          <h2 style={{ color: '#0b2b40', fontFamily: 'Georgia, serif' }}>Acesso Confidencial</h2>
+          <p style={{ color: '#555', marginTop: '10px', fontSize: '1.1rem', maxWidth: '500px', margin: '10px auto 0' }}>
+            Apenas utilizadores com privilégios de <strong>Administrador</strong> podem visualizar o fluxo de caixa e o histórico global de reservas.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="gestao-pratos-container">
       <div className="admin-header">

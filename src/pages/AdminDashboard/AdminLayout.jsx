@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 import './AdminLayout.css';
 
 function AdminLayout() {
   const navigate = useNavigate();
+  const { clearCart } = useCart();
 
   // Protección de la ruta a nivel global del Layout
   useEffect(() => {

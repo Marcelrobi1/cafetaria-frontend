@@ -327,3 +327,54 @@
   z-index: 10;
 }
 .image-container { position: relative; }
+
+.prato-image {
+  width: 80%;
+  height: 80%;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   MEDIA QUERIES - MENÚ PÚBLICO
+   ========================================= */
+@media (max-width: 768px) {
+  .catalog-header h2 {
+    font-size: 2rem;
+  }
+  
+  /* Pasar de 3 columnas a 1 columna */
+  .pratos-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 15px;
+  }
+
+  /* Pestañas de fechas apiladas o ajustadas */
+  .date-tabs-container {
+    gap: 10px;
+  }
+  .date-tab {
+    padding: 10px 15px;
+    font-size: 0.85rem;
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  /* Modal de detalles del plato en el menú */
+  .modal-layout {
+    flex-direction: column; /* Imagen arriba, texto abajo */
+  }
+  .modal-image {
+    width: 100%;
+    height: 250px; /* Limitar altura de la foto en móvil */
+    border-radius: 12px 12px 0 0;
+  }
+  .modal-details {
+    padding: 20px;
+  }
+  .modal-details h2 {
+    font-size: 1.5rem;
+  }
+}

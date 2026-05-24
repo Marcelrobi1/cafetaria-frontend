@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Auth.css';
-
 
 function Auth({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const BASE_URL = 'https://siws.ufp.pt/lwlc/api';
@@ -16,9 +16,11 @@ function Auth({ onLoginSuccess }) {
     e.preventDefault();
     setError('');
     setMessage('');
+    setLoading(true);
 
     if (!username || !password) {
       setError('Por favor, preencha todos os campos.');
+      setLoading(false);
       return;
     }
 
@@ -36,32 +38,35 @@ function Auth({ onLoginSuccess }) {
       }
 
       if (!response.ok) {
-        throw new Error(data.error || data.message || 'Credenciais inválidas.');
+        throw new Error(data.error || data.message || 'Credenciais inválidas. Verifique os seus dados.');
       }
 
-      // Guarda os dados no LocalStorage
+      // Guardamos los datos de sesión
       localStorage.setItem('token', data.token);
       localStorage.setItem('username', data.username);
       localStorage.setItem('role', data.role);
+      localStorage.setItem('userType', data.type || data.role); // Safeguard de tipo
 
-      setMessage('Login efetuado com sucesso!');
-      onLoginSuccess(data);
+      setMessage('Sessão iniciada com sucesso!');
+      if (onLoginSuccess) onLoginSuccess(data);
 
-      navigate('/');
-
-      // 2. MAGIA DEL ROUTER: Redirección automática al inicio tras el login exitoso
-      navigate('/'); 
+      // Redireccionamos al cliente directo al catálogo
+      navigate('/menu');
 
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="auth-page-container">
-      {/* 3. Actualizamos el botón para usar navigate() en lugar de onClose() */}
-      
-      
+      {/* Botón para regresar sin iniciar sesión */}
+      <button className="auth-back-btn" onClick={() => navigate('/')}>
+        ← Voltar ao Início
+      </button>
+
       <div className="auth-card">
         <div className="auth-image-side">
           <img 
@@ -76,7 +81,7 @@ function Auth({ onLoginSuccess }) {
         <div className="auth-form-side">
           <h2>Bem-vindo de Volta</h2>
           <p className="auth-subtitle">
-            Aceda à sua conta para gerir as suas encomendas e descobrir novos blends de curadoria artesanal.
+            Aceda à sua conta para gerir as suas reservas e descobrir a nossa curadoria de especialidade.
           </p>
 
           {error && <div className="auth-status-error">{error}</div>}
@@ -97,30 +102,26 @@ function Auth({ onLoginSuccess }) {
             <div className="form-group">
               <div className="label-row">
                 <label>PALAVRA-PASSE</label>
-                <span className="forgot-link">ESQUECEU-SE?</span>
               </div>
               <input 
                 type="password" 
-                placeholder="********" 
+                placeholder="••••••••" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
 
-            <button type="submit" className="auth-submit-btn">
-              INICIAR SESSÃO
+            <button type="submit" className="auth-submit-btn" disabled={loading}>
+              {loading ? 'A INICIAR SESSÃO...' : 'INICIAR SESSÃO'}
             </button>
           </form>
 
-          <div className="auth-divider">
-            <span>OU CONTINUAR COM</span>
+          {/* Enlace directo a la página de Registro que creamos anteriormente */}
+          <div className="auth-footer">
+            <p>Ainda não faz parte da Early? <Link to="/register" className="auth-register-link">Registe-se agora</Link></p>
           </div>
 
-          <div className="auth-social-buttons">
-            <button className="social-btn"><span className="btn-icon">G</span> Google</button>
-            <button className="social-btn"><span className="btn-icon"></span> Apple</button>
-          </div>
         </div>
       </div>
     </div>

@@ -7,6 +7,7 @@ import Navbar from './components/navbar/navbar'; // Barra de navegação (Header
 import Home from './pages/Home/Home'; //Inicio
 import MenuPage from './pages/MenuPage/MenuPage'; //Menu
 import Auth from './components/Auth/Auth'; //Login
+import Register from './components/Register/Register'; //Registo
 import Profile from './components/Profile'; //Perfil do utilizador
 
 //Panel do Gestão
@@ -56,6 +57,7 @@ function App() {
             path="/login" 
             element={<Auth onLoginSuccess={(userData) => setCurrentUser(userData)} />} 
           />
+          <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin" element={<AdminLayout />}>
             Rutas panel do Admin
