@@ -123,3 +123,21 @@
 .login-link:hover {
   text-decoration: underline;
 }
+
+.password-rules {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.password-rules p {
+  margin: 4px 0;
+  transition: color 0.3s ease;
+}
+
+.invalid {
+  color: #d9534f;
+}
+
+.valid {
+  color: #28a745;
+}
