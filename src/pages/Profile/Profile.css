@@ -1,7 +1,7 @@
-/* src/components/Profile/Profile.css */
+
 .profile-page-container {
   min-height: 100vh;
-  background-color: #f4f1ee; /* Tom de areia suave do Early */
+  background-color: #f4f1ee; 
   padding: 120px 5% 60px 5%;
 }
 
@@ -32,7 +32,7 @@
   min-height: 600px;
 }
 
-/* Painel Esquerdo (Fiel ao Mockup) */
+/* Painel Esquerdo*/
 .profile-left-panel {
   flex: 1;
   border-right: 1px solid #f0ede9;
@@ -237,11 +237,11 @@
 }
 
 /* =========================================
-   MEDIA QUERIES - PERFIL
+   MEDIA QUERIES - ADAPTAÇÃO PARA DISPOSITIVOS MÓVEIS
    ========================================= */
 @media (max-width: 768px) {
   .profile-main-card {
-    flex-direction: column; /* Romper el layout horizontal */
+    flex-direction: column; 
   }
 
   .profile-left-panel {
@@ -251,12 +251,12 @@
   }
 
   .profile-form-grid {
-    grid-template-columns: 1fr; /* Inputs a una sola columna */
+    grid-template-columns: 1fr; 
     gap: 15px;
   }
 
   .profile-action-row {
-    justify-content: center; /* Centrar botón de guardar */
+    justify-content: center;
   }
   
   .profile-save-btn {

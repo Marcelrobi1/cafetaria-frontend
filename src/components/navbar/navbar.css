@@ -1,12 +1,10 @@
-﻿/* src/components/navbar/navbar.css */
-
-/* --- CONTENEDOR PRINCIPAL --- */
+﻿/* --- CONTÊINER PRINCIPAL --- */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 50px;
-  background-color: rgba(26, 26, 26, 0.95); /* Color oscuro elegante */
+  background-color: rgba(26, 26, 26, 0.95); 
   color: white;
   position: absolute;
   top: 0;
@@ -26,7 +24,7 @@
   font-size: 1.5rem;
 }
 
-/* --- ENLACES DE NAVEGACIÓN (Desktop) --- */
+/* --- LINKS DE NAVEGAÇÃO (Desktop) --- */
 .nav-links {
   display: flex;
   list-style: none;
@@ -49,10 +47,10 @@
 }
 
 .nav-links a:hover {
-  color: #8c7355; /* Acento dorado/café de Early */
+  color: #8c7355; /* Acento dourado/café da Early */
 }
 
-/* --- ACCIONES DERECHAS (Carrito + Perfil) --- */
+/* --- AÇÕES À DIREITA (Carrinho + Perfil) --- */
 .navbar-actions {
   display: flex;
   align-items: center;
@@ -87,7 +85,7 @@
   align-items: center;
 }
 
-/* --- PERFIL Y DESPLEGABLE --- */
+/* --- PERFIL E DROPDOWN --- */
 .user-profile-container {
   position: relative;
 }
@@ -106,7 +104,7 @@
 .profile-dropdown {
   position: absolute;
   top: 100%;
-  right: -10px; /* Alineado un poco a la derecha */
+  right: -10px; 
   width: 280px;
   background-color: #ffffff;
   color: #1a1a1a;
@@ -202,7 +200,7 @@
   background-color: #f9f9f9;
 }
 
-/* Botón de Registro Especial en el Dropdown */
+/* Botão de Registro Especial no Dropdown */
 .highlight-btn {
   background-color: #0b2b40;
   color: white !important;
@@ -214,7 +212,7 @@
   background-color: #8c7355 !important;
 }
 
-/* --- ICONO HAMBURGUESA (Oculto en Desktop) --- */
+/* --- ÍCONE HAMBÚRGUER (Oculto no Desktop) --- */
 .hamburger {
   display: none;
   cursor: pointer;
@@ -235,7 +233,7 @@
 }
 
 /* =========================================
-   MEDIA QUERIES - MÓVILES Y TABLETS
+   MEDIA QUERIES - MÓVEIS E TABLETS
    ========================================= */
 @media screen and (max-width: 768px) {
   .navbar {
@@ -244,14 +242,14 @@
 
   .hamburger {
     display: block;
-    order: -1; /* Pone el menú hamburguesa a la izquierda del logo */
+    order: -1; /* Coloca o menu hambúrguer à esquerda do logo */
   }
 
   .logo {
-    margin: 0 auto; /* Centra el logo en la pantalla */
+    margin: 0 auto; /* Centraliza o logo na tela */
   }
 
-  /* Los enlaces pasan a ser el cajón lateral/desplegable */
+  /* Os links passam a ser a gaveta lateral/dropdown */
   .nav-links {
     position: fixed;
     top: 60px; /* Justo debajo del navbar */
@@ -268,7 +266,7 @@
   }
 
   .nav-links.active {
-    left: 0; /* Aparece en pantalla */
+    left: 0; /* Aparece na tela */
   }
 
   .nav-links li {
@@ -281,12 +279,12 @@
     padding: 15px;
   }
 
-  /* Animación: Las 3 rayas se vuelven una X */
+  /* Animação: As 3 barras viram para X */
   .hamburger.active .bar:nth-child(2) { opacity: 0; }
   .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
   .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-  /* Asegura que el dropdown de perfil no se salga en móviles */
+  /* Garante que o dropdown de perfil não ultrapasse em dispositivos móveis */
   .profile-dropdown {
     position: fixed;
     top: 65px;

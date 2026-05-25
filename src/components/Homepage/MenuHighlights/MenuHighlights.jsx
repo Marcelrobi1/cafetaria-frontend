@@ -18,7 +18,7 @@ function MenuHighlights() {
       </div>
       
       <div className="cards-container">
-        {/* Tarjeta 1 */}
+        {/* CARD 1 */}
         <div className="menu-card card-meat" onClick={navigateToMenu}>
           <div className="card-content">
             <h3>Carne</h3>
@@ -26,7 +26,7 @@ function MenuHighlights() {
           </div>
         </div>
 
-        {/* Tarjeta 2 */}
+        {/* CARD 2 */}
         <div className="menu-card card-fish" onClick={navigateToMenu}>
           <div className="card-content">
             <h3>Peixe</h3>
@@ -34,7 +34,7 @@ function MenuHighlights() {
           </div>
         </div>
 
-        {/* Tarjeta 3 */}
+        {/* CARD 3 */}
         <div className="menu-card card-vegie" onClick={navigateToMenu}>
           <div className="card-content">
             <h3>Vegetariano</h3>

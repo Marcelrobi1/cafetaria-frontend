@@ -5,7 +5,7 @@ import CartSidebar from '../Cart/CartSidebar';
 import './navbar.css';
 
 function Navbar({ user, onLogout }) {
-  // Estados para los menús
+  // Estados para os menus
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
@@ -16,11 +16,11 @@ function Navbar({ user, onLogout }) {
   const { totalItems, clearCart } = useCart(); 
   const [isCartOpen, setIsCartOpen] = useState(false); 
   
-  // 1. Lógica para el botón "Menu"
+  // 1. Lógica para o botão "Menu"
   const handleMenuClick = (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    setIsMobileMenuOpen(false); // Cierra el menú móvil al hacer clic
+    setIsMobileMenuOpen(false); // Fecha o menu móvel ao clicar
     
     if (!token) {
       navigate('/login');
@@ -29,7 +29,7 @@ function Navbar({ user, onLogout }) {
     }
   }; 
 
-  // Lógica para limpar carrinho ao fim da sessao
+  // Lógica para limpar o carrinho ao final da sessão
   const handleLogout = () => {
     localStorage.clear();
     clearCart();
@@ -38,10 +38,10 @@ function Navbar({ user, onLogout }) {
     window.location.href = '/';
   };
 
-  // 2. Lógica inteligente para hacer Scroll
+  // 2. Lógica inteligente para fazer scroll
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
-    setIsMobileMenuOpen(false); // Cierra el menú móvil al hacer clic
+    setIsMobileMenuOpen(false); // Fecha o menu móvel ao clicar
 
     if (location.pathname !== '/') {
       navigate('/');
@@ -59,7 +59,7 @@ function Navbar({ user, onLogout }) {
     }
   };
 
-  // Cierra el desplegable del perfil si haces clic fuera
+  // Fecha o dropdown de perfil se clicar fora
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -70,16 +70,16 @@ function Navbar({ user, onLogout }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Función para alternar el menú móvil
+  // Função para alternar o menu móvel
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    setIsOpen(false); // Si abre el menú móvil, cierra el perfil
+    setIsOpen(false); // Se abrir o menu móvel, fecha o perfil
   };
 
   return (
     <>
       <nav className="navbar">
-        {/* BOTÓN HAMBURGUESA (Móvil) */}
+        {/* BOTÃO HAMBÚRGUER (Móvel) */}
         <button 
           className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`} 
           onClick={toggleMobileMenu}
@@ -96,7 +96,7 @@ function Navbar({ user, onLogout }) {
           </Link>
         </div>
 
-        {/* ENLACES CENTRALES */}
+        {/* LINKS CENTRAIS */}
         <ul className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
           <li><Link to="/" onClick={() => setIsMobileMenuOpen(false)}>Inicio</Link></li>
           <li><a href="#menu" onClick={handleMenuClick}>Menu</a></li>
@@ -104,7 +104,7 @@ function Navbar({ user, onLogout }) {
           <li><a href="#footer" onClick={(e) => scrollToSection(e, 'footer')}>Contato</a></li>
         </ul>
 
-        {/* CONTROLES DERECHOS (Carrito + Perfil) */}
+        {/* CONTROLES À DIREITA (Carrinho + Perfil) */}
         <div className="navbar-actions">
           
           <button className="cart-icon-btn" onClick={() => setIsCartOpen(true)}>
@@ -117,7 +117,7 @@ function Navbar({ user, onLogout }) {
               <span>👤 {user ? user.username : 'Perfil'}</span>
             </div>
 
-            {/* TARJETA DESPLEGABLE DEL PERFIL */}
+            {/* CARTÃO DROPDOWN DO PERFIL */}
             {isOpen && (
               <div className="profile-dropdown" onClick={(e) => e.stopPropagation()}>
                 <div className="dropdown-header">
@@ -137,7 +137,7 @@ function Navbar({ user, onLogout }) {
 
                 <div className="dropdown-actions">
                   {user ? (
-                    /* OPCIONES PARA USUARIO AUTENTICADO */
+                    /* OPÇÕES PARA USUÁRIO AUTENTICADO */
                     <>
                       {(user.role === 'ADMIN' || user.role === 'EMPLOYEE') && (
                         <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/admin'); }}>
@@ -152,13 +152,13 @@ function Navbar({ user, onLogout }) {
                       </button>
                     </>
                   ) : (
-                    /* OPCIONES PARA INVITADO (NO REGISTRADO) */
+                    /* OPÇÕES PARA CONVIDADO (NÃO REGISTRADO) */
                     <>
                       <button className="dropdown-btn" onClick={() => { setIsOpen(false); navigate('/login'); }}>
                         <span className="icon">➔</span> Iniciar Sessão
                       </button>
                       
-                      {/* NUEVO BOTÓN DE REGISTRO INTEGRADO */}
+                      {/* NOVO BOTÃO DE REGISTRO INTEGRADO */}
                       <button className="dropdown-btn highlight-btn" onClick={() => { setIsOpen(false); navigate('/register'); }}>
                         <span className="icon">📝</span> Criar Conta Nova
                       </button>

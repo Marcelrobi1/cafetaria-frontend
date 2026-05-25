@@ -12,7 +12,7 @@ function About() {
           />
         </div>
 
-        {/* Lado derecho: Texto */}
+        {/* Lado direito: Texto */}
         <div className="about-content">
           <span className="subtitle">NOSSA IDENTIDADE</span>
           <h2>Simples. Orgânico.<br /><em>Early.</em></h2>

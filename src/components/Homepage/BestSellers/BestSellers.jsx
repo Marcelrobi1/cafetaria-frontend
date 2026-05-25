@@ -4,15 +4,15 @@ import './BestSellers.css';
 function BestSellers() {
   const navigate = useNavigate();
 
-  // Función inteligente que decide a dónde enviar al usuario
+  // Função inteligente que decide para onde enviar o usuário
   const handleItemClick = () => {
     const token = localStorage.getItem('token');
     
     if (token) {
-      // Si está autenticado, va directo a reservar
+      // Se estiver autenticado, vai direto para reservar
       navigate('/menu');
     } else {
-      // Si es un invitado, le pedimos que inicie sesión
+      // Se for convidado, pedimos para fazer login
       navigate('/login');
     }
   };
@@ -24,12 +24,11 @@ function BestSellers() {
           <span className="subtitle">FAVORITOS DA CASA</span>
           <h2>Os Pratos mais Vendidos</h2>
         </div>
-        {/* Cambiamos la etiqueta <a> por un botón que ejecuta nuestra función */}
         <button onClick={handleItemClick} className="view-all-btn">VER MENU COMPLETO &rarr;</button>
       </div>
       
       <div className="bestsellers-grid">
-        {/* Elemento Principal (Izquierda) */}
+        {/* Elemento Principal (Esquerda) */}
         <div className="grid-item main-dish" onClick={handleItemClick}>
           <div className="item-content">
             <span className="tag">ASSINATURA</span>
@@ -38,14 +37,14 @@ function BestSellers() {
           </div>
         </div>
 
-        {/* Elemento Superior (Derecha) */}
+        {/* Elemento Superior (Direita) */}
         <div className="grid-item side-top" onClick={handleItemClick}>
           <div className="item-content">
             <h3>Tarte de Maçã</h3>
           </div>
         </div>
 
-        {/* Elementos Inferiores (Derecha) */}
+        {/* Elementos Inferiores (Direita) */}
         <div className="grid-item side-bottom-left" onClick={handleItemClick}>
           <div className="item-content price-content">
             <h3>Pudim de Caramelo</h3>
@@ -54,7 +53,6 @@ function BestSellers() {
         </div>
         
         <div className="grid-item side-bottom-right" onClick={handleItemClick}>
-          {/* Solo imagen, sin texto en tu diseño */}
         </div>
       </div>
     </section>

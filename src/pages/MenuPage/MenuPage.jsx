@@ -1,4 +1,4 @@
-import Menu from '../../components/MenuClient/Menu';
+import Menu from '../MenuClient/Menu';
 import Footer from '../../components/Footer/Footer';
 
 function MenuPage() {

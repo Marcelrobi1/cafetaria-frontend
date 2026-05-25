@@ -1,5 +1,5 @@
 /* =========================================
-   DISEÑO DE ESCRITORIO (Desktop)
+   DESIGN DESKTOP
    ========================================= */
 .features-section {
   display: flex;
@@ -39,20 +39,20 @@
    ========================================= */
 @media screen and (max-width: 768px) {
   .features-section {
-    flex-direction: column; /* Apila las cajas verticalmente */
-    padding: 60px 5%; /* Reduce el margen lateral */
+    flex-direction: column; /* Empilha as caixas verticalmente */
+    padding: 60px 5%; /* Reduz a margem lateral */
     gap: 40px;
   }
 
   .feature-box {
-    text-align: center; /* Centra el texto en móviles para mejor estética */
+    text-align: center; /* Centraliza o texto no móvel para melhor estética */
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
   .feature-icon {
-    font-size: 2rem; /* Hace el icono un poco más grande en móviles */
+    font-size: 2rem; /* Torna o ícone um pouco maior nos móveis */
     margin-bottom: 10px;
   }
 }

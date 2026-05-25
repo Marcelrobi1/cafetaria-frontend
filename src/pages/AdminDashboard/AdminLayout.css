@@ -89,7 +89,7 @@
 }
 
 /* =========================================
-   CONTENIDO PRINCIPAL
+   CONTEUDO PRINCIPAL
    ========================================= */
 .admin-main-content {
   flex: 1;
@@ -107,7 +107,7 @@
 }
 
 /* =========================================
-   ELEMENTOS MÓVILES (Ocultos en PC)
+   ELEMENTOS MÓVILES (Ocultos em PC)
    ========================================= */
 .admin-mobile-header {
   display: none; /* Oculto por defecto en escritorio */

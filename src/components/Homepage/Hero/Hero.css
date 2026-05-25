@@ -1,10 +1,10 @@
 /* =========================================
-   DISEÑO DE ESCRITORIO (Desktop)
+   DESIGN DESKTOP
    ========================================= */
 .hero-section {
-  /* Usamos min-height para evitar problemas con la barra de direcciones en Safari/Chrome móvil */
+  /* Usamos min-height para evitar problemas com a barra de endereços no Safari/Chrome móvel */
   min-height: 100vh; 
-  /* fondo oscuro semi-transparente sobre la imagen para que el texto sea legible */
+  /* fundo escuro semitransparente sobre a imagem para que o texto seja legível */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../../../assets/601977623_18295577920279952_8451106502764881457_n.jpg');
   background-size: cover;
   background-position: center;
@@ -27,7 +27,6 @@
 }
 
 .hero-content h1 em {
-  /* Mantiene la fuente elegante y en cursiva de tu diseño */
   font-family: 'Georgia', serif;
   font-style: italic;
 }
@@ -52,7 +51,7 @@
   cursor: pointer;
   text-transform: uppercase;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  border-radius: 4px; /* Un pequeño borde redondeado para modernizar */
+  border-radius: 4px; 
 }
 
 .btn-primary:hover {
@@ -61,39 +60,39 @@
 }
 
 /* =========================================
-   MEDIA QUERIES - MÓVILES Y TABLETS
+   MEDIA QUERIES - MÓVEIS E TABLETS
    ========================================= */
 @media screen and (max-width: 768px) {
   .hero-section {
-    padding: 0 20px; /* Reducimos el margen lateral para aprovechar la pantalla */
-    justify-content: center; /* Centramos el contenedor principal */
+    padding: 0 20px; /* Reduzimos a margem lateral para aproveitar a tela */
+    justify-content: center; /* Centramos o contêiner principal */
   }
 
   .hero-content {
     margin-top: 0;
-    text-align: center; /* Centramos el texto para una lectura más cómoda en móvil */
+    text-align: center; /* Centralizamos o texto para uma leitura mais confortável no móvel */
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
   .hero-content h1 {
-    font-size: 2.8rem; /* Reducimos el título para que no desborde */
+    font-size: 2.8rem; /* Reduzimos o título para que não ultrapasse */
   }
 
   .hero-content p {
     font-size: 1rem;
-    padding: 0 10px; /* Evita que el texto toque los bordes del teléfono */
+    padding: 0 10px; /* Evita que o texto toque as bordas do telefone */
   }
 
   .btn-primary {
-    width: 100%; /* El botón ocupa todo el ancho disponible... */
-    max-width: 300px; /* ...pero sin superar los 300px para que no se vea gigante en tablets */
+    width: 100%; /* O botão ocupa toda a largura disponível... */
+    max-width: 300px; /* ...mas sem ultrapassar 300px para não ficar gigante em tablets */
     padding: 15px 20px;
   }
 }
 
-/* Ajuste adicional para teléfonos muy pequeños (ej. iPhone SE) */
+/* Ajuste adicional para telefones muito pequenos (ex. iPhone SE) */
 @media screen and (max-width: 480px) {
   .hero-content h1 {
     font-size: 2.3rem; 

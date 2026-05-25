@@ -1,5 +1,5 @@
 /* =========================================
-   DISEÑO BASE Y ESCRITORIO
+   DESIGN BASE E DESKTOP
    ========================================= */
 .menu-highlights-section {
   padding: 80px 5%;
@@ -30,17 +30,17 @@
   background-size: cover;
   background-position: center;
   display: flex;
-  align-items: flex-end; /* Empuja el texto hacia abajo */
+  align-items: flex-end;
   padding: 30px;
   box-sizing: border-box;
   text-align: left;
   transition: transform 0.3s ease;
   cursor: pointer;
-  border-radius: 12px; /* Añadimos bordes suaves para darle un toque premium */
+  border-radius: 12px; 
   overflow: hidden;
 }
 
-/* Efecto de elevación en escritorio */
+/* Efeito de elevação no desktop */
 .menu-card:hover {
   transform: translateY(-10px);
 }
@@ -66,7 +66,7 @@
   letter-spacing: 1px;
 }
 
-/* Fondos con degradado oscuro para que el texto sea siempre legible */
+/* Fundos com degradê escuro para que o texto seja sempre legível */
 .card-meat {
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%), url('../../../assets/655077106_18111395389747400_2961447355530419255_n.jpg');
 }
@@ -80,15 +80,15 @@
 }
 
 /* =========================================
-   MEDIA QUERIES - MÓVILES (SCROLL HORIZONTAL)
+   MEDIA QUERIES - MÓVEIS (SCROLL HORIZONTAL)
    ========================================= */
 @media screen and (max-width: 768px) {
   .menu-highlights-section {
-    padding: 60px 0; /* Quitamos el padding lateral para que las tarjetas lleguen al borde de la pantalla */
+    padding: 60px 0; 
   }
   
   .menu-header {
-    padding: 0 20px; /* Mantenemos el padding solo en el título */
+    padding: 0 20px; /* Mantemos o padding apenas no título */
   }
 
   .menu-header h2 {
@@ -96,18 +96,18 @@
     margin-bottom: 30px;
   }
 
-  /* LA MAGIA DEL SCROLL HORIZONTAL */
+  /* SCROLL HORIZONTAL */
   .cards-container {
-    justify-content: flex-start; /* Alineamos a la izquierda */
-    flex-wrap: nowrap; /* Evitamos que bajen a la siguiente línea */
-    overflow-x: auto; /* Activamos el scroll horizontal */
-    scroll-snap-type: x mandatory; /* Activamos el comportamiento magnético */
-    -webkit-overflow-scrolling: touch; /* Suavidad en dispositivos iOS */
-    padding: 0 20px 20px 20px; /* Damos espacio para la sombra */
-    gap: 15px; /* Reducimos el espacio entre tarjetas */
+    justify-content: flex-start; 
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory; 
+    -webkit-overflow-scrolling: touch; /* Suavidade em dispositivos iOS */
+    padding: 0 20px 20px 20px; 
+    gap: 15px; /* Reduzimos o espaço entre os cards */
   }
 
-  /* Ocultar la barra de scroll fea (pero mantener la funcionalidad) */
+  /* Ocultar a barra de scroll feia (mas manter a funcionalidade) */
   .cards-container::-webkit-scrollbar {
     display: none;
   }
@@ -117,12 +117,12 @@
   }
 
   .menu-card {
-    flex: 0 0 85%; /* En móvil, cada tarjeta ocupa el 85% de la pantalla */
+    flex: 0 0 85%; /* No móvel, cada card ocupa 85% da tela */
     height: 350px;
-    scroll-snap-align: center; /* Al deslizar, la tarjeta se frena justo en el centro */
+    scroll-snap-align: center; /* Ao deslizar, o card para bem no centro */
   }
 
   .menu-card:hover {
-    transform: none; /* Desactivamos el efecto hover en móviles, ya que no hay ratón */
+    transform: none; /* Desativamos o efeito hover no móvel, pois não há mouse */
   }
 }

@@ -7,10 +7,10 @@ function AdminLayout() {
   const navigate = useNavigate();
   const { clearCart } = useCart();
   
-  // NUEVO: Estado para controlar el menú lateral en dispositivos móviles
+  // Estado para controlar o menu lateral em dispositivos móveis
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
-  // Protección de la ruta a nivel global del Layout
+  // Proteção global da rota do layout
   useEffect(() => {
     const role = localStorage.getItem('role') || localStorage.getItem('userType');
     const token = localStorage.getItem('token');
@@ -26,14 +26,14 @@ function AdminLayout() {
     window.location.href = '/'; 
   };
 
-  // Funciones para manejar el menú en móviles
+  // Funções para gerir o menu em dispositivos móveis
   const toggleSidebar = () => setIsMobileSidebarOpen(!isMobileSidebarOpen);
   const closeSidebar = () => setIsMobileSidebarOpen(false);
 
   return (
     <div className="admin-layout-container">
       
-      {/* NUEVO: CABECERA MÓVIL (Solo visible en teléfonos) */}
+      {/* MENU HAMBURGUER (Visível apenas em telemóveis) */}
       <div className="admin-mobile-header">
         <div className="mobile-brand">
           <h3>Portal Early</h3>
@@ -43,13 +43,13 @@ function AdminLayout() {
         </button>
       </div>
 
-      {/* NUEVO: OVERLAY OSCURO (Para cerrar el menú tocando fuera) */}
+      {/* Para fechar o menu, toque fora do mesmo. */}
       {isMobileSidebarOpen && (
         <div className="admin-sidebar-overlay" onClick={closeSidebar}></div>
       )}
 
       {/* BARRA LATERAL (SIDEBAR) */}
-      {/* Añadimos una clase dinámica 'open' si el estado es true */}
+      {/* Classe dinâmica 'aberta' se o estado for verdadeiro */}
       <aside className={`admin-sidebar ${isMobileSidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-brand">
           <h3>Gestão Portal</h3>
@@ -89,7 +89,7 @@ function AdminLayout() {
         </div>
       </aside>
 
-      {/* ÁREA DE CONTENIDO DINÁMICO */}
+      {/* ÁREA DE CONTEÚDO DINÂMICO */}
       <main className="admin-main-content">
         <div className="content-wrapper">
           <Outlet /> 

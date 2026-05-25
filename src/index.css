@@ -1,6 +1,6 @@
 html, body {
   max-width: 100vw;
-  overflow-x: hidden; /* Esto es magia: oculta todo lo que intente salirse por los lados */
+  overflow-x: hidden; 
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -19,7 +19,6 @@ html, body {
   min-height: 100vh;
 }
 
-/* Evita que las imágenes rompan sus contenedores */
 img {
   max-width: 100%;
   height: auto;

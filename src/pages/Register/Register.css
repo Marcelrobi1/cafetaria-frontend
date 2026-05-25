@@ -4,7 +4,6 @@
   align-items: center;
   min-height: calc(100vh - 70px);
   background-color: #f4f1ee;
-  /* Reducimos el padding extremo de 120px para que encaje mejor en tablets y desktop */
   padding: 80px 20px;
 }
 
@@ -83,11 +82,11 @@
 }
 
 .invalid {
-  color: #888; /* Gris neutral para reglas no cumplidas */
+  color: #888; /* Regras não cumpridas */
 }
 
 .valid {
-  color: #137333; /* Verde éxito para reglas cumplidas */
+  color: #137333; /* Regras cumpridas */
 }
 
 .btn-register {
@@ -155,11 +154,11 @@
    ========================================= */
 @media screen and (max-width: 768px) {
   .register-container {
-    padding: 100px 15px 40px; /* Reduce el margen superior y lateral */
+    padding: 100px 15px 40px; 
   }
 
   .register-card {
-    padding: 30px 20px; /* Tarjeta con menos espacio muerto dentro */
+    padding: 30px 20px; 
   }
 
   .register-header h2 {
@@ -167,6 +166,6 @@
   }
 
   .password-rules {
-    font-size: 0.75rem; /* Achicamos ligeramente las reglas en móviles */
+    font-size: 0.75rem; 
   }
 }

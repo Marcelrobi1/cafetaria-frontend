@@ -15,7 +15,7 @@ function Profile() {
   const BASE_URL = 'https://siws.ufp.pt/lwlc/api';
   const token = localStorage.getItem('token');
 
-  // 1. Carregar os dados atuais do utilizador
+  // Carregar os dados atuais do utilizador
   useEffect(() => {
     const fetchUserData = async () => {
       if (!token) {
@@ -48,7 +48,7 @@ function Profile() {
     fetchUserData();
   }, [token, navigate]);
 
-  // 2. Atualizar os dados do utilizador
+  // Atualizar os dados do utilizador
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     setError('');
@@ -65,7 +65,7 @@ function Profile() {
     }
 
     try {
-      // Inyectamos el saldo original directamente del userData para no alterarlo
+      // Injetamos o saldo original diretamente dos dados do utilizador para não o alterar.
       const payload = {
         username: userData.username, 
         password: password, 
