@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maquetas de Diseño - Sistema de Cafetería</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .mockup-section {
+            margin-bottom: 60px;
+        }
+        
+        .mockup-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .mockup-description {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .mockup-frame {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+        
+        .screen {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+        }
+        
+        /* Navbar mockup */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .navbar-menu {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar-item {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section mockup */
+        .hero {
+            background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        
+        .hero h1 {
+            font-size: 3em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .hero-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .card-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .card-price {
+            font-size: 1.5em;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .card-button {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+        /* Form mockup */
+        .form-container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        
+        .form-button {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border: none;
+        }
+
+        
+        /* Admin Panel */
+        .admin-layout {
+            display: flex;
+            min-height: 500px;
+        }
+        
+        .admin-sidebar {
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+        
+        .admin-sidebar-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .admin-sidebar-item:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .admin-content {
+            flex: 1;
+            padding: 30px;
+            background: #ecf0f1;
+        }
+        
+        .admin-header {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .admin-table {
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .admin-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .admin-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .action-button {
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+            border: none;
+        }
+        
+        .edit-button {
+            background: #3498db;
+            color: white;
+        }
+        
+        .delete-button {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 350px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+            padding: 20px;
+            z-index: 1000;
+        }
+        
+        .cart-header {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .cart-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #667eea;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        .cart-checkout {
+            width: 100%;
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+        }
+
+        
+        /* Mobile frame */
+        .mobile-frame {
+            max-width: 375px;
+            margin: 0 auto;
+            border: 15px solid #333;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .mobile-notch {
+            height: 30px;
+            background: #333;
+            position: relative;
+        }
+        
+        .mobile-notch::after {
+            content: '';
+            width: 150px;
+            height: 30px;
+            background: white;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 20px 20px;
+        }
+        
+        /* Desktop frame */
+        .desktop-frame {
+            border: 3px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .browser-bar {
+            background: #e0e0e0;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .browser-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .browser-button.red {
+            background: #ff5f56;
+        }
+        
+        .browser-button.yellow {
+            background: #ffbd2e;
+        }
+        
+        .browser-button.green {
+            background: #27c93f;
+        }
+        
+        .browser-url {
+            flex: 1;
+            background: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            margin-left: 20px;
+            color: #666;
+        }
+        
+        /* Annotations */
+        .annotation {
+            background: #fff9c4;
+            border-left: 4px solid #ffd740;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .annotation-title {
+            font-weight: bold;
+            color: #f57f17;
+            margin-bottom: 5px;
+        }
+        
+        /* Color palette */
+        .color-palette {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .color-item {
+            text-align: center;
+        }
+        
+        .color-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .color-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        /* Typography */
+        .typography-sample {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .typo-h1 { font-size: 3em; margin-bottom: 15px; }
+        .typo-h2 { font-size: 2em; margin-bottom: 15px; }
+        .typo-body { font-size: 1em; color: #666; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎨 Maquetas de Diseño</h1>
+            <p>Sistema de Gestión para Cafetería - UI/UX Design Mockups</p>
+        </div>
+
+        <!-- Design System -->
+        <div class="mockup-section">
+            <h2 class="mockup-title">🎨 Sistema de Diseño</h2>
+            
+            <div class="mockup-frame">
+                <h3 style="margin-bottom: 20px;">Paleta de Colores</h3>
+                <div class="color-palette">
+                    <div class="color-item">
+                        <div class="color-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                        <div class="color-label">Primary Gradient</div>
+                        <div style="font-size: 0.8em; color: #999;">#667eea - #764ba2</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-box" style="background: #667eea;"></div>
+                        <div class="color-label">Primary</div>
+                        <div style="font-size: 0.8em; color: #999;">#667eea</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-box" style="background: #764ba2;"></div>
+                        <div class="color-label">Secondary</div>
+                        <div style="font-size: 0.8em; color: #999;">#764ba2</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-box" style="background: #2c3e50;"></div>
+                        <div class="color-label">Dark</div>
+                        <div style="font-size: 0.8em; color: #999;">#2c3e50</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-box" style="background: #ecf0f1;"></div>
+                        <div class="color-label">Light</div>
+                        <div style="font-size: 0.8em; color: #999;">#ecf0f1</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mockup-frame">
+                <h3 style="margin-bottom: 20px;">Tipografía</h3>
+                <div class="typography-sample">
+                    <div class="typo-h1">Heading 1 - Segoe UI</div>
+                    <div class="typo-h2">Heading 2 - Segoe UI</div>
+                    <div class="typo-body">Body Text - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vehicula dolor arcu, sit amet blandit dolor mollis nec.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mockup 1: Homepage -->
+        <div class="mockup-section">
+            <h2 class="mockup-title">📱 1. Página de Inicio (Homepage)</h2>
+            
+            <div class="mockup-description">
+                <div class="annotation-title">💡 Descripción</div>
+                <p>La página principal presenta un hero destacado, secciones de productos populares y características del servicio. Diseño limpio y moderno que invita a explorar.</p>
+            </div>
+            
+            <div class="mockup-frame">
+                <div class="desktop-frame">
+                    <div class="browser-bar">
+                        <div class="browser-button red"></div>
+                        <div class="browser-button yellow"></div>
+                        <div class="browser-button green"></div>
+                        <div class="browser-url">🌐 localhost:5173 - Cafetería</div>
+                    </div>
+                    <div class="screen">
+                        <div class="navbar">
+                            <div class="navbar-brand">🍽️ Cafetería</div>
+                            <div class="navbar-menu">
+                                <div class="navbar-item">Inicio</div>
+                                <div class="navbar-item">Menú</div>
+                                <div class="navbar-item">Contacto</div>
+                                <div class="navbar-item">🛒 Carrito</div>
+                                <div class="navbar-item">👤 Login</div>
+                            </div>
+                        </div>
+                        
+                        <div class="hero">
+                            <h1>Bienvenido a Nuestra Cafetería</h1>
+                            <p>Los mejores sabores, preparados con amor</p>
+                            <div class="hero-button">Ver Menú</div>
+                        </div>
+                        
+                        <div class="cards-grid">
+                            <div class="card">
+                                <div class="card-image">🍕</div>
+                                <div class="card-content">
+                                    <div class="card-title">Pizza Especial</div>
+                                    <div class="card-description">Deliciosa pizza con ingredientes frescos</div>
+                                    <div class="card-price">€12.99</div>
+                                    <div class="card-button">Añadir al Carrito</div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">🍔</div>
+                                <div class="card-content">
+                                    <div class="card-title">Hamburguesa Premium</div>
+                                    <div class="card-description">Carne de primera calidad</div>
+                                    <div class="card-price">€9.99</div>
+                                    <div class="card-button">Añadir al Carrito</div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">🥗</div>
+                                <div class="card-content">
+                                    <div class="card-title">Ensalada Fresca</div>
+                                    <div class="card-description">Vegetales orgánicos del día</div>
+                                    <div class="card-price">€7.99</div>
+                                    <div class="card-button">Añadir al Carrito</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="annotation">
+                <div class="annotation-title">📝 Notas de Diseño</div>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Navbar fijo con gradiente morado/azul</li>
+                    <li>Hero section con CTA (Call To Action) destacado</li>
+                    <li>Grid responsive de 3 columnas para productos destacados</li>
+                    <li>Cards con hover effect para mejor interactividad</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <!-- Mockup 2: Menu Page -->
+        <div class="mockup-section">
+            <h2 class="mockup-title">🍽️ 2. Página de Menú</h2>
+            
+            <div class="mockup-description">
+                <div class="annotation-title">💡 Descripción</div>
+                <p>Catálogo completo de productos con filtros, búsqueda y vista en grid. Los usuarios pueden explorar todos los platos disponibles y añadirlos al carrito.</p>
+            </div>
+            
+            <div class="mockup-frame">
+                <div class="desktop-frame">
+                    <div class="browser-bar">
+                        <div class="browser-button red"></div>
+                        <div class="browser-button yellow"></div>
+                        <div class="browser-button green"></div>
+                        <div class="browser-url">🌐 localhost:5173/menu</div>
+                    </div>
+                    <div class="screen">
+                        <div class="navbar">
+                            <div class="navbar-brand">🍽️ Cafetería</div>
+                            <div class="navbar-menu">
+                                <div class="navbar-item">Inicio</div>
+                                <div class="navbar-item" style="background: rgba(255,255,255,0.3);">Menú</div>
+                                <div class="navbar-item">Contacto</div>
+                                <div class="navbar-item">🛒 Carrito (3)</div>
+                                <div class="navbar-item">👤 Mi Cuenta</div>
+                            </div>
+                        </div>
+                        
+                        <div style="padding: 40px;">
+                            <h1 style="font-size: 2.5em; margin-bottom: 10px;">Nuestro Menú</h1>
+                            <p style="color: #666; font-size: 1.2em; margin-bottom: 30px;">Explora nuestra selección de platos</p>
+                            
+                            <div style="display: flex; gap: 15px; margin-bottom: 30px;">
+                                <input type="text" placeholder="🔍 Buscar platos..." style="flex: 1; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em;">
+                                <select style="padding: 12px 20px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em;">
+                                    <option>Todas las categorías</option>
+                                    <option>Entrantes</option>
+                                    <option>Platos principales</option>
+                                    <option>Postres</option>
+                                    <option>Bebidas</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="cards-grid">
+                            <div class="card">
+                                <div class="card-image">🍝</div>
+                                <div class="card-content">
+                                    <div class="card-title">Pasta Carbonara</div>
+                                    <div class="card-description">Receta italiana tradicional</div>
+                                    <div class="card-price">€11.99</div>
+                                    <div class="card-button">Añadir al Carrito</div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">🥘</div>
+                                <div class="card-content">
+                                    <div class="card-title">Paella Valenciana</div>
+                                    <div class="card-description">Auténtico sabor español</div>
+                                    <div class="card-price">€14.99</div>
+                                    <div class="card-button">Añadir al Carrito</div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">🍰</div>
+                                <div class="card-content">
+                                    <div class="card-title">Tarta de Chocolate</div>
+                                    <div class="card-description">Postre irresistible</div>
+                                    <div class="card-price">€5.99</div>
+                                    <div class="card-button">Añadir al Carrito</div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">🥤</div>
+                                <div class="card-content">
+                                    <div class="card-title">Smoothie Tropical</div>
+                                    <div class="card-description">Frutas naturales frescas</div>
+                                    <div class="card-price">€4.50</div>
+                                    <div class="card-button">Añadir al Carrito</div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">🍜</div>
+                                <div class="card-content">
+                                    <div class="card-title">Ramen Especial</div>
+                                    <div class="card-description">Caldo casero y fideos</div>
+                                    <div class="card-price">€10.99</div>
+                                    <div class="card-button">Añadir al Carrito</div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">🌮</div>
+                                <div class="card-content">
+                                    <div class="card-title">Tacos Mexicanos</div>
+                                    <div class="card-description">3 unidades variadas</div>
+                                    <div class="card-price">€8.99</div>
+                                    <div class="card-button">Añadir al Carrito</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="annotation">
+                <div class="annotation-title">📝 Notas de Diseño</div>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Barra de búsqueda y filtros para facilitar la navegación</li>
+                    <li>Grid responsive que se adapta a diferentes tamaños de pantalla</li>
+                    <li>Contador de items en el carrito visible en navbar</li>
+                    <li>Cards con información clara: imagen, título, descripción y precio</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <!-- Mockup 3: Login/Register -->
+        <div class="mockup-section">
+            <h2 class="mockup-title">🔐 3. Login / Registro</h2>
+            
+            <div class="mockup-description">
+                <div class="annotation-title">💡 Descripción</div>
+                <p>Sistema de autenticación limpio y seguro. Formularios validados con diseño centrado y amigable.</p>
+            </div>
+            
+            <div class="mockup-frame">
+                <div class="desktop-frame">
+                    <div class="browser-bar">
+                        <div class="browser-button red"></div>
+                        <div class="browser-button yellow"></div>
+                        <div class="browser-button green"></div>
+                        <div class="browser-url">🌐 localhost:5173/login</div>
+                    </div>
+                    <div class="screen">
+                        <div class="navbar">
+                            <div class="navbar-brand">🍽️ Cafetería</div>
+                            <div class="navbar-menu">
+                                <div class="navbar-item">Inicio</div>
+                                <div class="navbar-item">Menú</div>
+                                <div class="navbar-item">Contacto</div>
+                                <div class="navbar-item">🛒 Carrito</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-container">
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <h1 style="font-size: 2.5em; color: #667eea; margin-bottom: 10px;">Bienvenido</h1>
+                                <p style="color: #666;">Inicia sesión para continuar</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" placeholder="tu@email.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Contraseña</label>
+                                <input type="password" class="form-input" placeholder="••••••••">
+                            </div>
+                            
+                            <div style="text-align: right; margin-bottom: 20px;">
+                                <a href="#" style="color: #667eea; text-decoration: none;">¿Olvidaste tu contraseña?</a>
+                            </div>
+                            
+                            <button class="form-button">Iniciar Sesión</button>
+                            
+                            <div style="text-align: center; margin-top: 20px;">
+                                <p style="color: #666;">¿No tienes cuenta? <a href="#" style="color: #667eea; text-decoration: none; font-weight: bold;">Regístrate</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="annotation">
+                <div class="annotation-title">📝 Notas de Diseño</div>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Formulario centrado con diseño minimalista</li>
+                    <li>Campos con validación visual (borde rojo para errores)</li>
+                    <li>Enlace a recuperación de contraseña</li>
+                    <li>Call to action para registro si no tiene cuenta</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mockup 4: Shopping Cart -->
+        <div class="mockup-section">
+            <h2 class="mockup-title">🛒 4. Carrito de Compras</h2>
+            
+            <div class="mockup-description">
+                <div class="annotation-title">💡 Descripción</div>
+                <p>Sidebar deslizante que muestra los productos añadidos, permite ajustar cantidades y proceder al checkout.</p>
+            </div>
+            
+            <div class="mockup-frame">
+                <div style="position: relative; height: 600px; background: #f5f7fa; border-radius: 10px; overflow: hidden;">
+                    <div style="padding: 40px;">
+                        <h2>Página de Productos</h2>
+                        <p style="color: #666;">El carrito se muestra como sidebar lateral</p>
+                    </div>
+                    
+                    <div class="cart-sidebar">
+                        <div class="cart-header">
+                            🛒 Tu Carrito
+                            <span style="float: right; cursor: pointer;">✕</span>
+                        </div>
+                        
+                        <div class="cart-item">
+                            <div>
+                                <div style="font-weight: bold;">Pizza Especial</div>
+                                <div style="color: #666; font-size: 0.9em;">€12.99 x 2</div>
+                            </div>
+                            <div style="font-weight: bold;">€25.98</div>
+                        </div>
+                        
+                        <div class="cart-item">
+                            <div>
+                                <div style="font-weight: bold;">Hamburguesa Premium</div>
+                                <div style="color: #666; font-size: 0.9em;">€9.99 x 1</div>
+                            </div>
+                            <div style="font-weight: bold;">€9.99</div>
+                        </div>
+                        
+                        <div class="cart-item">
+                            <div>
+                                <div style="font-weight: bold;">Ensalada Fresca</div>
+                                <div style="color: #666; font-size: 0.9em;">€7.99 x 1</div>
+                            </div>
+                            <div style="font-weight: bold;">€7.99</div>
+                        </div>
+                        
+                        <div class="cart-total">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Subtotal:</span>
+                                <span>€43.96</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                                <span>IVA (21%):</span>
+                                <span>€9.23</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 1.2em; color: #667eea;">
+                                <span>Total:</span>
+                                <span>€53.19</span>
+                            </div>
+                        </div>
+                        
+                        <button class="cart-checkout">Proceder al Pago</button>
+                        
+                        <div style="text-align: center; margin-top: 15px;">
+                            <a href="#" style="color: #667eea; text-decoration: none;">Seguir Comprando</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="annotation">
+                <div class="annotation-title">📝 Notas de Diseño</div>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Sidebar fijo en el lado derecho con overlay</li>
+                    <li>Lista de items con cantidades y precios</li>
+                    <li>Cálculo automático de subtotal, IVA y total</li>
+                    <li>Botón destacado para proceder al checkout</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <!-- Mockup 5: User Profile -->
+        <div class="mockup-section">
+            <h2 class="mockup-title">👤 5. Perfil de Usuario</h2>
+            
+            <div class="mockup-description">
+                <div class="annotation-title">💡 Descripción</div>
+                <p>Panel personal donde el usuario puede ver y editar su información, historial de pedidos y preferencias.</p>
+            </div>
+            
+            <div class="mockup-frame">
+                <div class="desktop-frame">
+                    <div class="browser-bar">
+                        <div class="browser-button red"></div>
+                        <div class="browser-button yellow"></div>
+                        <div class="browser-button green"></div>
+                        <div class="browser-url">🌐 localhost:5173/profile</div>
+                    </div>
+                    <div class="screen">
+                        <div class="navbar">
+                            <div class="navbar-brand">🍽️ Cafetería</div>
+                            <div class="navbar-menu">
+                                <div class="navbar-item">Inicio</div>
+                                <div class="navbar-item">Menú</div>
+                                <div class="navbar-item">Contacto</div>
+                                <div class="navbar-item">🛒 Carrito</div>
+                                <div class="navbar-item" style="background: rgba(255,255,255,0.3);">👤 Mi Perfil</div>
+                            </div>
+                        </div>
+                        
+                        <div style="padding: 40px;">
+                            <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 40px;">
+                                <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2.5em;">
+                                    👤
+                                </div>
+                                <div>
+                                    <h1 style="font-size: 2em;">Juan Pérez</h1>
+                                    <p style="color: #666;">juan.perez@email.com</p>
+                                    <p style="color: #667eea; margin-top: 5px;">Cliente desde: Enero 2024</p>
+                                </div>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
+                                <div>
+                                    <h2 style="font-size: 1.5em; margin-bottom: 20px;">Información Personal</h2>
+                                    <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                                        <div class="form-group">
+                                            <label class="form-label">Nombre Completo</label>
+                                            <input type="text" class="form-input" value="Juan Pérez">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-input" value="juan.perez@email.com">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="form-label">Teléfono</label>
+                                            <input type="tel" class="form-input" value="+34 612 345 678">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="form-label">Dirección</label>
+                                            <input type="text" class="form-input" value="Calle Principal 123, Madrid">
+                                        </div>
+                                        
+                                        <button class="form-button">Guardar Cambios</button>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h2 style="font-size: 1.5em; margin-bottom: 20px;">Estadísticas</h2>
+                                    <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center;">
+                                        <div style="margin-bottom: 30px;">
+                                            <div style="font-size: 3em; color: #667eea; font-weight: bold;">24</div>
+                                            <div style="color: #666;">Pedidos Realizados</div>
+                                        </div>
+                                        <div style="margin-bottom: 30px;">
+                                            <div style="font-size: 3em; color: #667eea; font-weight: bold;">€486</div>
+                                            <div style="color: #666;">Total Gastado</div>
+                                        </div>
+                                        <div>
+                                            <div style="font-size: 3em; color: #667eea; font-weight: bold;">🍕</div>
+                                            <div style="color: #666;">Plato Favorito</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="annotation">
+                <div class="annotation-title">📝 Notas de Diseño</div>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Avatar del usuario con iniciales o foto de perfil</li>
+                    <li>Layout de 2 columnas: información personal y estadísticas</li>
+                    <li>Formulario editable con botón de guardar</li>
+                    <li>Panel de estadísticas con métricas relevantes</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <!-- Mockup 6: Admin Dashboard -->
+        <div class="mockup-section">
+            <h2 class="mockup-title">⚙️ 6. Panel de Administración - Gestión de Platos</h2>
+            
+            <div class="mockup-description">
+                <div class="annotation-title">💡 Descripción</div>
+                <p>Panel administrativo completo con sidebar de navegación y tabla CRUD para gestionar platos, ingredientes, menús y usuarios.</p>
+            </div>
+            
+            <div class="mockup-frame">
+                <div class="desktop-frame">
+                    <div class="browser-bar">
+                        <div class="browser-button red"></div>
+                        <div class="browser-button yellow"></div>
+                        <div class="browser-button green"></div>
+                        <div class="browser-url">🌐 localhost:5173/admin/pratos</div>
+                    </div>
+                    <div class="screen">
+                        <div class="navbar" style="background: #2c3e50;">
+                            <div class="navbar-brand">🛡️ Admin Panel</div>
+                            <div class="navbar-menu">
+                                <div class="navbar-item">Dashboard</div>
+                                <div class="navbar-item">🔔 Notificaciones (5)</div>
+                                <div class="navbar-item">👤 Admin</div>
+                                <div class="navbar-item">🚪 Cerrar Sesión</div>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-layout">
+                            <div class="admin-sidebar">
+                                <h3 style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2);">Gestión</h3>
+                                <div class="admin-sidebar-item" style="background: rgba(255,255,255,0.2);">
+                                    🍽️ Platos
+                                </div>
+                                <div class="admin-sidebar-item">
+                                    📋 Menús
+                                </div>
+                                <div class="admin-sidebar-item">
+                                    🥗 Ingredientes
+                                </div>
+                                <div class="admin-sidebar-item">
+                                    💰 Compras
+                                </div>
+                                <div class="admin-sidebar-item">
+                                    👥 Usuarios
+                                </div>
+                                <div class="admin-sidebar-item">
+                                    📊 Estadísticas
+                                </div>
+                                <div class="admin-sidebar-item">
+                                    ⚙️ Configuración
+                                </div>
+                            </div>
+                            
+                            <div class="admin-content">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                                    <h1 class="admin-header">Gestión de Platos</h1>
+                                    <button style="background: #667eea; color: white; padding: 12px 25px; border-radius: 8px; border: none; cursor: pointer; font-size: 1em;">
+                                        ➕ Nuevo Plato
+                                    </button>
+                                </div>
+                                
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Imagen</th>
+                                            <th>Nombre</th>
+                                            <th>Categoría</th>
+                                            <th>Precio</th>
+                                            <th>Stock</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>#001</td>
+                                            <td>🍕</td>
+                                            <td>Pizza Especial</td>
+                                            <td>Platos Principales</td>
+                                            <td>€12.99</td>
+                                            <td>25</td>
+                                            <td><span style="background: #d4edda; color: #155724; padding: 5px 10px; border-radius: 5px;">Activo</span></td>
+                                            <td>
+                                                <button class="action-button edit-button">✏️ Editar</button>
+                                                <button class="action-button delete-button">🗑️ Eliminar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#002</td>
+                                            <td>🍔</td>
+                                            <td>Hamburguesa Premium</td>
+                                            <td>Platos Principales</td>
+                                            <td>€9.99</td>
+                                            <td>18</td>
+                                            <td><span style="background: #d4edda; color: #155724; padding: 5px 10px; border-radius: 5px;">Activo</span></td>
+                                            <td>
+                                                <button class="action-button edit-button">✏️ Editar</button>
+                                                <button class="action-button delete-button">🗑️ Eliminar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#003</td>
+                                            <td>🥗</td>
+                                            <td>Ensalada Fresca</td>
+                                            <td>Entrantes</td>
+                                            <td>€7.99</td>
+                                            <td>32</td>
+                                            <td><span style="background: #d4edda; color: #155724; padding: 5px 10px; border-radius: 5px;">Activo</span></td>
+                                            <td>
+                                                <button class="action-button edit-button">✏️ Editar</button>
+                                                <button class="action-button delete-button">🗑️ Eliminar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#004</td>
+                                            <td>🍰</td>
+                                            <td>Tarta de Chocolate</td>
+                                            <td>Postres</td>
+                                            <td>€5.99</td>
+                                            <td>0</td>
+                                            <td><span style="background: #f8d7da; color: #721c24; padding: 5px 10px; border-radius: 5px;">Agotado</span></td>
+                                            <td>
+                                                <button class="action-button edit-button">✏️ Editar</button>
+                                                <button class="action-button delete-button">🗑️ Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="annotation">
+                <div class="annotation-title">📝 Notas de Diseño</div>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Layout de 2 columnas: sidebar de navegación y contenido principal</li>
+                    <li>Tabla responsive con todas las columnas relevantes</li>
+                    <li>Estados visuales con badges de color (activo/inactivo)</li>
+                    <li>Botones de acción (editar/eliminar) con colores diferenciados</li>
+                    <li>Navbar admin con notificaciones y opción de logout</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <!-- Mockup 7: Mobile Version -->
+        <div class="mockup-section">
+            <h2 class="mockup-title">📱 7. Versión Mobile - Menu</h2>
+            
+            <div class="mockup-description">
+                <div class="annotation-title">💡 Descripción</div>
+                <p>Diseño responsive optimizado para dispositivos móviles. Interfaz táctil con navegación intuitiva.</p>
+            </div>
+            
+            <div class="mockup-frame">
+                <div class="mobile-frame">
+                    <div class="mobile-notch"></div>
+                    <div class="screen">
+                        <div class="navbar" style="padding: 10px 15px;">
+                            <div style="font-size: 1.2em; font-weight: bold;">🍽️ Cafetería</div>
+                            <div style="font-size: 1.5em; cursor: pointer;">☰</div>
+                        </div>
+                        
+                        <div style="padding: 20px;">
+                            <h1 style="font-size: 1.8em; margin-bottom: 15px;">Menú</h1>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <input type="text" placeholder="🔍 Buscar..." style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                            </div>
+                            
+                            <div style="display: flex; gap: 10px; overflow-x: auto; margin-bottom: 20px;">
+                                <div style="min-width: 100px; padding: 10px 20px; background: #667eea; color: white; border-radius: 20px; text-align: center;">Todos</div>
+                                <div style="min-width: 100px; padding: 10px 20px; background: #f0f0f0; border-radius: 20px; text-align: center;">Entrantes</div>
+                                <div style="min-width: 100px; padding: 10px 20px; background: #f0f0f0; border-radius: 20px; text-align: center;">Principales</div>
+                                <div style="min-width: 100px; padding: 10px 20px; background: #f0f0f0; border-radius: 20px; text-align: center;">Postres</div>
+                            </div>
+                            
+                            <div class="card" style="margin-bottom: 15px;">
+                                <div style="display: flex; gap: 15px;">
+                                    <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 2em;">🍕</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 1.1em; font-weight: bold; margin-bottom: 5px;">Pizza Especial</div>
+                                        <div style="color: #666; font-size: 0.9em; margin-bottom: 8px;">Ingredientes frescos</div>
+                                        <div style="font-size: 1.3em; color: #667eea; font-weight: bold;">€12.99</div>
+                                    </div>
+                                    <div style="display: flex; align-items: center;">
+                                        <button style="background: #667eea; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.5em; cursor: pointer;">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card" style="margin-bottom: 15px;">
+                                <div style="display: flex; gap: 15px;">
+                                    <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 2em;">🍔</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 1.1em; font-weight: bold; margin-bottom: 5px;">Hamburguesa Premium</div>
+                                        <div style="color: #666; font-size: 0.9em; margin-bottom: 8px;">Carne de calidad</div>
+                                        <div style="font-size: 1.3em; color: #667eea; font-weight: bold;">€9.99</div>
+                                    </div>
+                                    <div style="display: flex; align-items: center;">
+                                        <button style="background: #667eea; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.5em; cursor: pointer;">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <div style="display: flex; gap: 15px;">
+                                    <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 2em;">🥗</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 1.1em; font-weight: bold; margin-bottom: 5px;">Ensalada Fresca</div>
+                                        <div style="color: #666; font-size: 0.9em; margin-bottom: 8px;">Vegetales orgánicos</div>
+                                        <div style="font-size: 1.3em; color: #667eea; font-weight: bold;">€7.99</div>
+                                    </div>
+                                    <div style="display: flex; align-items: center;">
+                                        <button style="background: #667eea; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.5em; cursor: pointer;">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating Cart Button -->
+                        <div style="position: fixed; bottom: 20px; right: 20px; background: #667eea; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5em; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer;">
+                            🛒
+                            <span style="position: absolute; top: -5px; right: -5px; background: #e74c3c; width: 25px; height: 25px; border-radius: 50%; font-size: 0.7em; display: flex; align-items: center; justify-content: center;">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="annotation">
+                <div class="annotation-title">📝 Notas de Diseño</div>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Frame de iPhone con notch para simular dispositivo real</li>
+                    <li>Cards horizontales optimizadas para pantalla pequeña</li>
+                    <li>Filtros con scroll horizontal (chips)</li>
+                    <li>Botón flotante de carrito con contador de items</li>
+                    <li>Touch-friendly con botones grandes para añadir productos</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <!-- Component Library -->
+        <div class="mockup-section">
+            <h2 class="mockup-title">🧩 8. Librería de Componentes</h2>
+            
+            <div class="mockup-description">
+                <div class="annotation-title">💡 Descripción</div>
+                <p>Componentes reutilizables que conforman el sistema de diseño del proyecto.</p>
+            </div>
+            
+            <div class="mockup-frame">
+                <h3 style="margin-bottom: 20px;">Botones</h3>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 40px;">
+                    <button style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 30px; border-radius: 8px; border: none; cursor: pointer; font-size: 1em;">
+                        Botón Principal
+                    </button>
+                    <button style="background: white; color: #667eea; padding: 12px 30px; border-radius: 8px; border: 2px solid #667eea; cursor: pointer; font-size: 1em;">
+                        Botón Secundario
+                    </button>
+                    <button style="background: #e74c3c; color: white; padding: 12px 30px; border-radius: 8px; border: none; cursor: pointer; font-size: 1em;">
+                        Botón Peligro
+                    </button>
+                    <button style="background: #27ae60; color: white; padding: 12px 30px; border-radius: 8px; border: none; cursor: pointer; font-size: 1em;">
+                        Botón Éxito
+                    </button>
+                </div>
+                
+                <h3 style="margin-bottom: 20px;">Campos de Formulario</h3>
+                <div style="max-width: 400px; margin-bottom: 40px;">
+                    <div class="form-group">
+                        <label class="form-label">Campo de Texto Normal</label>
+                        <input type="text" class="form-input" placeholder="Escribe aquí...">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Campo con Error</label>
+                        <input type="text" class="form-input" style="border-color: #e74c3c;" placeholder="Campo requerido">
+                        <div style="color: #e74c3c; font-size: 0.9em; margin-top: 5px;">⚠️ Este campo es obligatorio</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Campo Deshabilitado</label>
+                        <input type="text" class="form-input" disabled value="No editable" style="background: #f5f5f5; cursor: not-allowed;">
+                    </div>
+                </div>
+                
+                <h3 style="margin-bottom: 20px;">Badges y Tags</h3>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px;">
+                    <span style="background: #d4edda; color: #155724; padding: 5px 15px; border-radius: 15px; font-size: 0.9em;">✓ Activo</span>
+                    <span style="background: #f8d7da; color: #721c24; padding: 5px 15px; border-radius: 15px; font-size: 0.9em;">✕ Inactivo</span>
+                    <span style="background: #fff3cd; color: #856404; padding: 5px 15px; border-radius: 15px; font-size: 0.9em;">⚠ Pendiente</span>
+                    <span style="background: #d1ecf1; color: #0c5460; padding: 5px 15px; border-radius: 15px; font-size: 0.9em;">ℹ Info</span>
+                </div>
+                
+                <h3 style="margin-bottom: 20px;">Alertas</h3>
+                <div style="max-width: 600px;">
+                    <div style="background: #d4edda; border-left: 4px solid #28a745; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>✓ Éxito:</strong> La operación se completó correctamente.
+                    </div>
+                    <div style="background: #f8d7da; border-left: 4px solid #dc3545; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>✕ Error:</strong> Ocurrió un problema al procesar la solicitud.
+                    </div>
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>⚠ Advertencia:</strong> Revisa los datos antes de continuar.
+                    </div>
+                    <div style="background: #d1ecf1; border-left: 4px solid #17a2b8; padding: 15px; border-radius: 5px;">
+                        <strong>ℹ Información:</strong> Ten en cuenta esta información importante.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Responsive Breakpoints -->
+        <div class="mockup-section">
+            <h2 class="mockup-title">📐 9. Breakpoints Responsive</h2>
+            
+            <div class="mockup-frame">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #667eea; color: white;">
+                            <th style="padding: 15px; text-align: left;">Dispositivo</th>
+                            <th style="padding: 15px; text-align: left;">Breakpoint</th>
+                            <th style="padding: 15px; text-align: left;">Columnas Grid</th>
+                            <th style="padding: 15px; text-align: left;">Características</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                            <td style="padding: 15px;">📱 Mobile</td>
+                            <td style="padding: 15px;">< 576px</td>
+                            <td style="padding: 15px;">1 columna</td>
+                            <td style="padding: 15px;">Menú hamburguesa, cards verticales</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                            <td style="padding: 15px;">📱 Mobile L</td>
+                            <td style="padding: 15px;">576px - 768px</td>
+                            <td style="padding: 15px;">1-2 columnas</td>
+                            <td style="padding: 15px;">Layout flexible, botones grandes</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                            <td style="padding: 15px;">💻 Tablet</td>
+                            <td style="padding: 15px;">768px - 992px</td>
+                            <td style="padding: 15px;">2-3 columnas</td>
+                            <td style="padding: 15px;">Sidebar colapsable, grid adaptativo</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                            <td style="padding: 15px;">🖥️ Desktop</td>
+                            <td style="padding: 15px;">992px - 1200px</td>
+                            <td style="padding: 15px;">3-4 columnas</td>
+                            <td style="padding: 15px;">Layout completo, sidebar fijo</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px;">🖥️ Desktop XL</td>
+                            <td style="padding: 15px;">> 1200px</td>
+                            <td style="padding: 15px;">4+ columnas</td>
+                            <td style="padding: 15px;">Máximo aprovechamiento del espacio</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 15px; margin-top: 60px; text-align: center;">
+            <h2 style="margin-bottom: 15px;">📄 Documentación Completa</h2>
+            <p style="margin-bottom: 20px; opacity: 0.9;">
+                Estas maquetas representan el diseño visual del Sistema de Gestión para Cafetería.<br>
+                Proyecto desarrollado con React + Vite
+            </p>
+            <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.3);">
+                <p>🔗 <a href="https://github.com/Marcelrobi1/cafetaria-frontend" style="color: white;">github.com/Marcelrobi1/cafetaria-frontend</a></p>
+                <p style="margin-top: 10px; opacity: 0.8;">Mayo 2026 - Versión 1.0</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Script para imprimir como PDF
+        if (window.location.search.includes('print')) {
+            window.onload = function() {
+                window.print();
+            }
+        }
+    </script>
+</body>
+</html>
