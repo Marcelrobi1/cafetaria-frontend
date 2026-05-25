@@ -51,7 +51,7 @@
   margin: 0;
 }
 
-/* Centralizamos los estilos de listas y enlaces aquí */
+/* Centralizados os estilos de listas e links */
 .footer-column ul li span, 
 .footer-column p, 
 .social-links a {
@@ -61,19 +61,19 @@
   margin-bottom: 15px;
   cursor: pointer;
   line-height: 1.6;
-  text-decoration: none; /* Elimina la línea azul de los enlaces */
+  text-decoration: none; /* Elimina a linha sublinhada dos links */
   display: inline-block;
   transition: color 0.3s ease;
 }
 
 .footer-column ul li span:hover, 
 .social-links a:hover {
-  color: #d4b499; /* Efecto dorado al pasar el ratón */
+  color: #d4b499; /* Efeito dourado quando hover */
 }
 
 .social-links {
   display: flex;
-  flex-direction: column; /* Apila las redes sociales verticalmente */
+  flex-direction: column; /* Organizaçao das contas das redes sociais (vertical) */
   gap: 5px;
 }
 
@@ -94,39 +94,35 @@
   letter-spacing: 1px;
 }
 
-/* =========================================
-   MEDIA QUERIES - TABLETS (Múltiples Filas)
-   ========================================= */
+/* Tablets */
 @media screen and (max-width: 900px) {
   .footer-container {
-    flex-wrap: wrap; /* Permite que las columnas pasen a una nueva línea si no caben */
+    flex-wrap: wrap; /* Permite que as colunas se dividam caso nao caibam numa coluna apenas */
     gap: 50px;
   }
   
   .footer-brand {
-    flex: 1 1 100%; /* La marca ocupa el 100% del ancho arriba */
+    flex: 1 1 100%; /* A marca ocupa a totalidade da largura superior */
     margin-bottom: 0;
   }
 
   .footer-brand p {
-    max-width: 100%; /* Quita la restricción de ancho para aprovechar la pantalla */
+    max-width: 100%; /* Remove a restriçao de tela (largura) para se aproveitar ao maximo */
   }
 
   .footer-column {
-    flex: 1 1 calc(33.333% - 50px); /* Las otras 3 columnas se dividen equitativamente debajo */
+    flex: 1 1 calc(33.333% - 50px); /* Divide se as 3 colunas de maneira equitativa */
   }
 }
 
-/* =========================================
-   MEDIA QUERIES - MÓVILES (Una sola columna)
-   ========================================= */
+/* Telemoveis */
 @media screen and (max-width: 600px) {
   .footer-section {
-    padding: 60px 20px 20px; /* Reduce el margen lateral en teléfonos */
+    padding: 60px 20px 20px; /* Reduz a margem lateral em telemoveis */
   }
 
   .footer-container {
-    flex-direction: column; /* Fuerza todo a una sola columna vertical */
+    flex-direction: column; /* Força tudo a ficar numa só coluna */
     gap: 40px;
   }
 

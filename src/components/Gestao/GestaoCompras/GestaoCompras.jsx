@@ -7,7 +7,7 @@ function GestaoCompras() {
   const [loading, setLoading] = useState(true);
   const [erroValidacao, setErroValidacao] = useState('');
 
-  // Estados para el Formulario de Edición
+  // Formulario de edição de compras
   const [editingId, setEditingId] = useState(null);
   const [clientUsername, setClientUsername] = useState('');
   const [dishName, setDishName] = useState('');
@@ -33,7 +33,7 @@ function GestaoCompras() {
 
       if (response.ok) {
         const data = await response.json();
-        // Ordenamos por fecha de reserva (las más próximas primero)
+        // Ordenamos por data da reserva 
         const comprasOrdenadas = data.sort((a, b) => new Date(a.date) - new Date(b.date));
         setCompras(comprasOrdenadas);
       } else {
@@ -46,7 +46,7 @@ function GestaoCompras() {
     }
   };
 
-  // --- LÓGICA DE EDICIÓN (PUT) ---
+  // Logica de edição
   const handleSubmitEdicao = async (e) => {
     e.preventDefault();
     setErroValidacao('');
@@ -76,7 +76,7 @@ function GestaoCompras() {
     }
   };
 
-  // --- LÓGICA DE ELIMINACIÓN (DELETE) ---
+  // Logica de delete
   const handleDelete = async (id) => {
     if (!window.confirm("Tem a certeza que deseja cancelar e apagar esta reserva?")) return;
 
@@ -102,7 +102,7 @@ function GestaoCompras() {
     setClientUsername(compra.clientUsername);
     setDishName(compra.dishName);
     
-    // Convertimos la fecha al formato que necesita el <input type="date"> (YYYY-MM-DD)
+    // Convertemos a data para o formato necessario (YYYY-MM-DD)
     if (compra.date) {
       const dateObj = new Date(compra.date);
       const formattedDate = dateObj.toISOString().split('T')[0];
@@ -131,7 +131,7 @@ function GestaoCompras() {
     });
   };
 
-  // --- VERIFICACIÓN DE SEGURIDAD (RBAC) ---
+  // Gestão de segurança
   const userType = localStorage.getItem('userType');
 
   if (userType !== 'ADMIN') {
@@ -236,8 +236,7 @@ function GestaoCompras() {
                   value={clientUsername} 
                   onChange={(e) => setClientUsername(e.target.value)} 
                   required 
-                  /* Lo dejamos editable en caso de que el admin necesite reasignar la compra, 
-                     o puedes poner readOnly={true} si el username no debe cambiar */
+                  /* Deixamos este campo editavel para caso o admin precise de reatribuir uma compra */
                 />
               </div>
 

@@ -4,10 +4,10 @@ import './GestaoMenu.css';
 function GestaoMenus() {
   const [vistaActual, setVistaActual] = useState('lista');
   const [menus, setMenus] = useState([]);
-  const [pratos, setPratos] = useState([]); // Listado unificado de todos los platos reales
+  const [pratos, setPratos] = useState([]); 
   const [loading, setLoading] = useState(true);
   
-  // Estados del Formulario
+  // Formulario
   const [editingId, setEditingId] = useState(null);
   const [dataMenu, setDataMenu] = useState('');
   const [meatDish, setMeatDish] = useState('');
@@ -29,7 +29,7 @@ function GestaoMenus() {
   const fetchDadosIniciais = async () => {
     setLoading(true);
     try {
-      // Descargamos los menús planeados y los platos registrados
+      // Descarregar menus planeados e pratos registados 
       const [resMenus, resPratos] = await Promise.all([
         fetch(`${BASE_URL}/menus`, { headers: getAuthHeaders() }),
         fetch(`${BASE_URL}/dishes`, { headers: getAuthHeaders() })
@@ -39,10 +39,10 @@ function GestaoMenus() {
         const menusData = await resMenus.json();
         const pratosData = await resPratos.json();
         
-        // Ordenamos cronológicamente los menús por fecha
+        // Ordenamos cronológicamente os menus por data
         setMenus(menusData.sort((a, b) => new Date(a.date) - new Date(b.date)));
         
-        // Guardamos todos los platos del servidor sin filtros restrictivos
+        // Guardamos os pratos no server sem filtros
         setPratos(pratosData);
       } else {
         setErroValidacao('Erro ao carregar dados do servidor.');

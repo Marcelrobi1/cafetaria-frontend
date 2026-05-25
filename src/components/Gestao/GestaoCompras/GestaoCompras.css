@@ -1,7 +1,7 @@
-/* Reutiliza la animación y estructuras base de GestaoPratos */
+/* Reutiliza a animacão e estruturas base de GestaoPratos */
 @import '../GestaoPratos/GestaoPratos.css'; 
 
-/* --- BADGES DE ESTADO (Etiquetas de color) --- */
+/* Etiquetas de cor */
 .status-badge {
   padding: 6px 12px;
   border-radius: 20px;
@@ -34,7 +34,7 @@
   color: white;
 }
 
-/* --- ESTILOS DEL MODAL DE COMPRAS --- */
+/* Estilo das compras */
 .purchase-modal {
   max-width: 600px !important;
   padding: 0 !important;

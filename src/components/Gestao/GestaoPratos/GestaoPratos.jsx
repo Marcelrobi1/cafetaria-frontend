@@ -8,18 +8,16 @@ function GestaoPratos() {
   const [ingredientes, setIngredientes] = useState([]); 
   const [loading, setLoading] = useState(true);
   
-  // Nuevos estados para la imagen
   const [imagemFile, setImagemFile] = useState(null);
   const [imagemPreview, setImagemPreview] = useState('');
   const [uploading, setUploading] = useState(false);
 
   const fileInputRef = useRef(null);
 
-  // Estados del Formulario (Adaptados 100% al backend)
   const [editingId, setEditingId] = useState(null);
   const [nome, setNome] = useState('');
   const [preco, setPreco] = useState('');
-  const [ingredientesSelecionados, setIngredientesSelecionados] = useState([]); // Guardará Nombres, no IDs
+  const [ingredientesSelecionados, setIngredientesSelecionados] = useState([]); 
   const [erroValidacao, setErroValidacao] = useState('');
 
   const BASE_URL = 'https://siws.ufp.pt/lwlc/api';
@@ -54,7 +52,7 @@ function GestaoPratos() {
     }
   };
 
-  // Manejamos la selección de ingredientes usando el NOMBRE
+  // Gerimos a seleção de ingredientes utilizando o nome 
   const handleIngredientToggle = (nomeIngrediente) => {
     setIngredientesSelecionados(prev => 
       prev.includes(nomeIngrediente) 
@@ -73,24 +71,21 @@ const handleSubmit = async (e) => {
     setUploading(true);
     setErroValidacao('');
 
-    // 1. Creamos el objeto con los datos del plato
+    // Criado objeto com os dados do prato
     const dishData = {
       name: nome,
       price: parseFloat(preco),
       ingredientNames: ingredientesSelecionados 
     };
 
-    // 2. Preparamos el FormData (Formulario Multiparte)
+    // Preparado o Form
     const formData = new FormData();
     
-    // IMPORTANTE: El Swagger exige que la parte 'dish' sea un JSON expuesto.
-    // Para que Java/Spring Boot o el backend lo lea bien en un multipart, 
-    // lo enviamos como un Blob (Archivo de texto en memoria) de tipo application/json.
     formData.append('dish', new Blob([JSON.stringify(dishData)], {
       type: 'application/json'
     }));
 
-    // 3. Añadimos la imagen si el usuario seleccionó una
+    // Adicionamos imagem caso o utilizador tiver selecionado uma
     if (imagemFile) {
       formData.append('image', imagemFile);
     }
@@ -99,19 +94,17 @@ const handleSubmit = async (e) => {
       const url = editingId ? `${BASE_URL}/dishes/${editingId}` : `${BASE_URL}/dishes`;
       const method = editingId ? 'PUT' : 'POST';
 
-      // 4. Preparamos los headers de Autorización
+      // Autorização
       const token = localStorage.getItem('token');
       const headers = {};
       if (token) {
         headers['Authorization'] = `Bearer ${token}`;
       }
-      // ¡ATENCIÓN! NO ponemos 'Content-Type': 'application/json' ni 'multipart/form-data'.
-      // El navegador lo detecta automáticamente al pasarle el objeto formData y crea los boundaries.
 
       const response = await fetch(url, {
         method: method,
         headers: headers,
-        body: formData // Enviamos el paquete completo
+        body: formData //
       });
 
       if (!response.ok) {
@@ -119,7 +112,6 @@ const handleSubmit = async (e) => {
         throw new Error(`Erro do servidor: ${errorText || response.status}`);
       }
 
-      // Si todo fue bien, recargamos la lista y limpiamos
       fetchDadosIniciais(); 
       resetForm();
 
@@ -158,7 +150,7 @@ const handleSubmit = async (e) => {
     setNome(prato.name);
     setPreco(prato.price);
     setIngredientesSelecionados(prato.ingredientNames || []);
-    setImagemPreview(prato.imageUrl || ''); // Mostramos la imagen actual si existe
+    setImagemPreview(prato.imageUrl || ''); // Mostramos a imagem atual se tiver
     setImagemFile(null);
     setVistaActual('formulario');
   };
@@ -281,7 +273,7 @@ const resetForm = () => {
                       <label key={ing.id} className="checkbox-label">
                         <input 
                           type="checkbox" 
-                          // Ahora comprobamos si el NOMBRE está en el array
+                          // Verificar se o nome está no array
                           checked={ingredientesSelecionados.includes(ing.name)}
                           onChange={() => handleIngredientToggle(ing.name)}
                         />
@@ -307,12 +299,8 @@ const resetForm = () => {
                 />
               </div>
 
-              {/* Se eliminó el toggle de disponibilidad porque el backend no lo soporta */}
-
 <div className="form-group">
                 <label>Imagem do Prato</label>
-                
-                {/* Input oculto para seleccionar el archivo */}
                 <input 
                   type="file" 
                   id="imageInput"
@@ -323,7 +311,6 @@ const resetForm = () => {
                     const file = e.target.files[0];
                     if (file) {
                       setImagemFile(file);
-                      // Ya no necesitamos crear el ObjectURL para el preview
                     }
                   }}
                 />

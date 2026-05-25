@@ -3,7 +3,7 @@ import { useCart } from '../../context/CartContext';
 import DishImage from '../../components/DishImage/DishImage';
 import './CartSidebar.css';
 
-// Icono SVG personalizado que se parece al de la imagen (una cesta de compra moderna)
+// Icon Cesta de Compras
 const CartIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M7.1 19.3L16.9 19.3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -59,7 +59,7 @@ function CartSidebar({ isOpen, onClose }) {
 
       const resultados = await Promise.all(promesasDeCompra);
       
-      // MAGIA DE DIAGNÓSTICO: Vamos extrair o erro exato do servidor para cada prato
+      // Extrair do erro exato do servidor para cada prato
       let errosEncontrados = [];
       for (let i = 0; i < resultados.length; i++) {
         const res = resultados[i];
@@ -89,10 +89,10 @@ function CartSidebar({ isOpen, onClose }) {
 
   return (
     <>
-      {/* Overlay con efecto de desenfoque de cristal (Glassmorphism) */}
+      {/* Overlay com efeito translucido e blur */}
       <div className="cart-overlay-glass" onClick={onClose}></div>
       
-      {/* Panel lateral del carrito */}
+      {/* Painel lateral do carrinho */}
       <div className="cart-sidebar-premium">
         <div className="cart-header-premium">
           <div className="cart-title-group">

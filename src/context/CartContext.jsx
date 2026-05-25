@@ -3,11 +3,11 @@ import { createContext, useState, useEffect, useContext } from 'react';
 // Contexto
 const CartContext = createContext();
 
-// Hook personalizado para usar o carrito facilmente
+// Hook personalizado para usar o carrinho facilmente
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-  // Inicializamos o carrito buscando no localStorage
+  // Inicializamos o carrinho buscando no localStorage
   const [cart, setCart] = useState(() => {
     const carrinhoGuardado = localStorage.getItem('carrinho');
     return carrinhoGuardado ? JSON.parse(carrinhoGuardado) : [];

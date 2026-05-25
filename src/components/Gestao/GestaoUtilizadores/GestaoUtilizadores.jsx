@@ -26,7 +26,7 @@ function GestaoUtilizadores() {
     'Content-Type': 'application/json'
   });
 
-  // --- MÉTODOS DA API ---
+  // Metodos da API
   const fetchUsers = async () => {
     setLoading(true);
     try {
@@ -62,8 +62,7 @@ function GestaoUtilizadores() {
     const url = editingUser ? `${BASE_URL}/users/${editingUser.id}` : `${BASE_URL}/users`;
     const method = editingUser ? 'PUT' : 'POST';
 
-    // PROGRAMACIÓN DEFENSIVA: 
-    // Si estamos editando y dejaron la contraseña en blanco, NO la enviamos en el payload.
+    // Se estivermos a editar e a password estiver em branco nao sera enviada na payload.
     const payload = {
       username: formData.username,
       type: formData.type,
@@ -93,7 +92,6 @@ function GestaoUtilizadores() {
     }
   };
 
-  // --- CONTROLADORES DO MODAL ---
   const openAddModal = () => {
     setEditingUser(null);
     setFormData({ username: '', password: '', type: 'CLIENT', balance: 0 });
@@ -113,7 +111,7 @@ function GestaoUtilizadores() {
 
   const closeModal = () => setIsModalOpen(false);
 
-  // --- FUNÇÕES DE RENDERIZAÇÃO VISUAL ---
+  // Funções de renderização visual
   const getRoleBadge = (type) => {
     switch(type) {
       case 'ADMIN': return <span className="role-badge role-admin">Administrador</span>;
@@ -216,7 +214,6 @@ function GestaoUtilizadores() {
         )}
       </div>
 
-      {/* MODAL COM DESIGN PREMIUM */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content users-modal" onClick={(e) => e.stopPropagation()}>

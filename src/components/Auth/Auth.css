@@ -1,7 +1,8 @@
 /* src/components/Auth/Auth.css */
 .auth-page-container {
   min-height: 100vh;
-  background-color: #f4f1ee; /* Fondo bege característico de la app */
+  background-color: #f4f1ee; /* Bege caracteristico da pagina */
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +22,7 @@
   font-weight: bold;
   letter-spacing: 1px;
   cursor: pointer;
-  color: #0b2b40; /* Azul escuro Early */
+  color: #0b2b40; /* Azul Early */
   text-transform: uppercase;
   transition: opacity 0.3s;
 }
@@ -35,7 +36,7 @@
   width: 100%;
   max-width: 1000px;
   background-color: #ffffff;
-  border-radius: 12px; /* Ligeramente más redondeado */
+  border-radius: 12px; 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
@@ -83,7 +84,7 @@
   font-family: 'Georgia', serif;
   font-size: 2.2rem;
   font-weight: normal;
-  color: #0b2b40; /* Azul escuro Early */
+  color: #0b2b40; 
   margin: 0 0 15px 0;
 }
 
@@ -95,7 +96,7 @@
   margin-bottom: 35px;
 }
 
-/* Feedbacks de Status */
+/* Feedback do login */
 .auth-status-error {
   background-color: #fdeaea;
   color: #d9534f;
@@ -151,13 +152,13 @@
 }
 
 .form-group input:focus {
-  border-bottom-color: #0b2b40; /* Subrayado azul escuro al escribir */
+  border-bottom-color: #0b2b40; /* Sublinhado */
 }
 
 /* Botão de Submit */
 .auth-submit-btn {
   width: 100%;
-  background-color: #0b2b40; /* Color principal */
+  background-color: #0b2b40; /* Cor principal */
   color: #ffffff;
   border: none;
   padding: 16px;
@@ -173,7 +174,8 @@
 }
 
 .auth-submit-btn:hover:not(:disabled) {
-  background-color: #8c7355; /* Acento dorado en hover */
+  background-color: #8c7355; /* Hover muda ligeiramente a cor */
+
 }
 
 .auth-submit-btn:disabled {
@@ -204,13 +206,13 @@
   text-decoration: underline;
 }
 
-/* Responsividade Básica (Responsive) */
+/* Responsividade Básica */
 @media (max-width: 850px) {
   .auth-card {
     flex-direction: column;
   }
   .auth-image-side {
-    display: none; /* Esconde la imagen en móviles para dar prioridad al formulario */
+    display: none; /* Esconde a imagem e da prioridade a ao formulario em ecras menores */
   }
   .auth-form-side {
     padding: 40px 20px;

@@ -50,7 +50,7 @@
 }
 .btn-add-primary:hover { background-color: #52453a; }
 
-/* Tabla */
+/* Tabela */
 .table-card {
   background: white;
   border-radius: 12px;
@@ -131,7 +131,7 @@
   color: #333;
 }
 
-/* Custom Toggle Falso (Visual para la tabla) */
+/* Custom Toggle Falso (Visual para a tabela) */
 .status-toggle {
   width: 40px;
   height: 20px;
@@ -153,7 +153,7 @@
 }
 .status-toggle.active .toggle-circle { left: 22px; }
 
-/* Acciones */
+/* Ações */
 .actions-cell {
   display: flex;
   gap: 15px;
@@ -220,7 +220,7 @@
   cursor: pointer;
 }
 
-/* Toggle Switch Real (Para el form) */
+/* Toggle Switch Formulario */
 .toggle-group {
   display: flex;
   justify-content: space-between;
@@ -300,7 +300,7 @@ input:checked + .slider:before { transform: translateX(20px); }
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000; /* Fondo oscuro para resaltar la foto */
+  background-color: #000; /* Fundo escuro para que a foto se destaque */
 }
 
 .preview-image {
@@ -334,51 +334,49 @@ td .prato-image {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* =========================================
-   MEDIA QUERIES - MÓVILES Y TABLETS (Max 768px)
-   ========================================= */
+/* Telemoveis e Tablets */
 @media (max-width: 768px) {
-  /* 1. Cabeceras del Panel: Apilar título y botón */
+  /* Header */
   .admin-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
   }
   .admin-header .btn-add-primary {
-    width: 100%; /* Botón de ancho completo para pulgares */
+    width: 100%; /* Botão com largura total */
     text-align: center;
   }
 
-  /* 2. Tablas: Magia de Scroll Horizontal */
+  /* Tabela - Scroll Horizontal */
   .table-card {
-    overflow-x: auto; /* Permite deslizar la tabla hacia los lados */
+    overflow-x: auto; /* Permite deslizar a tabela para os lados */
     -webkit-overflow-scrolling: touch;
-    border-radius: 0; /* Opcional: quita bordes redondos en móvil */
+    border-radius: 0; /* Remove bordas arredondadas */
     border-left: none;
     border-right: none;
   }
   .admin-table {
-    min-width: 700px; /* Obliga a la tabla a mantener su tamaño original */
+    min-width: 700px; /* Força tabela a manter tamanho original */
   }
 
-  /* 3. Formularios y Modales (Usuarios y Platos) */
+  /* Formulario (usuarios e pratos) */
   .form-group-row {
-    flex-direction: column; /* Apilar inputs que estaban lado a lado */
+    flex-direction: column; /* Empilhar o que estava lado a lado */
     gap: 0;
   }
   .modal-content, .users-modal, .purchase-modal {
     width: 95% !important;
     margin: 20px auto;
     max-height: 90vh;
-    overflow-y: auto; /* Scroll interno si el modal es muy alto */
+    overflow-y: auto; 
   }
   .modal-header, .modal-form-body {
     padding: 15px 20px;
   }
   
-  /* 4. Grid de información en Compras */
+  /* Quadro de informação - Compras */
   .purchase-info-grid {
-    grid-template-columns: 1fr; /* Una sola columna en lugar de tres */
+    grid-template-columns: 1fr; /* Uma coluna enves de tres*/
     gap: 15px;
   }
   .status-buttons-group {
@@ -386,51 +384,49 @@ td .prato-image {
   }
 }
 
-/* =========================================
-   MEDIA QUERIES - MÓVILES Y TABLETS (Max 768px)
-   ========================================= */
+/* Media - Telemoveis e Tablets */
 @media (max-width: 768px) {
-  /* 1. Cabeceras del Panel: Apilar título y botón */
+  /* Header */
   .admin-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
   }
   .admin-header .btn-add-primary {
-    width: 100%; /* Botón de ancho completo para pulgares */
+    width: 100%; /*Botão largura total*/
     text-align: center;
   }
 
-  /* 2. Tablas: Magia de Scroll Horizontal */
+  /* Tabela Scroll Horizontal */
   .table-card {
-    overflow-x: auto; /* Permite deslizar la tabla hacia los lados */
+    overflow-x: auto; /* Permite deslizar a tabela para os lados*/
     -webkit-overflow-scrolling: touch;
     border-radius: 0; 
     border-left: none;
     border-right: none;
   }
   .admin-table {
-    min-width: 700px; /* Obliga a la tabla a mantener su tamaño original */
+    min-width: 700px; /* Obriga a tabela a manter o tamanho original */
   }
 
-  /* 3. Formularios y Modales */
+  /* Formulario */
   .form-group-row {
     flex-direction: column;
     gap: 0;
   }
   
-  /* NUEVO: Achicar el padding de la tarjeta del formulario en móviles */
+  /* Reduzir o espaçamento interno do formulario */
   .form-card-centered {
     padding: 25px 20px;
   }
 
-  /* NUEVO: Pasar la cuadrícula de ingredientes de 2 columnas a 1 columna */
+  /* Grelha de ingredientes passa de 2 para 1 coluna */
   .ingredients-selector {
     grid-template-columns: 1fr;
-    max-height: 250px; /* Le damos más altura en móvil para poder hacer scroll cómodo */
+    max-height: 250px; /* Aumenta a altura para facilitar a navegaçao em dispositivos moveis */
   }
 
-  /* NUEVO: Reducir un poco el tamaño de las fotos en la tabla */
+  /* Reduzir o tamnho das imagens na tabela */
   td .prato-image, .item-thumbnail {
     width: 60px;
     height: 60px;
