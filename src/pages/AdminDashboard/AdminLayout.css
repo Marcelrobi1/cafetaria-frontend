@@ -1,12 +1,15 @@
 .admin-layout-container {
   display: flex;
   min-height: 100vh;
-  padding-top: 85px; /* Espacio para la barra superior */
+  padding-top: 85px; /* Espacio para la barra pública (Navbar) superior */
   background-color: #faf9f8;
   font-family: Arial, sans-serif;
+  position: relative;
 }
 
-/* SIDEBAR */
+/* =========================================
+   SIDEBAR (Escritorio)
+   ========================================= */
 .admin-sidebar {
   width: 260px;
   background-color: #fff;
@@ -15,9 +18,11 @@
   flex-direction: column;
   padding: 30px 0;
   position: sticky;
-  top: 0;
-  height: 100vh;
+  top: 85px; /* Se queda pegado debajo de la Navbar pública */
+  height: calc(100vh - 85px);
   box-sizing: border-box;
+  z-index: 100;
+  transition: left 0.3s ease-in-out;
 }
 
 .sidebar-brand {
@@ -83,42 +88,101 @@
   margin-top: auto;
 }
 
-/* CONTENIDO PRINCIPAL */
+/* =========================================
+   CONTENIDO PRINCIPAL
+   ========================================= */
 .admin-main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-}
-
-.top-bar-placeholder {
-  height: 70px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0 50px;
-}
-
-.user-profile-mini {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #333;
-}
-
-.avatar-circle {
-  width: 35px;
-  height: 35px;
-  background-color: #e0dcd5;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 }
 
 .content-wrapper {
-  padding: 20px 50px 50px 50px;
+  padding: 40px 50px 50px 50px;
   flex: 1;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   ELEMENTOS MÓVILES (Ocultos en PC)
+   ========================================= */
+.admin-mobile-header {
+  display: none; /* Oculto por defecto en escritorio */
+}
+
+.admin-sidebar-overlay {
+  display: none;
+}
+
+/* =========================================
+   MEDIA QUERIES - TABLETS Y MÓVILES
+   ========================================= */
+@media screen and (max-width: 850px) {
+  
+  .admin-layout-container {
+    flex-direction: column; /* Apila el contenido verticalmente */
+  }
+
+  /* 1. Transformamos la Barra Lateral en un "Cajón Oculto" */
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Escondida fuera de la pantalla a la izquierda */
+    height: 100vh; /* Ocupa toda la pantalla */
+    z-index: 1050; /* Por encima de todo, incluso de la Navbar pública */
+    box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+  }
+
+  /* Cuando React añade la clase "open", la barra entra a la pantalla */
+  .admin-sidebar.open {
+    left: 0; 
+  }
+
+  /* 2. El fondo oscuro para resaltar el menú lateral */
+  .admin-sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 1040;
+  }
+
+  /* 3. La cabecera especial del administrador para móviles */
+  .admin-mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #eaeaea;
+    position: sticky;
+    top: 85px; /* Se queda pegada debajo de tu Navbar global */
+    z-index: 90;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+  }
+
+  .mobile-brand h3 {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    color: #0b2b40;
+    font-size: 1.2rem;
+  }
+
+  .admin-hamburger {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #0b2b40;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  /* 4. Ajustes de espacio en la zona de trabajo (formularios/tablas) */
+  .content-wrapper {
+    padding: 20px 15px; /* Reducimos drásticamente el margen en móviles para ganar espacio */
+  }
 }

@@ -207,3 +207,41 @@
   letter-spacing: 1px;
   cursor: pointer;
 }
+
+/* --- CLASE PARA EL FORMULARIO DE INGREDIENTES --- */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* =========================================
+   MEDIA QUERIES - GESTIÓN DE INGREDIENTES
+   ========================================= */
+@media screen and (max-width: 768px) {
+  /* 1. Pasar el selector de Tipo y Alérgeno a 1 sola columna */
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  /* 2. Activar scroll horizontal para la tabla de ingredientes */
+  .table-card {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .admin-table {
+    min-width: 650px;
+  }
+
+  /* 3. Asegurar que los botones de acción se alinean bien */
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .btn-add-primary {
+    width: 100%;
+    text-align: center;
+  }
+}

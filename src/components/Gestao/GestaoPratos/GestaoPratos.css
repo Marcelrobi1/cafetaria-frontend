@@ -385,3 +385,54 @@ td .prato-image {
     flex-direction: column;
   }
 }
+
+/* =========================================
+   MEDIA QUERIES - MÓVILES Y TABLETS (Max 768px)
+   ========================================= */
+@media (max-width: 768px) {
+  /* 1. Cabeceras del Panel: Apilar título y botón */
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .admin-header .btn-add-primary {
+    width: 100%; /* Botón de ancho completo para pulgares */
+    text-align: center;
+  }
+
+  /* 2. Tablas: Magia de Scroll Horizontal */
+  .table-card {
+    overflow-x: auto; /* Permite deslizar la tabla hacia los lados */
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0; 
+    border-left: none;
+    border-right: none;
+  }
+  .admin-table {
+    min-width: 700px; /* Obliga a la tabla a mantener su tamaño original */
+  }
+
+  /* 3. Formularios y Modales */
+  .form-group-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  /* NUEVO: Achicar el padding de la tarjeta del formulario en móviles */
+  .form-card-centered {
+    padding: 25px 20px;
+  }
+
+  /* NUEVO: Pasar la cuadrícula de ingredientes de 2 columnas a 1 columna */
+  .ingredients-selector {
+    grid-template-columns: 1fr;
+    max-height: 250px; /* Le damos más altura en móvil para poder hacer scroll cómodo */
+  }
+
+  /* NUEVO: Reducir un poco el tamaño de las fotos en la tabla */
+  td .prato-image, .item-thumbnail {
+    width: 60px;
+    height: 60px;
+  }
+}

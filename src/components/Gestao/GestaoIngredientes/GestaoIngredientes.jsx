@@ -259,7 +259,7 @@ function GestaoIngredientes() {
                 {erroValidacao && <span className="error-text" style={{color: '#d9534f', display: 'block', marginTop: '5px'}}>{erroValidacao}</span>}
               </div>
 
-              <div className="form-group" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+              <div className="form-group form-grid-2">
                 <div>
                   <label>Tipo de Ingrediente</label>
                   <select value={tipo} onChange={(e) => setTipo(e.target.value)} required>
