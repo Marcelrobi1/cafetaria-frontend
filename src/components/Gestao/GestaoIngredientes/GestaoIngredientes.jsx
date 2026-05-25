@@ -134,7 +134,7 @@ function GestaoIngredientes() {
     setVistaActual('lista');
   };
 
-  // Traductor para la tabla: Tipos
+  // Tradução dos tipos
   const traduzirTipo = (type) => {
     const traducoes = {
       'DAIRY_PRODUCTS': 'Laticínios',
@@ -151,7 +151,7 @@ function GestaoIngredientes() {
     return traducoes[type] || type;
   };
 
-  // Traductor para la tabla: Alergénicos
+  // Tradução alergenios
   const traduzirAlergenio = (allergen) => {
     const traducoes = {
       'CELERY': 'Aipo',
@@ -277,7 +277,6 @@ function GestaoIngredientes() {
                 </div>
                 <div>
                   <label>Alergénios</label>
-                  {/* AQUÍ ESTÁ LA CORRECCIÓN DE LA CAPTURA: Toda la lista oficial del backend */}
                   <select value={alergenio} onChange={(e) => setAlergenio(e.target.value)} required>
                     <option value="NONE">Nenhum</option>
                     <option value="GLUTEN_CONTAINING_CEREALS">Glúten (Cereais)</option>

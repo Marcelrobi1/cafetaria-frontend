@@ -17,13 +17,13 @@ function Footer() {
     <footer className="footer-section" id="footer">
       <div className="footer-container">
         
-        {/* Columna 1: Marca */}
+        {/* Coluna 1: Marca */}
         <div className="footer-brand">
           <h2>Early Cafetaria</h2>
           <p>O teu ritual matinal no coração do Porto. Café de especialidade e design pensados para despertar os sentidos.</p>
         </div>
 
-        {/* Columna 2: Enlaces */}
+        {/* Coluna 2: Links */}
         <div className="footer-column">
           <h4>MENU</h4>
           <ul>
@@ -33,17 +33,16 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Columna 3: Ubicación */}
+        {/* Coluna 3: Localização */}
         <div className="footer-column">
           <h4>VISITE-NOS</h4>
           <p>📍 Rua dos Bragas 351, 4050-123 Porto<br/>Porto, Portugal</p>
           <p>🕒 Seg - Sex: 08:00 — 18:00<br/>Sáb - Dom: 09:00 — 16:00</p>
         </div>
 
-        {/* Columna 4: Contacto */}
+        {/* Coluna 4: Contactos */}
         <div className="footer-column">
           <h4>REDES SOCIAIS</h4>
-          {/* Limpiamos los enlaces pasándolos al CSS */}
           <div className="social-links">
             <a href="https://www.instagram.com/earlycedofeita/" target="_blank" rel="noopener noreferrer">Instagram</a>
             <a href="https://www.pinterest.com/" target="_blank" rel="noopener noreferrer">Pinterest</a>
@@ -55,7 +54,7 @@ function Footer() {
       </div>
 
       <div className="footer-bottom">
-        {/* Pequeño detalle pro: usamos el año dinámico de JavaScript */}
+        {/* Utilização do ano dinamico do JS */}
         <p>&copy; {new Date().getFullYear()} EARLY CAFETARIA — DEVELOPED BY ROBI HENRIQUEZ & PEDRO PAIVA - UFP</p>
       </div>
     </footer>

@@ -41,16 +41,16 @@ function Auth({ onLoginSuccess }) {
         throw new Error(data.error || data.message || 'Credenciais inválidas. Verifique os seus dados.');
       }
 
-      // Guardamos los datos de sesión
+      // Guardamos os dados da sessão
       localStorage.setItem('token', data.token);
       localStorage.setItem('username', data.username);
       localStorage.setItem('role', data.role);
-      localStorage.setItem('userType', data.type || data.role); // Safeguard de tipo
+      localStorage.setItem('userType', data.type || data.role); 
 
       setMessage('Sessão iniciada com sucesso!');
       if (onLoginSuccess) onLoginSuccess(data);
 
-      // Redireccionamos al cliente directo al catálogo
+      // Redirecionamos o cliente para o menu
       navigate('/menu');
 
     } catch (err) {
@@ -62,7 +62,7 @@ function Auth({ onLoginSuccess }) {
 
   return (
     <div className="auth-page-container">
-      {/* Botón para regresar sin iniciar sesión */}
+      {/* Botão para regressao a homepage sem dar login */}
       <button className="auth-back-btn" onClick={() => navigate('/')}>
         ← Voltar ao Início
       </button>
@@ -117,7 +117,7 @@ function Auth({ onLoginSuccess }) {
             </button>
           </form>
 
-          {/* Enlace directo a la página de Registro que creamos anteriormente */}
+          {/* Redireciona para a pagina de registo */}
           <div className="auth-footer">
             <p>Ainda não faz parte da Early? <Link to="/register" className="auth-register-link">Registe-se agora</Link></p>
           </div>

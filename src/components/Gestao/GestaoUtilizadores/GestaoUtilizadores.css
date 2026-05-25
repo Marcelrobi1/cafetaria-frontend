@@ -1,7 +1,7 @@
-/* Reutilizamos toda la arquitectura de la tabla y botones principales */
+/* Reutilizamos a arquitetura da tabela e dos botões da GestaoPratos */
 @import '../GestaoPratos/GestaoPratos.css'; 
 
-/* --- BADGES DE ROLES --- */
+/* Tipo de utilizador */
 .role-badge {
   padding: 6px 12px;
   border-radius: 20px;
@@ -16,7 +16,7 @@
 .role-employee { background-color: #cce5ff; color: #004085; }
 .role-client { background-color: #e2e3e5; color: #383d41; }
 
-/* --- ESTRUCTURA DEL FORMULARIO MODAL --- */
+/* Formulario */
 .users-modal {
   max-width: 500px !important;
   padding: 0 !important;
@@ -48,7 +48,7 @@
   border-top: 1px solid #eaeaea;
 }
 
-/* Campos de entrada estilizados */
+/* Campos de entrada */
 .form-input {
   width: 100%;
   padding: 12px 15px;
