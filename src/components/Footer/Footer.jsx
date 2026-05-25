@@ -1,6 +1,19 @@
+import { useNavigate } from 'react-router-dom';
 import './Footer.css';
 
 function Footer() {
+
+  const navigate = useNavigate();
+  const handleMenuNavigation = () => {
+  const token = localStorage.getItem('token');
+
+    if (!token) {
+      navigate('/login');
+    } else {
+      navigate('/menu');
+    }
+  };
+
   return (
     <footer className="footer-section" id = "footer">
       <div className="footer-container">
@@ -15,9 +28,9 @@ function Footer() {
         <div className="footer-column">
           <h4>MENU</h4>
           <ul>
-            <li><a href="/menu" style={{ textDecoration: 'none', color: 'inherit' }}>Carne</a></li>
-            <li><a href="/menu" style={{ textDecoration: 'none', color: 'inherit' }}>Peixe</a></li>
-            <li><a href="/menu" style={{ textDecoration: 'none', color: 'inherit' }}>Vegetariano</a></li>
+            <li><span onClick={handleMenuNavigation} style={{ cursor: 'pointer' }}>Carne</span></li>
+            <li><span onClick={handleMenuNavigation} style={{ cursor: 'pointer' }}>Peixe</span></li>
+            <li><span onClick={handleMenuNavigation} style={{ cursor: 'pointer' }}>Vegetariano</span></li>
           </ul>
         </div>
 
