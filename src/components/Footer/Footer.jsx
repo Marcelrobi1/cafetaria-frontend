@@ -2,11 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import './Footer.css';
 
 function Footer() {
-
   const navigate = useNavigate();
-  const handleMenuNavigation = () => {
-  const token = localStorage.getItem('token');
 
+  const handleMenuNavigation = () => {
+    const token = localStorage.getItem('token');
     if (!token) {
       navigate('/login');
     } else {
@@ -15,7 +14,7 @@ function Footer() {
   };
 
   return (
-    <footer className="footer-section" id = "footer">
+    <footer className="footer-section" id="footer">
       <div className="footer-container">
         
         {/* Columna 1: Marca */}
@@ -28,9 +27,9 @@ function Footer() {
         <div className="footer-column">
           <h4>MENU</h4>
           <ul>
-            <li><span onClick={handleMenuNavigation} style={{ cursor: 'pointer' }}>Carne</span></li>
-            <li><span onClick={handleMenuNavigation} style={{ cursor: 'pointer' }}>Peixe</span></li>
-            <li><span onClick={handleMenuNavigation} style={{ cursor: 'pointer' }}>Vegetariano</span></li>
+            <li><span onClick={handleMenuNavigation}>Carne</span></li>
+            <li><span onClick={handleMenuNavigation}>Peixe</span></li>
+            <li><span onClick={handleMenuNavigation}>Vegetariano</span></li>
           </ul>
         </div>
 
@@ -44,10 +43,11 @@ function Footer() {
         {/* Columna 4: Contacto */}
         <div className="footer-column">
           <h4>REDES SOCIAIS</h4>
-          <p className="social-links">
-            <span> <a href="https://www.instagram.com/earlycedofeita/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>Instagram</a></span>
-            <span> <a href="https://www.pinterest.com/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>Pinterest</a></span>
-          </p>
+          {/* Limpiamos los enlaces pasándolos al CSS */}
+          <div className="social-links">
+            <a href="https://www.instagram.com/earlycedofeita/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.pinterest.com/" target="_blank" rel="noopener noreferrer">Pinterest</a>
+          </div>
           <h4 className="phone-title">TELEFONE</h4>
           <p>📞 +351 937 461 551</p>
         </div>
@@ -55,7 +55,8 @@ function Footer() {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; 2026 EARLY CAFETARIA — DEVELOPED BY ROBI HENRIQUEZ & PEDRO PAIVA - UFP</p>
+        {/* Pequeño detalle pro: usamos el año dinámico de JavaScript */}
+        <p>&copy; {new Date().getFullYear()} EARLY CAFETARIA — DEVELOPED BY ROBI HENRIQUEZ & PEDRO PAIVA - UFP</p>
       </div>
     </footer>
   );

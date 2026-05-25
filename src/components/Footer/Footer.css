@@ -51,22 +51,30 @@
   margin: 0;
 }
 
-.footer-column ul li, .footer-column p, .social-links span {
+/* Centralizamos los estilos de listas y enlaces aquí */
+.footer-column ul li span, 
+.footer-column p, 
+.social-links a {
   color: #666;
   font-family: Arial, sans-serif;
   font-size: 0.9rem;
   margin-bottom: 15px;
   cursor: pointer;
   line-height: 1.6;
+  text-decoration: none; /* Elimina la línea azul de los enlaces */
+  display: inline-block;
+  transition: color 0.3s ease;
 }
 
-.footer-column ul li:hover, .social-links span:hover {
-  color: #d4b499;
+.footer-column ul li span:hover, 
+.social-links a:hover {
+  color: #d4b499; /* Efecto dorado al pasar el ratón */
 }
 
 .social-links {
   display: flex;
-  gap: 15px;
+  flex-direction: column; /* Apila las redes sociales verticalmente */
+  gap: 5px;
 }
 
 .phone-title {
@@ -84,4 +92,49 @@
   font-size: 0.7rem;
   color: #aaa;
   letter-spacing: 1px;
+}
+
+/* =========================================
+   MEDIA QUERIES - TABLETS (Múltiples Filas)
+   ========================================= */
+@media screen and (max-width: 900px) {
+  .footer-container {
+    flex-wrap: wrap; /* Permite que las columnas pasen a una nueva línea si no caben */
+    gap: 50px;
+  }
+  
+  .footer-brand {
+    flex: 1 1 100%; /* La marca ocupa el 100% del ancho arriba */
+    margin-bottom: 0;
+  }
+
+  .footer-brand p {
+    max-width: 100%; /* Quita la restricción de ancho para aprovechar la pantalla */
+  }
+
+  .footer-column {
+    flex: 1 1 calc(33.333% - 50px); /* Las otras 3 columnas se dividen equitativamente debajo */
+  }
+}
+
+/* =========================================
+   MEDIA QUERIES - MÓVILES (Una sola columna)
+   ========================================= */
+@media screen and (max-width: 600px) {
+  .footer-section {
+    padding: 60px 20px 20px; /* Reduce el margen lateral en teléfonos */
+  }
+
+  .footer-container {
+    flex-direction: column; /* Fuerza todo a una sola columna vertical */
+    gap: 40px;
+  }
+
+  .footer-column {
+    flex: 1 1 100%;
+  }
+
+  .phone-title {
+    margin-top: 20px;
+  }
 }

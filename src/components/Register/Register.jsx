@@ -13,6 +13,7 @@ function Register() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  
   const passwordChecks = {
     length: formData.password.length >= 6,
     uppercase: /[A-Z]/.test(formData.password),
@@ -21,10 +22,6 @@ function Register() {
   };
 
   const BASE_URL = 'https://siws.ufp.pt/lwlc/api';
-  
-  // TOKEN DE ADMINISTRADOR HARDCODEADO (Service Account Proxy)
-  // ATENÇÃO: Atualiza este token mesmo antes da apresentação, pois ele expira rápido!
-  
 
   const handleChange = (e) => {
     setFormData({
@@ -38,32 +35,33 @@ function Register() {
     setError('');
     setSuccess('');
 
+    // 1. Validar si las contraseñas coinciden
     if (formData.password !== formData.confirmPassword) {
       setError('As palavras-passe não coincidem.');
       return;
     }
+    
+    // 2. Validar las reglas de seguridad
     if (
       !passwordChecks.length ||
       !passwordChecks.uppercase ||
       !passwordChecks.number ||
       !passwordChecks.special
     ) {
-    setError('A palavra-passe não cumpre todos os requisitos.');
-    return;
+      setError('A palavra-passe não cumpre todos os requisitos.');
+      return;
     }
 
     setLoading(true);
 
     try {
-      // ==========================================
-      // FASE 1: OBTENER UN TOKEN FRESCO DE ADMIN (Auto-Login Oculto)
-      // ==========================================
+      // FASE 1: Auto-Login Oculto del Admin
       const loginResponse = await fetch(`${BASE_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           username: "admin",
-          password: "Secure1!" // Credenciales extraídas de Swagger
+          password: "Secure1!"
         })
       });
 
@@ -72,11 +70,9 @@ function Register() {
       }
 
       const loginData = await loginResponse.json();
-      const freshAdminToken = loginData.token; // ¡Token recién horneado!
+      const freshAdminToken = loginData.token;
 
-      // ==========================================
-      // FASE 2: CREAR EL USUARIO CON EL NUEVO TOKEN
-      // ==========================================
+      // FASE 2: Crear el Cliente
       const payload = {
         username: formData.username,
         password: formData.password,
@@ -88,13 +84,12 @@ function Register() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${freshAdminToken}` // Usamos el token fresco
+          'Authorization': `Bearer ${freshAdminToken}`
         },
         body: JSON.stringify(payload)
       });
 
       if (!registerResponse.ok) {
-        const errorText = await registerResponse.text();
         throw new Error(`Erro ao criar conta: Username indisponível ou dados inválidos.`);
       }
 
@@ -148,20 +143,34 @@ function Register() {
           </div>
 
           <div className="form-group">
-            <label>Palavra-passe validação:</label>
-              <div className="password-rules">
-                  <p className={passwordChecks.length ? 'valid' : 'invalid'}> ● 6 Caracteres
-                </p>
-
-                  <p className={passwordChecks.uppercase ? 'valid' : 'invalid'}> ● 1 Maiúscula
-                </p>
-
-                  <p className={passwordChecks.number ? 'valid' : 'invalid'}> ● 1 Número
-                </p>
-
-                  <p className={passwordChecks.special ? 'valid' : 'invalid'}> ● 1 Carácter Extraordinário
-                </p>
+            <label>Validação de Segurança:</label>
+            <div className="password-rules">
+              <p className={passwordChecks.length ? 'valid' : 'invalid'}>
+                {passwordChecks.length ? '✓' : '●'} Mínimo 6 Caracteres
+              </p>
+              <p className={passwordChecks.uppercase ? 'valid' : 'invalid'}>
+                {passwordChecks.uppercase ? '✓' : '●'} 1 Letra Maiúscula
+              </p>
+              <p className={passwordChecks.number ? 'valid' : 'invalid'}>
+                {passwordChecks.number ? '✓' : '●'} 1 Número
+              </p>
+              <p className={passwordChecks.special ? 'valid' : 'invalid'}>
+                {passwordChecks.special ? '✓' : '●'} 1 Carácter Especial (!@#$%)
+              </p>
             </div>
+          </div>
+
+          {/* ¡RESCATAMOS EL CAMPO DE CONFIRMAR CONTRASEÑA! */}
+          <div className="form-group">
+            <label>Confirmar Palavra-passe</label>
+            <input 
+              type="password" 
+              name="confirmPassword"
+              placeholder="Repita a sua palavra-passe"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required 
+            />
           </div>
 
           <button type="submit" className="btn-register" disabled={loading}>
