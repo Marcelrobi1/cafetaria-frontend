@@ -3,8 +3,14 @@ import { useNavigate } from 'react-router-dom';
 function MenuHighlights() {
   const navigate = useNavigate();
   const navigateToMenu = () => {
+    const token = localStorage.getItem('token');
+
+  if (!token) {
+    navigate('/login');
+  } else {
     navigate('/menu');
-  };
+  }
+};
   return (
     <section className="menu-highlights-section">
       <div className="menu-header">
