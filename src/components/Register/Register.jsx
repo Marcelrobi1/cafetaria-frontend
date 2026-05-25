@@ -148,7 +148,7 @@ function Register() {
           </div>
 
           <div className="form-group">
-            <label>Confirmar Palavra-passe</label>
+            <label>Palavra-passe validação:</label>
               <div className="password-rules">
                   <p className={passwordChecks.length ? 'valid' : 'invalid'}> ● 6 Caracteres
                 </p>
